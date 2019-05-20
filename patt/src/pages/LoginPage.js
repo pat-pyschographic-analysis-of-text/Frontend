@@ -1,9 +1,13 @@
 import React from 'react'; 
+import { LoginForm } from '../components'; 
  
 class LoginPage extends React.Component {
     render() {
         return(
-            <> Login Page </> 
+            <> 
+            <LoginForm /> 
+            </> 
+
             )
     }
 }
