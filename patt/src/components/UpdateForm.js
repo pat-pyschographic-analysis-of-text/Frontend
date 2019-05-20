@@ -1,4 +1,5 @@
 import React from 'react'; 
+import { Link } from 'react-router-dom'; 
  
 class UpdateForm extends React.Component {
     render() {
@@ -24,7 +25,7 @@ class UpdateForm extends React.Component {
                 placeholder="password"
               />
 
-              <button>Update profile</button>
+              <Link to="/search"><button>Update profile</button></Link>
             </form>
           </>
         );
