@@ -1,27 +1,5 @@
 import axios from 'axios'
 
-export const TESTING = 'TESTING'
-export const TESTING_ERROR = 'TESTING_ERROR'
-
-export const testing = username => dispatch => {
-    return axios 
-            .post('https://mif88l63ba.execute-api.us-west-2.amazonaws.com/default/personality-score', username)
-            .then(res => {
-                console.log(res)
-                dispatch({
-                    type: TESTING,
-                    payload: res
-                })
-            })
-            .catch(err => {
-                dispatch({
-                    type: TESTING_ERROR,
-                    payload: err
-                })
-                console.log(err)
-            })
-}
-
 export const REGISTER_START = 'REGISTER_START'
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 export const REGISTER_ERROR = 'REGISTER_ERROR'

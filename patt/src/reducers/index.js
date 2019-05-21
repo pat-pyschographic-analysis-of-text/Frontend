@@ -1,4 +1,4 @@
-import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, TESTING, TESTING_ERROR, LOG_OUT_START, LOG_OUT_SUCCESS, CAPTURE_PROFILE, DELETE_PROFILE_SUCCESS, DELETE_PROFILE_START, DELETE_PROFILE_ERROR } from '../actions'
+import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT_START, LOG_OUT_SUCCESS, CAPTURE_PROFILE, DELETE_PROFILE_SUCCESS, DELETE_PROFILE_START, DELETE_PROFILE_ERROR } from '../actions'
 
 const initialState = {
     registering: false,
@@ -53,16 +53,6 @@ const rootReducer = (state = initialState, action) => {
                     loggingIn: false,
                     error: action.payload,
                     message: null
-            }
-        case TESTING:
-                return {
-                    ...state,
-                    testData: action.payload
-            }
-        case TESTING_ERROR:
-            return {
-                ...state,
-                error: action.payload
             }
         case LOG_OUT_START:
             return {

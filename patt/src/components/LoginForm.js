@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom'; 
 import { connect } from 'react-redux'
-import { login, testing } from '../actions'
+import { login } from '../actions'
 import { withRouter } from 'react-router-dom' 
 
 class LoginForm extends React.Component {
@@ -10,9 +10,6 @@ class LoginForm extends React.Component {
             username: '',
             password: ''
         }
-    }
-    componentDidMount() {
-        // this.props.testing({username: 'jaymaas-dev'})
     }
     handleChanges = e => {
         this.setState({
@@ -70,5 +67,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { login, testing }
+    { login }
 )(withRouter(LoginForm)); 
