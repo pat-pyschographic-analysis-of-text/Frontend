@@ -5,9 +5,8 @@ import styled from 'styled-components';
 
 import MobileLogo from '../assets/MobileLogo.png';
 
-// Overall App styling 
+// Overall Component styling 
 const RegisterWrapper = styled.div`
-    color: red; 
     background-color: white; 
     max-width: 500px; 
     width: 100%; 
