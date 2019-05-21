@@ -6,7 +6,6 @@ import styled from 'styled-components';
 const SettingsButtonStyle = styled.i`
     font-size: 1.5rem; 
     margin-left: 90%; 
-    margin-top: 5%; 
 `; 
 
 export default function SettingsButton () {

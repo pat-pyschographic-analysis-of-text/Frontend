@@ -47,16 +47,18 @@ const SearchBar = styled.input`
 `; 
 
 const SeeDataButton = styled.button`
-  background-color: #6ce3ff;
+  background-color: #12B1FC;
   font-family: "Montserrat", sans-serif;
   color: white;
   border-radius: 10px;
-  padding: 2%;
+  padding: 10%;
   margin-top: 50%; 
+  max-width: 500px; 
   width: 100%;
 
   &:hover {
-    background-color: #352ecb;
+    background-color: white;
+    color: #12B1FC; 
     cursor: pointer;
   }
 `; 
