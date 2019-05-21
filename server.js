@@ -55,7 +55,7 @@ let registeredUsers = [
     }
 ]
 
-let registeredUsersLength = registeredUsers.length 
+let registeredUsersNextId = 0
 
 app.use(bodyParser.json())
 
@@ -71,7 +71,7 @@ function authenticator(req, res, next) {
 }
 
 app.get('/', (req, res) => {
-    res.json(data)
+    res.json(registeredUsers)
 })
 
 app.post('/login', (req, res) => {
@@ -93,8 +93,6 @@ app.post('/register', (req, res) => {
     passport = {
         username: passport.username, 
         password: passport.password,
-        email: passport.email
-
     }
     const registeredUser = { id: getNextUserId(), passport}
 
@@ -111,9 +109,9 @@ app.get('/data', authenticator, (req, res) => {
 })
 
 function getNextUserId() {
-    return registeredUsersLength + 1
+    return registeredUsersNextId + 1
 }
 
 app.listen(port, () => {
-    console.log(`Server listening on ${port}. Dont forget how hard Jay worked on this(15 minutes)`)
+    console.log(`Server listening on ${port}. Dont forget how hard Jay worked on this (15 minutes)`)
 })
