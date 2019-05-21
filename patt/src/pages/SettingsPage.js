@@ -7,7 +7,6 @@ class SettingsPage extends React.Component {
         return(
             <> 
             <UpdateForm /> 
-            <Link to="/"><button>Logout</button></Link>
             </> 
 
             )
