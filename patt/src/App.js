@@ -1,18 +1,16 @@
 import React from 'react';
 import { LoginPage, RegisterPage, SettingsPage, SearchPage, DataCardPage } from './pages/index'; 
-
+import PrivateRoute from './PrivateRoute'
 import { Route } from 'react-router-dom'; 
 
 function App() {
   return (
     <>
-    
     <Route exact path="/" component={LoginPage}/> 
     <Route path="/register" component= {RegisterPage} /> 
-    <Route path="/settings" component= {SettingsPage} /> 
-    <Route path="/search" component= {SearchPage} /> 
-    <Route path="/search-results" component= {DataCardPage} /> 
-    
+    <PrivateRoute path="/settings" component= {SettingsPage} /> 
+    <PrivateRoute exact path="/search" component= {SearchPage} /> 
+    <PrivateRoute exact path="/search-results" component= {DataCardPage} /> 
     </>
   );
 }

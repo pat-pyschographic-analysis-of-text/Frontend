@@ -1,17 +1,41 @@
 import React from 'react'; 
 import { UpdateForm } from '../components'; 
-import { Link } from 'react-router-dom'; 
+import { connect } from 'react-redux' 
+import { withRouter } from 'react-router-dom'
+import { logout, deleteProfile } from '../actions'
  
 class SettingsPage extends React.Component {
+    logout = e => {
+        e.preventDefault()
+        this.props.logout()
+        this.props.history.push('/')
+    }
+    deleteProfile = e => {
+        e.preventDefault()
+        this.props.deleteProfile(this.props.userId)
+            .then(() => {
+                this.props.history.push('/')
+            })
+    }
     render() {
         return(
             <> 
             <UpdateForm /> 
-            <Link to="/"><button>Logout</button></Link>
+            <button onClick={
+                this.logout
+            }>Logout</button>
+            <button onClick={this.deleteProfile}>Delete Profile</button>
             </> 
-
-            )
+        )
     }
 }
 
-export default SettingsPage; 
+const mapStateToProps = state => ({
+    message: state.message,
+    userId: state.userId
+})
+
+export default connect(
+    mapStateToProps,
+    { logout, deleteProfile }
+)(withRouter(SettingsPage)); 
