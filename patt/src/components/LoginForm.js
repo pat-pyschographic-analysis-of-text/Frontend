@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import MobileLogo from '../assets/MobileLogo.png'; 
 
+// Universal Login page styling 
+
 const LoginWrapper = styled.div`
     color: red; 
     background-color: white; 
@@ -23,40 +25,56 @@ const LoginFormWrapper = styled.form`
     flex-direction: column; 
 `;
 
+// Logo 
+
 const MobileLogoStyled = styled.img`
     max-width: 30%; 
     height: auto; 
 `; 
 
+// Text Headers 
+
 const HeaderTitle = styled.h2`
-    color: #352ecb; 
+    color: #0082c9; 
 `; 
 
 const HeaderSubtitle = styled.h5`
-    color: #745AFF; 
+    color: #778899; 
     width: 60%; 
 `; 
 
+// Login section 
 const LoginTitle = styled.h2`
     color: #0082c9; 
 `; 
 
 const LoginButton = styled.button `
-    background-color: #6ce3ff;
+    background-color: #12B1FC;
+    font-family: 'Montserrat', sans-serif;
+    color: white; 
 
     &:hover {
-        background-color: #0082c9;
+        background-color: white;
+        color: #12B1FC; 
         cursor: pointer;
     }
 `; 
 
 const SignUpButton = styled.button `
-    background-color: #ac88ff; 
+    background-color: #6ce3ff; 
+    font-family: 'Montserrat', sans-serif;
+    color: white; 
 
     &:hover {
         background-color: #352ecb;
         cursor: pointer;
     }
+`; 
+
+const SignInInput = styled.input`
+    border: 1px solid #778899; 
+    font-family: 'Montserrat', sans-serif;
+    margin: 3%; 
 `; 
  
 class LoginForm extends React.Component {
@@ -70,15 +88,15 @@ class LoginForm extends React.Component {
                     <LoginTitle>Login</LoginTitle>
                    
                         <LoginFormWrapper>
-                            <input
+                            <SignInInput
                                 name="email"
                                 type="text"
-                                placeholder="email"
+                                placeholder="Email"
                             />
-                            <input
+                            <SignInInput
                                 name="password"
                                 type="password"
-                                placeholder="password"
+                                placeholder="Password"
                             />
         
                             <Link to="/search"><LoginButton>Login</LoginButton></Link>
