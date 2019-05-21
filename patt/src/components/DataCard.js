@@ -18,6 +18,7 @@ const DataCardWrapper = styled.div`
     font-family: 'Montserrat', sans-serif;
 `;
 
+// For refactoring: create a custom React component that takes prop, and those props will be string of title
 const HeaderTitle = styled.h2`
     color: #0082c9; 
 `; 
