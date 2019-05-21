@@ -1,6 +1,5 @@
 import React from "react";
 import { DataCard, SettingsButton } from "../components";
-import { Link } from "react-router-dom";
 
 class DataCardPage extends React.Component {
   render() {
@@ -8,9 +7,6 @@ class DataCardPage extends React.Component {
       <>
         <SettingsButton /> 
         <DataCard />
-        <Link to="/search">
-          <button>Search again</button>
-        </Link>
       </>
     );
   }
