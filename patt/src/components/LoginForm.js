@@ -52,6 +52,10 @@ const LoginButton = styled.button `
     background-color: #12B1FC;
     font-family: 'Montserrat', sans-serif;
     color: white; 
+    border-radius: 10px; 
+    padding: 2%; 
+    width: 50%; 
+    margin-bottom: 2%; 
 
     &:hover {
         background-color: white;
@@ -64,6 +68,9 @@ const SignUpButton = styled.button `
     background-color: #6ce3ff; 
     font-family: 'Montserrat', sans-serif;
     color: white; 
+    border-radius: 10px; 
+    padding: 2%; 
+    width: 50%; 
 
     &:hover {
         background-color: #352ecb;
