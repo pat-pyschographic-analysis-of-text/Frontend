@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom'; 
 import { connect } from 'react-redux'
 import { login, testing } from '../actions'
- 
+import { withRouter } from 'react-router-dom' 
+
 class LoginForm extends React.Component {
     state = {
         credentials: {
@@ -11,7 +12,7 @@ class LoginForm extends React.Component {
         }
     }
     componentDidMount() {
-        this.props.testing({username: 'jaymaas-dev'})
+        // this.props.testing({username: 'jaymaas-dev'})
     }
     handleChanges = e => {
         this.setState({
@@ -25,6 +26,14 @@ class LoginForm extends React.Component {
         e.preventDefault()
         console.log(this.state.credentials)
         this.props.login(this.state.credentials)
+            .then(() => {
+                this.timeOut()
+            })
+    }
+    timeOut = () => {
+        {this.props.message && setTimeout(() => 
+            this.props.history.push('/search')
+              , 2000)}
     }
     render() {
         return(
@@ -45,6 +54,8 @@ class LoginForm extends React.Component {
                     />
 
                     <Link to="/search"><button onClick={this.login}>Login</button></Link>
+                    {this.props.message && <p>{this.props.message}</p>}
+                    {this.props.error && <p>{this.props.error}</p>}
                 </form>
            </>
             )
@@ -53,10 +64,11 @@ class LoginForm extends React.Component {
 
 const mapStateToProps = state => ({
     loggingIn: state.loggingIn,
-    error: state.error
+    error: state.error,
+    message: state.message
 })
 
 export default connect(
     mapStateToProps,
     { login, testing }
-)(LoginForm); 
+)(withRouter(LoginForm)); 
