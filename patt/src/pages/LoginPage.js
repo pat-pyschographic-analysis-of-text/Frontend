@@ -7,7 +7,7 @@ class LoginPage extends React.Component {
         return(
             <> 
             <LoginForm /> 
-            <Link to="/register"><button>Create account</button></Link>
+            {/* <Link to="/register"><button>Create account</button></Link> */}
             </> 
 
             )
