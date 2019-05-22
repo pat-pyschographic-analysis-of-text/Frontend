@@ -6,6 +6,9 @@ import MobileLogo from '../assets/MobileLogo.png';
 
 import { Link } from 'react-router-dom'; 
 
+import { connect } from 'react-redux'
+import { testing } from '../actions'
+
 const DataCardWrapper = styled.div`
     background-color: white; 
     max-width: 500px; 
@@ -46,7 +49,13 @@ const SearchAgainButton = styled.button `
 `; 
 
 class DataCard extends React.Component {
+  componentDidMount() {
+      this.props.testing("austen")
+  }
+
   render() {
+    let test = this.props.testResults
+    console.log(test)
     return (
       <DataCardWrapper>
         <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
@@ -64,4 +73,13 @@ class DataCard extends React.Component {
   }
 }
 
-export default DataCard;
+const mapStateToProps = state => ({
+  error: state.error,
+  testing: state.testing,
+  testResults: state.testResults
+})
+
+export default connect(
+  mapStateToProps,
+  { testing }
+)(DataCard);
