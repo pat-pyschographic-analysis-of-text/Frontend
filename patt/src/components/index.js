@@ -4,5 +4,6 @@ import UpdateForm from './UpdateForm';
 import SearchForm from './SearchForm';
 import DataCard from './DataCard';  
 import SettingsButton from './SettingsButton'; 
+import ExploreProfiles from './ExploreProfiles';
 
-export {LoginForm, RegisterForm, UpdateForm, SearchForm, DataCard, SettingsButton }
+export {LoginForm, RegisterForm, UpdateForm, SearchForm, DataCard, SettingsButton, ExploreProfiles}

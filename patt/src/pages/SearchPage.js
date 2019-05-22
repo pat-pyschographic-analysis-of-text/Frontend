@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { SearchForm, SettingsButton } from '../components'; 
+import { SearchForm, SettingsButton, ExploreProfiles } from '../components'; 
  
 class SearchPage extends React.Component {
     render() {
@@ -7,8 +7,8 @@ class SearchPage extends React.Component {
             <> 
             <SettingsButton /> 
             <SearchForm /> 
+            <ExploreProfiles />
             </> 
-
             )
     }
 }

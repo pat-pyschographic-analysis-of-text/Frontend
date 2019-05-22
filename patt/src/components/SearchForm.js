@@ -84,7 +84,6 @@ class SearchForm extends React.Component {
                 <SeeDataButton>Get data</SeeDataButton>
               </Link>
             </SearchFormWrapper>
-
           </SearchWrapper>
         );
     }
