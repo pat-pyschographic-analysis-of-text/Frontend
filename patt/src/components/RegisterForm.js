@@ -1,7 +1,9 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom'; 
-
 import styled from 'styled-components'; 
+import { connect } from 'react-redux'
+import { register } from '../actions'
+import { withRouter } from 'react-router-dom'
 
 import MobileLogo from '../assets/MobileLogo.png';
 
@@ -55,36 +57,74 @@ const SignUpButton = styled.button `
 `; 
 
 class RegisterForm extends React.Component {
+  state =  {
+    credentials: {
+      username: '',
+      password: ''
+    }
+  }
+
+  handleChanges = e => {
+    this.setState({
+      credentials : {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
+
+  register = e => {
+    e.preventDefault()
+    console.log(this.state.credentials)
+    this.props.register(this.state.credentials)
+      .then(() => {
+        this.timeOut()
+      })
+  }
+  timeOut = () => {
+    {this.props.message &&
+    setTimeout(() => 
+    this.props.history.push('/search')
+      , 2000)}
+  }
     render() {
         return (
           <RegisterWrapper>
             <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
             <HeaderTitle>Create account</HeaderTitle>
-            <RegisterFormWrapper>
-              <RegisterInput 
-              name="email" 
-              type="text" 
-              placeholder="Email" 
-              />
+            <RegisterFormWrapper onSubmit={this.register)>
+
 
               <RegisterInput
                 name="username"
                 type="text"
-                placeholder="Username"
+                placeholder="Email"
+                onChange={this.handleChanges}
               />
 
               <RegisterInput
                 name="password"
                 type="password"
                 placeholder="Password"
+                onChange={this.handleChanges}
               />
 
-              <Link to="/search"><SignUpButton>Sign up</SignUpButton></Link>
+              <SignUpButton onClick={this.register}>Sign up</SignUpButton>
             </RegisterFormWrapper>
-
+              {this.props.message && <p>{this.props.message}</p>}
+              {this.props.error && <p>{this.props.error}</p>}
           </RegisterWrapper>
         );
     }
 }
 
-export default RegisterForm; 
+const mapStateToProps = state => ({
+  registering: state.registering,
+  error: state.error,
+  message: state.message
+})
+
+export default connect(
+  mapStateToProps,
+  { register }
+)(withRouter(RegisterForm)); 

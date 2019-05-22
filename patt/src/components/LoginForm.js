@@ -1,5 +1,10 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom'; 
+import { connect } from 'react-redux'
+import { login } from '../actions'
+import { withRouter } from 'react-router-dom' 
+
+
 
 import styled from 'styled-components'; 
 
@@ -86,35 +91,72 @@ const SignInInput = styled.input`
 `; 
  
 class LoginForm extends React.Component {
+    state = {
+        credentials: {
+            username: '',
+            password: ''
+        }
+    }
+    handleChanges = e => {
+        this.setState({
+            credentials: {
+                ...this.state.credentials,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+    login = e => {
+        e.preventDefault()
+        console.log(this.state.credentials)
+        this.props.login(this.state.credentials)
+            .then(() => {
+                this.timeOut()
+            })
+    }
+    timeOut = () => {
+        {this.props.message && setTimeout(() => 
+            this.props.history.push('/search')
+              , 2000)}
+    }
     render() {
         return(
-           <>
                 <LoginWrapper>
                     <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
                     <HeaderTitle>Tweetmate</HeaderTitle>
                     <HeaderSubtitle>Discover what your tweets say about who you are and who you should follow.</HeaderSubtitle>
                     <LoginTitle>Login</LoginTitle>
                    
-                        <LoginFormWrapper>
+                        <LoginFormWrapper onSubmit={this.login}>
                             <SignInInput
-                                name="email"
+                                name="username"
                                 type="text"
                                 placeholder="Email"
+                                onChange={this.handleChanges}
                             />
                             <SignInInput
                                 name="password"
                                 type="password"
                                 placeholder="Password"
+                                onChange={this.handleChanges}
                             />
         
-                            <Link to="/search"><LoginButton>Login</LoginButton></Link>
+                            <LoginButton onClick={this.login}>Login</LoginButton>
                             <Link to="/register"><SignUpButton>Sign up</SignUpButton></Link>
                         </LoginFormWrapper>
-                    
+                     {this.props.message && <p>{this.props.message}</p>}
+                    {this.props.error && <p>{this.props.error}</p>}
                 </LoginWrapper>
-           </>
             )
     }
 }
 
-export default LoginForm; 
+const mapStateToProps = state => ({
+    loggingIn: state.loggingIn,
+    error: state.error,
+    message: state.message
+})
+
+export default connect(
+    mapStateToProps,
+    { login }
+)(withRouter(LoginForm)); 

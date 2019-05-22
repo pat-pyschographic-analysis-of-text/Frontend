@@ -1,6 +1,5 @@
 import React from 'react'; 
-import { Link } from 'react-router-dom'; 
-
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'; 
 
 import MobileLogo from '../assets/MobileLogo.png';
@@ -70,6 +69,7 @@ const LogoutButton = styled.button `
         cursor: pointer;
     }
 `; 
+
  
 class UpdateForm extends React.Component {
     render() {
@@ -79,12 +79,6 @@ class UpdateForm extends React.Component {
             <HeaderTitle>Update Profile</HeaderTitle>
             
             <UpdateFormWrapper>
-              
-              <UpdateInput 
-              name="email" 
-              type="text" 
-              placeholder="Email" 
-              />
 
               <UpdateInput
                 name="username"
