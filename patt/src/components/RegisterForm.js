@@ -1,9 +1,9 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom'; 
 import styled from 'styled-components'; 
-import { connect } from 'react-redux'
-import { register } from '../actions'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { register } from '../actions';
+import { withRouter } from 'react-router-dom'; 
 
 import MobileLogo from '../assets/MobileLogo.png';
 

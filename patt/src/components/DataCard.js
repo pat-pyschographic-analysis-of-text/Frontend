@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MobileLogo from '../assets/MobileLogo.png'; 
 import { Link } from 'react-router-dom'; 
 import { connect } from 'react-redux'
-import { testing } from '../actions'
+import { searching } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
 
 const DataCardWrapper = styled.div`
@@ -62,10 +62,10 @@ class DataCard extends React.Component {
     displayedData: ''
   }
   componentDidMount() {
-    this.props.testing("austen")
+    this.props.searching("austen")
     setTimeout(() => {
       this.setState({
-        data: this.props.testResults.personality,
+        data: this.props.searchResults.personality,
         displayedData: 'Personality'
       })
     }, 500)
@@ -79,11 +79,11 @@ class DataCard extends React.Component {
   }
   dataProviderLogic = dataName => {
     if (dataName === 'Personality') {
-      return this.props.testResults.personality
+      return this.props.searchResults.personality
     } else if (dataName === 'Needs') {
-      return this.props.testResults.needs
+      return this.props.searchResults.needs
     } else if (dataName === 'Values') {
-      return this.props.testResults.values
+      return this.props.searchResults.values
     }
   }
   percentileProviderLogic = integer => {
@@ -95,21 +95,20 @@ class DataCard extends React.Component {
     return legendTitle
   }
   render() {
-    const obj = this.state.data
-    const objOfArr = Object.keys(obj).map(key => {
-        return {
-            key: this.legendTitleCapitalizer(key),
-            value: obj[key]
-        }
-    })
-    const profileData = this.props.testResults
-    const legend = objOfArr.map((data, i) => {
-      return <p key={i}>{this.legendTitleCapitalizer(data.key)}: %{this.percentileProviderLogic(data.value)}</p>
-    })
+    // const obj = this.state.data
+    // const objOfArr = Object.keys(obj).map(key => {
+    //     return {
+    //         key: this.legendTitleCapitalizer(key),
+    //         value: obj[key]
+    //     }
+    // })
+    // const profileData = this.props.searchResults
+    // const legend = objOfArr.map((data, i) => {
+    //   return <p key={i}>{this.legendTitleCapitalizer(data.key)}: %{this.percentileProviderLogic(data.value)}</p>
+    // })
     return (
       <DataCardWrapper>
-        <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
-        <HeaderTitle>@{profileData.username}</HeaderTitle>
+        <HeaderTitle>@</HeaderTitle>
         <TabNavWrapper>
           <TabNav id="Personality" onClick={this.clickHandler}>
             Personality
@@ -122,11 +121,11 @@ class DataCard extends React.Component {
           </TabNav>
           </TabNavWrapper>
           <div>
-            <SingleUserTraitsGraph props={objOfArr}/>
+            <SingleUserTraitsGraph />
           </div>
         <div>
         {this.state.displayedData}
-          <p>{legend}</p>
+          {/* <p>{legend}</p> */}
         </div>
         <Link to="/search">
           <SearchAgainButton>Search again</SearchAgainButton>
@@ -139,11 +138,11 @@ class DataCard extends React.Component {
 
 const mapStateToProps = state => ({
   error: state.error,
-  testing: state.testing,
-  testResults: state.testResults
+  searching: state.searching,
+  searchResults: state.searchResults
 })
 
 export default connect(
   mapStateToProps,
-  { testing }
+  { searching }
 )(DataCard);

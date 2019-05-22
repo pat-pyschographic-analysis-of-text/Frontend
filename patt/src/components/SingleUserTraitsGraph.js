@@ -11,7 +11,6 @@ export default function SingleUserTraitsGraph(props) {
             padding={{top:100, bottom:100, right:100, left:100}}
              >
                 <VictoryArea
-                data={props.props}
                 x='key'
                 y="value"
                 animate
