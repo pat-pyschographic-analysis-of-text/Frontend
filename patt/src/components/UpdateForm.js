@@ -2,10 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'; 
 
+// Importing parts that will wire up Update action 
+import {connect} from 'react-redux'; 
+import { updateProfile, deleteProfile } from '../actions'; 
+import { withRouter } from 'react-router-dom'; 
+
 import MobileLogo from '../assets/MobileLogo.png';
 
 // Overall Component styling 
-
 const UpdateWrapper = styled.div`
     background-color: white; 
     max-width: 500px; 
@@ -55,7 +59,7 @@ const UpdateButton = styled.button `
     }
 `; 
 
-const LogoutButton = styled.button `
+const DeleteButton = styled.button `
     background-color: #6ce3ff; 
     font-family: 'Montserrat', sans-serif;
     color: white; 
@@ -72,32 +76,95 @@ const LogoutButton = styled.button `
 
  
 class UpdateForm extends React.Component {
-    render() {
-        return (
-          <UpdateWrapper>
-            <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
-            <HeaderTitle>Update Profile</HeaderTitle>
-            
-            <UpdateFormWrapper>
-
-              <UpdateInput
-                name="username"
-                type="text"
-                placeholder="Username"
-              />
-
-              <UpdateInput
-                name="password"
-                type="password"
-                placeholder="Password"
-              />
-
-              <Link to="/search"><UpdateButton>Update profile</UpdateButton></Link>
-              <Link to="/"><LogoutButton>Logout</LogoutButton></Link>
-            </UpdateFormWrapper>
-          </UpdateWrapper>
-        );
+  // Setting state to what our server needs to receive
+  state = {
+    profileUpdates: {
+      username: ""
     }
+  };
+
+  // Change handler function
+  handleChanges = e => {
+    this.setState({
+      profileUpdates: {
+        ...this.state.profileUpdates,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  // Function that will update Profile
+  updateProfile = e => {
+    e.preventDefault();
+    // Setting new variable so can add id later 
+    const profileUpdates = this.state.profileUpdates; 
+
+    // adding user ID to the object 
+    profileUpdates.id = this.props.userId; 
+
+    console.log(profileUpdates);
+
+    this.props.updateProfile(profileUpdates).then(() => {
+     this.timeOut();
+   });
+  };
+
+  // Sends a message to the user about updating status, and redirects only if the update was successful
+  timeOut = () => {
+    {
+      this.props.message &&
+        setTimeout(() => this.props.history.push("/search"), 2000);
+    }
+  };
+
+  //Function that deletes a profile
+
+  deleteProfile = e => {
+    e.preventDefault();
+    this.props.deleteProfile(this.props.userId).then(() => {
+      this.props.history.push("/");
+    });
+  };
+
+  render() {
+    return (
+      <UpdateWrapper>
+        <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
+        <HeaderTitle>Update Username</HeaderTitle>
+
+        <UpdateFormWrapper onSubmit={this.updateProfile}>
+
+          <UpdateInput
+            name="username"
+            type="text"
+            placeholder="Username"
+            onChange={this.handleChanges}
+          />
+
+          <Link to="/search">
+            <UpdateButton onClick={this.updateProfile}>
+              Update Username
+            </UpdateButton>
+          </Link>
+
+          <Link to="/">
+            <DeleteButton onClick={this.deleteProfile}>Delete Profile</DeleteButton>
+          </Link>
+        </UpdateFormWrapper>
+      </UpdateWrapper>
+    );
+  }
 }
 
-export default UpdateForm; 
+const mapStateToProps = state => ({
+  updating: state.updating, 
+  message: state.message,
+  error: state.error, 
+  userId: state.userId
+})
+
+// Using connect function to pass our actions in as props to this Form 
+export default connect(
+  mapStateToProps,
+   {updateProfile, deleteProfile}
+   ) (withRouter(UpdateForm)); 

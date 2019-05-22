@@ -129,3 +129,55 @@ export const deleteProfile = profileId => dispatch => {
                 })
             })
 }
+
+// Creating Update Profile actions and action creator 
+export const UPDATE_PROFILE_START = 'UPDATE_PROFILE_START'
+export const UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS'
+export const UPDATE_PROFILE_ERROR = 'UPDATE_PROFILE_ERROR'
+
+export const updateProfile = profileUpdates => dispatch => {
+    dispatch({ type: UPDATE_PROFILE_START })
+
+    return axios 
+            .put(`https://pyschographic-analysis-of-text.herokuapp.com/users/${profileUpdates.id}`, profileUpdates)
+            .then(res => {
+                console.log(res)
+                 dispatch({
+                     type: UPDATE_PROFILE_SUCCESS,
+                     payload: `Profile updated successfully.`
+                 })
+            })
+            .catch(err => {
+                console.log(err)
+                dispatch({
+                    type: UPDATE_PROFILE_ERROR,
+                    payload: 'update'
+                })
+            })
+}
+
+// Creating Search actions and action creator 
+// export const SEARCH_START = 'SEARCH_START'
+// export const SEARCH_SUCCESS = 'SEARCH_SUCCESS' 
+// export const SEARCH_ERROR = 'SEARCH_ERROR' 
+ 
+// export const testing = username => dispatch => { 
+//     dispatch({ type: SEARCH_START })
+//     return axios  
+//             
+//             .get(`https://pyschographic-analysis-of-text.herokuapp.com/users/${username}`)
+//             .then(res => { 
+//                 console.log(res) 
+//                 dispatch({ 
+//                     type: SEARCH_SUCCESS, 
+//                     payload: res.data 
+//                 }) 
+//             }) 
+//             .catch(err => { 
+//                 console.log(err) 
+//                 dispatch({ 
+//                     type: SEARCH_ERROR, 
+//                     payload: err 
+//                 }) 
+//             }) 
+// } 
