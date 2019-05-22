@@ -9,6 +9,7 @@ import MobileLogo from '../assets/MobileLogo.png';
 import { connect } from 'react-redux'; 
 import { searching } from '../actions'; 
 import { withRouter } from 'react-router-dom'; 
+import NavButtonWrapper from './NavButtonWrapper';
 
 // Overall Component styling 
 const SearchWrapper = styled.div`
@@ -115,6 +116,7 @@ class SearchForm extends React.Component {
     render() {
         return (
           <SearchWrapper>
+            <NavButtonWrapper /> 
             <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
             
             <div style={{display: 'flex'}}>

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import styled from 'styled-components'; 
 
-const LogoutButton = styled.i`
+const LogoutButtonWrapper = styled.i`
     font-size: 1.5rem; 
     position: fixed; 
     top: 0;
@@ -24,9 +24,9 @@ class LogoutButton extends React.Component {
 
     render() {
         return (
-            <LogOutButton onClick={this.logout}>
+            <LogoutButtonWrapper onClick={this.logout}>
                 <i className="fas fa-sign-out-alt"></i>
-            </LogOutButton>
+            </LogoutButtonWrapper>
         )
     }
 }

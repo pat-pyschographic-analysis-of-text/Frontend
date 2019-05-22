@@ -8,6 +8,7 @@ import { updateProfile, deleteProfile } from '../actions';
 import { withRouter } from 'react-router-dom'; 
 
 import MobileLogo from '../assets/MobileLogo.png';
+import NavButtonWrapper from './NavButtonWrapper';
 
 // Overall Component styling 
 const UpdateWrapper = styled.div`
@@ -130,6 +131,7 @@ class UpdateForm extends React.Component {
     return (
       <UpdateWrapper>
         <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
+        <NavButtonWrapper /> 
         <HeaderTitle>Update Username</HeaderTitle>
 
         <UpdateFormWrapper onSubmit={this.updateProfile}>
