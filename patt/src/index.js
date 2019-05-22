@@ -16,7 +16,7 @@ import rootReducer from '../src/reducers';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; 
 
 // Creating store
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk, logger))); 
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk))); 
 
 
 ReactDOM.render(

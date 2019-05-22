@@ -5,11 +5,6 @@ import { withRouter } from 'react-router-dom'
 import { logout, deleteProfile } from '../actions'
  
 class SettingsPage extends React.Component {
-    logout = e => {
-        e.preventDefault()
-        this.props.logout()
-        this.props.history.push('/')
-    }
     deleteProfile = e => {
         e.preventDefault()
         this.props.deleteProfile(this.props.userId)
@@ -21,9 +16,6 @@ class SettingsPage extends React.Component {
         return(
             <> 
             <UpdateForm /> 
-            <button onClick={
-                this.logout
-            }>Logout</button>
             <button onClick={this.deleteProfile}>Delete Profile</button>
             </> 
         )
