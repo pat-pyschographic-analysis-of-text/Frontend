@@ -44,13 +44,13 @@ class ExploreProfiles extends Component {
         console.log(this.props.testResults)
         return (
             <SearchWrapper>
-                {/* {this.props.testResults.personality ? ( */}
+                {this.props.testResults.personality ? (
                     <ProfileCard>
                         <ProfileImage src={AustenPic}/>
                         <ProfileLevels>
                             <Progress
-                                // percent={this.props.testResults.personality.conscientiousness*100}
-                                percent={75}
+                                percent={this.props.testResults.personality.conscientiousness*100}
+                                //percent={75}
                                 theme={{
                                     active: {
                                     symbol: '🤔',
@@ -59,8 +59,8 @@ class ExploreProfiles extends Component {
                                 }}
                             />
                             <Progress
-                                // percent={this.props.testResults.needs.challenge*100}
-                                percent={56}
+                                percent={this.props.testResults.needs.challenge*100}
+                                //percent={56}
                                 theme={{
                                     active: {
                                     symbol: '💪',
@@ -69,8 +69,8 @@ class ExploreProfiles extends Component {
                                 }}
                             />
                             <Progress
-                                // percent={this.props.testResults.needs.love*100}
-                                percent={80}
+                                percent={this.props.testResults.needs.love*100}
+                                //percent={80}
                                 theme={{
                                     active: {
                                     symbol: '🖖',
@@ -80,9 +80,9 @@ class ExploreProfiles extends Component {
                             />
                         </ProfileLevels>
                     </ProfileCard>
-                {/* ) : (
+                ) : (
                     null
-                )} */}
+                )} 
             </SearchWrapper>
         );
     }
