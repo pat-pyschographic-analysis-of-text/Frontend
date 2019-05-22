@@ -95,21 +95,20 @@ class DataCard extends React.Component {
     return legendTitle
   }
   render() {
-    const obj = this.state.data
-    const objOfArr = Object.keys(obj).map(key => {
-        return {
-            key: this.legendTitleCapitalizer(key),
-            value: obj[key]
-        }
-    })
-    const profileData = this.props.searchResults
-    const legend = objOfArr.map((data, i) => {
-      return <p key={i}>{this.legendTitleCapitalizer(data.key)}: %{this.percentileProviderLogic(data.value)}</p>
-    })
+    // const obj = this.state.data
+    // const objOfArr = Object.keys(obj).map(key => {
+    //     return {
+    //         key: this.legendTitleCapitalizer(key),
+    //         value: obj[key]
+    //     }
+    // })
+    // const profileData = this.props.searchResults
+    // const legend = objOfArr.map((data, i) => {
+    //   return <p key={i}>{this.legendTitleCapitalizer(data.key)}: %{this.percentileProviderLogic(data.value)}</p>
+    // })
     return (
       <DataCardWrapper>
-        <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
-        <HeaderTitle>@{profileData.username}</HeaderTitle>
+        <HeaderTitle>@</HeaderTitle>
         <TabNavWrapper>
           <TabNav id="Personality" onClick={this.clickHandler}>
             Personality
@@ -122,11 +121,11 @@ class DataCard extends React.Component {
           </TabNav>
           </TabNavWrapper>
           <div>
-            <SingleUserTraitsGraph props={objOfArr}/>
+            <SingleUserTraitsGraph />
           </div>
         <div>
         {this.state.displayedData}
-          <p>{legend}</p>
+          {/* <p>{legend}</p> */}
         </div>
         <Link to="/search">
           <SearchAgainButton>Search again</SearchAgainButton>

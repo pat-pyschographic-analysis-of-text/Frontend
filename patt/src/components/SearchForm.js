@@ -21,6 +21,11 @@ const SearchWrapper = styled.div`
     text-align: center; 
     align-items: center; 
     font-family: 'Montserrat', sans-serif;
+    height: 15vh;
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+    margin: 0;
 `; 
 
 // Logo 
@@ -30,7 +35,9 @@ const MobileLogoStyled = styled.img`
 `; 
 
 const HeaderTitle = styled.h2`
-    color: #0082c9; 
+    color: #0082c9;
+    font-size: 1em; 
+    margin-right: 2.5vw;
 `; 
 
 const HeaderSubtitle = styled.h5`
@@ -40,7 +47,7 @@ const HeaderSubtitle = styled.h5`
  
 const SearchFormWrapper = styled.form`
 display: flex; 
-flex-direction: column; 
+flex-direction: row; 
 align-items: center; 
 `; 
 
@@ -49,6 +56,7 @@ const SearchBar = styled.input`
   font-family: 'Montserrat', sans-serif;
   padding: 5%; 
   border: 2px solid #778899; 
+  min-width: 25vw;
 `; 
 
 const SeeDataButton = styled.button`
@@ -57,7 +65,7 @@ const SeeDataButton = styled.button`
   color: white;
   border-radius: 10px;
   padding: 10%;
-  margin-top: 50%; 
+  margin: 0 2vw; 
   max-width: 500px; 
   width: 100%;
 
@@ -88,11 +96,11 @@ class SearchForm extends React.Component {
   // Search function calls our action 
   search = e => {
     e.preventDefault()
-    console.log(this.state.username); 
-    this.props.searching(this.state.unsername)
-    .then(() => {
-      this.timeOut()
-    })
+    console.log(this.state.username.search); 
+    this.props.searching(this.state.username.search)
+      .then(() => {
+        this.timeOut()
+      })
   }
 
   // TimeOut gives our user a message in a certain amount of time 
@@ -100,7 +108,7 @@ class SearchForm extends React.Component {
   timeOut = () => {
     {this.props.message &&
     setTimeout(() => 
-  this.props.history.push('search-results')
+  this.props.history.push('/search-results')
 , 2000)}
   }
 
@@ -108,23 +116,26 @@ class SearchForm extends React.Component {
         return (
           <SearchWrapper>
             <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
-            <HeaderTitle>Find a Tweetmate</HeaderTitle>
-            <HeaderSubtitle>
-              Enter a user's Twitter handle to learn what their tweets say about their personality and who else tweets like they do. 
-            </HeaderSubtitle>
             
-            <SearchFormWrapper onSubmit={this.search}>
-              <SearchBar
-                name="search"
-                type="text"
-                placeholder="Enter Twitter handle"
-                onChange={this.handleChanges}
-              />
-
-              <Link to="/search-results">
-                <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
-              </Link>
-            </SearchFormWrapper>
+            <div style={{display: 'flex'}}>
+              <HeaderTitle>Find a Tweetmate</HeaderTitle>
+              {/* <HeaderSubtitle>
+                Enter a user's Twitter handle to learn what their tweets say about their personality and who else tweets like they do. 
+              </HeaderSubtitle> */}
+              
+              <SearchFormWrapper onSubmit={this.search}>
+                <SearchBar
+                  name="search"
+                  type="text"
+                  placeholder="Enter Twitter handle"
+                  onChange={this.handleChanges}
+                />
+  
+                <Link to="/search-results">
+                  <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
+                </Link>
+              </SearchFormWrapper>
+            </div>
 
           </SearchWrapper>
         );
