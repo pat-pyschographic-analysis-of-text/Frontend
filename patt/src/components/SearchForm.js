@@ -5,6 +5,11 @@ import styled from 'styled-components';
 
 import MobileLogo from '../assets/MobileLogo.png';
 
+// Importing things we need for Search 
+import { connect } from 'react-redux'; 
+import { searching } from '../actions'; 
+import { withRouter } from 'react-router-dom'; 
+
 // Overall Component styling 
 const SearchWrapper = styled.div`
     background-color: white; 
@@ -64,6 +69,41 @@ const SeeDataButton = styled.button`
 `; 
 
 class SearchForm extends React.Component {
+
+  // Setting username state to an empty string
+  state = {
+    username: '', 
+  }
+
+  // Handle changes function watches what our user types in 
+  handleChanges = e => {
+    this.setState({
+      username: {
+        ...this.state.username, 
+        [e.target.name]: e.target.value
+      }
+    })
+  }
+
+  // Search function calls our action 
+  search = e => {
+    e.preventDefault()
+    console.log(this.state.username); 
+    this.props.searching(this.state.unsername)
+    .then(() => {
+      this.timeOut()
+    })
+  }
+
+  // TimeOut gives our user a message in a certain amount of time 
+
+  timeOut = () => {
+    {this.props.message &&
+    setTimeout(() => 
+  this.props.history.push('search-results')
+, 2000)}
+  }
+
     render() {
         return (
           <SearchWrapper>
@@ -73,15 +113,16 @@ class SearchForm extends React.Component {
               Enter a user's Twitter handle to learn what their tweets say about their personality and who else tweets like they do. 
             </HeaderSubtitle>
             
-            <SearchFormWrapper>
+            <SearchFormWrapper onSubmit={this.search}>
               <SearchBar
                 name="search"
                 type="text"
                 placeholder="Enter Twitter handle"
+                onChange={this.handleChanges}
               />
 
               <Link to="/search-results">
-                <SeeDataButton>Get data</SeeDataButton>
+                <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
               </Link>
             </SearchFormWrapper>
 
@@ -90,4 +131,11 @@ class SearchForm extends React.Component {
     }
 }
 
-export default SearchForm; 
+const mapStateToProps = state => ({
+  searching: state.searching, 
+  error: state.error, 
+  message: state.message
+})
+
+export default connect(mapStateToProps, {searching}
+  ) (withRouter(SearchForm)); 

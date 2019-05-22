@@ -1,6 +1,4 @@
-import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT_START, LOG_OUT_SUCCESS, CAPTURE_PROFILE, DELETE_PROFILE_SUCCESS, DELETE_PROFILE_START, DELETE_PROFILE_ERROR, UPDATE_PROFILE_START, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERROR } from '../actions'
-
-import { TESTING_START, TESTING_SUCCESS, TESTING_ERROR } from '../actions'
+import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT_START, LOG_OUT_SUCCESS, CAPTURE_PROFILE, DELETE_PROFILE_SUCCESS, DELETE_PROFILE_START, DELETE_PROFILE_ERROR, UPDATE_PROFILE_START, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERROR, SEARCH_START, SEARCH_SUCCESS, SEARCH_ERROR } from '../actions'
 
 const initialState = {
     registering: false,
@@ -11,8 +9,8 @@ const initialState = {
     message: null,
     profile: null,
     userId: null,
-    testing: null,
-    testResults: []
+    searching: null,
+    searchResults: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -112,23 +110,26 @@ const rootReducer = (state = initialState, action) => {
           message: "", 
           error: action.payload 
         };
-      case TESTING_START:
+      case SEARCH_START:
         return {
           ...state,
-          testing: true,
+          searching: true,
+          message: "",
           error: "" 
         };
-      case TESTING_SUCCESS:
+      case SEARCH_SUCCESS:
         return {
           ...state,
-          testing: false,
+          searching: false,
+          message: action.payload.message, 
           error: "",
-          testResults: action.payload
+          searchResults: action.payload.searchResults
         };
-      case TESTING_ERROR:
+      case SEARCH_ERROR:
         return {
           ...state,
-          testing: false,
+          searching: false,
+          message: "",
           error: action.payload
         };
       default:

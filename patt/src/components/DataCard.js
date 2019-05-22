@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MobileLogo from '../assets/MobileLogo.png'; 
 import { Link } from 'react-router-dom'; 
 import { connect } from 'react-redux'
-import { testing } from '../actions'
+import { searching } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
 
 const DataCardWrapper = styled.div`
@@ -62,10 +62,10 @@ class DataCard extends React.Component {
     displayedData: ''
   }
   componentDidMount() {
-    this.props.testing("austen")
+    this.props.searching("austen")
     setTimeout(() => {
       this.setState({
-        data: this.props.testResults.personality,
+        data: this.props.searchResults.personality,
         displayedData: 'Personality'
       })
     }, 500)
@@ -79,11 +79,11 @@ class DataCard extends React.Component {
   }
   dataProviderLogic = dataName => {
     if (dataName === 'Personality') {
-      return this.props.testResults.personality
+      return this.props.searchResults.personality
     } else if (dataName === 'Needs') {
-      return this.props.testResults.needs
+      return this.props.searchResults.needs
     } else if (dataName === 'Values') {
-      return this.props.testResults.values
+      return this.props.searchResults.values
     }
   }
   percentileProviderLogic = integer => {
@@ -102,7 +102,7 @@ class DataCard extends React.Component {
             value: obj[key]
         }
     })
-    const profileData = this.props.testResults
+    const profileData = this.props.searchResults
     const legend = objOfArr.map((data, i) => {
       return <p key={i}>{this.legendTitleCapitalizer(data.key)}: %{this.percentileProviderLogic(data.value)}</p>
     })
@@ -139,11 +139,11 @@ class DataCard extends React.Component {
 
 const mapStateToProps = state => ({
   error: state.error,
-  testing: state.testing,
-  testResults: state.testResults
+  searching: state.searching,
+  searchResults: state.searchResults
 })
 
 export default connect(
   mapStateToProps,
-  { testing }
+  { searching }
 )(DataCard);

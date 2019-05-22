@@ -1,30 +1,5 @@
 import axios from 'axios'
 
-export const TESTING_START = 'TESTING_START'
-export const TESTING_SUCCESS = 'TESTING_SUCCESS' 
-export const TESTING_ERROR = 'TESTING_ERROR' 
- 
-export const testing = username => dispatch => { 
-    dispatch({ type: TESTING_START })
-    return axios  
-            // .post('https://mif88l63ba.execute-api.us-west-2.amazonaws.com/default/personality-score', username) 
-            .get(`https://pyschographic-analysis-of-text.herokuapp.com/users/${username}`)
-            .then(res => { 
-                console.log(res) 
-                dispatch({ 
-                    type: TESTING_SUCCESS, 
-                    payload: res.data 
-                }) 
-            }) 
-            .catch(err => { 
-                console.log(err) 
-                dispatch({ 
-                    type: TESTING_ERROR, 
-                    payload: err 
-                }) 
-            }) 
-} 
-
 export const REGISTER_START = 'REGISTER_START'
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 export const REGISTER_ERROR = 'REGISTER_ERROR'
@@ -156,28 +131,28 @@ export const updateProfile = profileUpdates => dispatch => {
             })
 }
 
-// Creating Search actions and action creator 
-// export const SEARCH_START = 'SEARCH_START'
-// export const SEARCH_SUCCESS = 'SEARCH_SUCCESS' 
-// export const SEARCH_ERROR = 'SEARCH_ERROR' 
+ // Creating Search actions and action creator 
+ export const SEARCH_START = 'SEARCH_START'
+ export const SEARCH_SUCCESS = 'SEARCH_SUCCESS' 
+ export const SEARCH_ERROR = 'SEARCH_ERROR' 
  
-// export const testing = username => dispatch => { 
-//     dispatch({ type: SEARCH_START })
-//     return axios  
-//             
-//             .get(`https://pyschographic-analysis-of-text.herokuapp.com/users/${username}`)
-//             .then(res => { 
-//                 console.log(res) 
-//                 dispatch({ 
-//                     type: SEARCH_SUCCESS, 
-//                     payload: res.data 
-//                 }) 
-//             }) 
-//             .catch(err => { 
-//                 console.log(err) 
-//                 dispatch({ 
-//                     type: SEARCH_ERROR, 
-//                     payload: err 
-//                 }) 
-//             }) 
-// } 
+ export const searching = username => dispatch => { 
+     dispatch({ type: SEARCH_START })
+     return axios  
+          
+             .get(`https://pyschographic-analysis-of-text.herokuapp.com/api/users/${username}`)
+             .then(res => { 
+                 console.log(res) 
+                //  dispatch({ 
+                //      type: SEARCH_SUCCESS, 
+                //      payload: res.data 
+                // }) 
+             }) 
+             .catch(err => { 
+                 console.log(err) 
+                 dispatch({ 
+                     type: SEARCH_ERROR, 
+                     payload: err 
+                 }) 
+             }) 
+ } 
