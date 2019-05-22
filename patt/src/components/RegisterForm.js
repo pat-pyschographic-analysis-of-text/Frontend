@@ -92,7 +92,7 @@ class RegisterForm extends React.Component {
           <RegisterWrapper>
             <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
             <HeaderTitle>Create account</HeaderTitle>
-            <RegisterFormWrapper onSubmit={this.register)>
+            <RegisterFormWrapper onSubmit={this.register}>
 
 
               <RegisterInput
