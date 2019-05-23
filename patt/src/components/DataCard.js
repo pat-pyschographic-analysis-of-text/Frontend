@@ -56,7 +56,16 @@ const TabNavWrapper = styled.div`
 
 const TabNav = styled.div`
     padding: 2vh 5vw;
-`
+  `
+
+const StyledLoadingMessage = styled.div`
+  z-index: 5;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 10vh; 
+  font-family: 'Montserrat', sans-serif;
+`;     
+
 
 class DataCard extends React.Component {
   state = {
@@ -82,33 +91,67 @@ class DataCard extends React.Component {
   }
 
   render() {
+    // SKIP THIS AT FIRST
+    // cannot declare a deconstructed object here because searchResults comes off of this.props and the compiler goes top to bottom 
+    // const { username, image_url,  } = searchResults
+
+
+    // START READING HERE
+    //anthing that comes off of this.props, we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
+    const { searchLoaded, searchResults } = this.props
+
+
+ //anthing that comes off of this.state, we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
+    const { displayedData } = this.state
+
+
+ //anthing that comes off of searchResults(can be thought of this.props.searchResults, but since we deconstructed it above, we can extend of it like so...however if this was defined above it would cause an error, see example), we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
+    const { username, image_url,  } = searchResults
+
+
+    // When I do this, I usaully will do each seperate deconstruction path in order as i come to them. After i deconstruct each object, i will check to make sure it is still rendering. I would commit after doing a whole component. However, it may be best for you to commit a little more often until you get the hang of this. 
+
     return (
-      <DataCardWrapper>
-        {!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating live scores now...'</p>}
-        {this.props.searchLoaded && 
-        <>
-        <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle>
-        <TabNavWrapper>
-          <TabNav id="Personality" onClick={this.clickHandler}>
-            Personality
-          </TabNav>
-          <TabNav id="Values" onClick={this.clickHandler}>
-            Values
-          </TabNav>
-          <TabNav id="Needs" onClick={this.clickHandler}>
-            Needs
-          </TabNav>
-          </TabNavWrapper>
-          <div>
-            {this.state.displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(this.state.displayedData)} /> }
-          </div>
+    <>
         <div>
-        {this.state.displayedData}
-        <TraitsLegend profilePic={this.props.searchResults.image_url} data={this.dataProviderLogic(this.state.displayedData)}/>
+        {/* <StyledLoadingMessage>{!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating  */}
+          <StyledLoadingMessage>{!searchLoaded && <p>'Making a very impressive request to our AI. Calculating live scores now...'</p>}</StyledLoadingMessage>
+    
+          <DataCardWrapper>
+           
+          {/* {this.props.searchLoaded &&  */}
+              {searchLoaded && 
+              <>
+              {/* <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle> */}
+              <HeaderTitle>@{username}</HeaderTitle>
+              <TabNavWrapper>
+                <TabNav id="Personality" onClick={this.clickHandler}>
+                  Personality
+                </TabNav>
+                <TabNav id="Values" onClick={this.clickHandler}>
+                  Values
+                </TabNav>
+                <TabNav id="Needs" onClick={this.clickHandler}>
+                  Needs
+                </TabNav>
+                </TabNavWrapper>
+                
+                <div>
+                  {/* {this.state.displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(this.state.displayedData)} /> } */}
+                  {displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(displayedData)} /> }
+                </div>
+      
+              <div>
+              {/* {this.state.displayedData} */}
+              {displayedData}
+              {/* <TraitsLegend profilePic={this.props.searchResults.image_url} data={this.dataProviderLogic(displayedData)}/> */}
+              <TraitsLegend profilePic={image_url} data={this.dataProviderLogic(displayedData)}/>
+              </div>
+              </>
+              }
+          </DataCardWrapper>
         </div>
-        </>
-        }
-      </DataCardWrapper>
+    </>
     );
   }
 }
