@@ -10,7 +10,7 @@ function App() {
       <Route path="/register" component= {RegisterPage} /> 
       <PrivateRoute path="/settings" component= {SettingsPage} /> 
       <PrivateRoute exact path="/search" component= {SearchPage} /> 
-      <PrivateRoute exact path="/search-results" component= {DataCardPage} /> 
+      {/* <PrivateRoute exact path="/search-results" component= {DataCardPage} />  */}
     </>
   );
 }

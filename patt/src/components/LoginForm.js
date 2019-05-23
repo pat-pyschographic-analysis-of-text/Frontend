@@ -8,12 +8,10 @@ import { withRouter } from 'react-router-dom'
 
 import styled from 'styled-components'; 
 
-import MobileLogo from '../assets/MobileLogo.png'; 
+import FullLogo from '../assets/FullLogo.png'; 
 
-// Universal Login page styling 
-
+// Full page wrapper styling 
 const LoginWrapper = styled.div`
-    color: red; 
     background-color: white; 
     max-width: 500px; 
     width: 100%; 
@@ -25,46 +23,58 @@ const LoginWrapper = styled.div`
     font-family: 'Montserrat', sans-serif;
 `; 
 
-const LoginFormWrapper = styled.form`
-    display: flex; 
-    flex-direction: column; 
-`;
-
 // Logo 
-
-const MobileLogoStyled = styled.img`
-    max-width: 30%; 
+const LogoStyle = styled.img`
+    /* Sizing */
+    max-width: 60%; 
     height: auto; 
+
+    margin-top: 5vh; 
 `; 
 
-// Text Headers 
-
-const HeaderTitle = styled.h2`
-    color: #0082c9; 
-`; 
-
+// Subtitle
 const HeaderSubtitle = styled.h5`
     color: #778899; 
     width: 60%; 
+    margin-top: 5vh; 
 `; 
 
 // Login section 
+const LoginFormWrapper = styled.form`
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    border: 2px solid #778899; 
+    background-color: #12B1FC; 
+    padding: 5%; 
+    border-radius: 10px; 
+    margin-top: 5vh; 
+`;
+
 const LoginTitle = styled.h2`
-    color: #0082c9; 
+    color: white; 
 `; 
 
-const LoginButton = styled.button `
-    background-color: #12B1FC;
+const SignInInput = styled.input`
+    border: 1px solid #778899; 
     font-family: 'Montserrat', sans-serif;
-    color: white; 
+    padding: 1vh; 
+    margin: 3%; 
+`;
+
+const LoginButton = styled.button `
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
+    color: #12B1FC; 
     border-radius: 10px; 
     padding: 2%; 
-    width: 50%; 
-    margin-bottom: 2%; 
-
+    margin-bottom: 2vh; 
+    margin-top: 2vh; 
+    width: 50%;
+    
     &:hover {
-        background-color: white;
-        color: #12B1FC; 
+        background-color: #12B1FC; 
+        color: white; 
         cursor: pointer;
     }
 `; 
@@ -83,12 +93,7 @@ const SignUpButton = styled.button `
         cursor: pointer;
     }
 `; 
-
-const SignInInput = styled.input`
-    border: 1px solid #778899; 
-    font-family: 'Montserrat', sans-serif;
-    margin: 3%; 
-`; 
+ 
  
 class LoginForm extends React.Component {
     state = {
@@ -121,16 +126,16 @@ class LoginForm extends React.Component {
     render() {
         return(
                 <LoginWrapper>
-                    <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
-                    <HeaderTitle>Tweetmate</HeaderTitle>
+                    <LogoStyle src={FullLogo} alt="TweetMate logo" />
                     <HeaderSubtitle>Discover what your tweets say about who you are and who you should follow.</HeaderSubtitle>
-                    <LoginTitle>Login</LoginTitle>
+                    
                    
                         <LoginFormWrapper onSubmit={this.login}>
+                        <LoginTitle>Login</LoginTitle>
                             <SignInInput
                                 name="username"
                                 type="text"
-                                placeholder="Email"
+                                placeholder="Username"
                                 onChange={this.handleChanges}
                             />
                             <SignInInput
@@ -141,10 +146,14 @@ class LoginForm extends React.Component {
                             />
         
                             <LoginButton onClick={this.login}>Login</LoginButton>
-                            <Link to="/register"><SignUpButton>Sign up</SignUpButton></Link>
+
+                            <SignUpButton><Link to="/register" style={{ textDecoration: 'none', color: 'white'}}>Sign up</Link></SignUpButton>
+                            
                         </LoginFormWrapper>
+
                      {this.props.message && <p>{this.props.message}</p>}
                     {this.props.error && <p>{this.props.error}</p>}
+
                 </LoginWrapper>
             )
     }
