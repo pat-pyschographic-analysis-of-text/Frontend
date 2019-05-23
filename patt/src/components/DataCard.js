@@ -56,7 +56,16 @@ const TabNavWrapper = styled.div`
 
 const TabNav = styled.div`
     padding: 2vh 5vw;
-`
+  `
+
+const StyledLoadingMessage = styled.div`
+  z-index: 5;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 10vh; 
+  font-family: 'Montserrat', sans-serif;
+`;     
+
 
 class DataCard extends React.Component {
   state = {
@@ -86,7 +95,7 @@ class DataCard extends React.Component {
 
     <>
         <div>
-          <div style={{zIndex: "5", margin: "0 auto", border: "1px solid red", textAlign: "center", paddingTop: "35vh"}}>{!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating live scores now...'</p>}</div>
+          <StyledLoadingMessage>{!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating live scores now...'</p>}</StyledLoadingMessage>
     
           <DataCardWrapper>
            
