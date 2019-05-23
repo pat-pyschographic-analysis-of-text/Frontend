@@ -7,10 +7,11 @@ import {connect} from 'react-redux';
 import { updateProfile, deleteProfile } from '../actions'; 
 import { withRouter } from 'react-router-dom'; 
 
-import MobileLogo from '../assets/MobileLogo.png';
+import FullLogo from '../assets/FullLogo.png';
+import NavButtonWrapper from './NavButtonWrapper';
 
-// Overall Component styling 
-const UpdateWrapper = styled.div`
+// Full page wrapper styling 
+const SettingsWrapper = styled.div`
     background-color: white; 
     max-width: 500px; 
     width: 100%; 
@@ -22,39 +23,52 @@ const UpdateWrapper = styled.div`
     font-family: 'Montserrat', sans-serif;
 `; 
 
-const HeaderTitle = styled.h2`
-    color: #0082c9; 
-`; 
-
-const UpdateFormWrapper = styled.form`
-display: flex;
-flex-direction: column;
-`; 
-
 // Logo 
-const MobileLogoStyled = styled.img`
-    max-width: 30%; 
+const LogoStyle = styled.img`
+    /* Sizing */
+    max-width: 60%; 
     height: auto; 
+
+    margin-top: 5vh; 
 `; 
+
+// SettingsForm section 
+const SettingsFormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #778899;
+  background-color: #12b1fc;
+  padding: 5%;
+  border-radius: 10px;
+  margin-top: 5vh;
+`; 
+
+const SettingsTitle = styled.h2`
+    color: white; 
+`; 
+
 
 const UpdateInput = styled.input`
-border: 1px solid #778899; 
-font-family: 'Montserrat', sans-serif;
-margin: 3%; 
-`; 
+  border: 1px solid #778899;
+  font-family: "Montserrat", sans-serif;
+  padding: 1vh;
+  margin: 3%;
+`;
 
 const UpdateButton = styled.button `
-    background-color: #12B1FC;
+    background-color: white;
     font-family: 'Montserrat', sans-serif;
-    color: white; 
+    color: #12B1FC; 
     border-radius: 10px; 
     padding: 2%; 
-    width: 50%; 
-    margin-bottom: 2%; 
-
+    margin-bottom: 2vh; 
+    margin-top: 2vh; 
+    width: 70%;
+    
     &:hover {
-        background-color: white;
-        color: #12B1FC; 
+        background-color: #12B1FC; 
+        color: white; 
         cursor: pointer;
     }
 `; 
@@ -65,7 +79,7 @@ const DeleteButton = styled.button `
     color: white; 
     border-radius: 10px; 
     padding: 2%; 
-    width: 50%; 
+    width: 80%; 
 
     &:hover {
         background-color: white;
@@ -75,11 +89,12 @@ const DeleteButton = styled.button `
 `; 
 
  
-class UpdateForm extends React.Component {
+class SettingsForm extends React.Component {
   // Setting state to what our server needs to receive
   state = {
     profileUpdates: {
-      username: ""
+      username: "", 
+      twitter_handle: "", 
     }
   };
 
@@ -128,11 +143,13 @@ class UpdateForm extends React.Component {
 
   render() {
     return (
-      <UpdateWrapper>
-        <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
-        <HeaderTitle>Update Username</HeaderTitle>
+      <SettingsWrapper>
+        <NavButtonWrapper />
 
-        <UpdateFormWrapper onSubmit={this.updateProfile}>
+        <LogoStyle src={FullLogo} alt="TweetMate logo" />
+
+        <SettingsFormWrapper onSubmit={this.updateProfile}>
+          <SettingsTitle>Settings</SettingsTitle>
 
           <UpdateInput
             name="username"
@@ -141,17 +158,26 @@ class UpdateForm extends React.Component {
             onChange={this.handleChanges}
           />
 
+          <UpdateInput
+            name="twitter_handle"
+            type="text"
+            placeholder="Twitter handle"
+            onChange={this.handleChanges}
+          />
+
           <Link to="/search">
             <UpdateButton onClick={this.updateProfile}>
-              Update Username
+              Update profile
             </UpdateButton>
           </Link>
 
           <Link to="/">
-            <DeleteButton onClick={this.deleteProfile}>Delete Profile</DeleteButton>
+            <DeleteButton onClick={this.deleteProfile}>
+              Delete Profile
+            </DeleteButton>
           </Link>
-        </UpdateFormWrapper>
-      </UpdateWrapper>
+        </SettingsFormWrapper>
+      </SettingsWrapper>
     );
   }
 }
@@ -167,4 +193,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
    {updateProfile, deleteProfile}
-   ) (withRouter(UpdateForm)); 
+   ) (withRouter(SettingsForm)); 
