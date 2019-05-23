@@ -23,11 +23,21 @@ const Header = styled.div`
     justify-content: space-around; 
     margin-top: 5vw; 
     font-family: 'Montserrat', sans-serif;
+
+    @media (min-width: 500px) {
+        margin: 0 auto; 
+        justify-content: space-around; 
+        max-width: 800px; 
+    }
 `; 
 
 const HeaderLogo = styled.img`
     max-width: 25%; 
     height: auto; 
+
+    @media (min-width: 500px) {
+        max-width: 20%; 
+    }
 `; 
 
 const SearchBar = styled.input`
@@ -35,6 +45,7 @@ const SearchBar = styled.input`
   padding: 5%; 
   border: 2px solid #778899; 
   min-width: 25vw;
+
 `; 
 
 const SearchButton = styled.button`
@@ -50,6 +61,8 @@ const SearchButton = styled.button`
     color: #12B1FC; 
     cursor: pointer;
   }
+
+  
 `; 
 
 class SearchForm extends React.Component {
