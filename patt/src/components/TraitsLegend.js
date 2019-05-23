@@ -40,6 +40,7 @@ export default function ExploreProfiles(props) {
             value: obj[key]
         }
     })
+    //conditionally render the color to match the score for each progress (red, yellow, green)
     const percent = objOfArr.map((trait, i) => {
         return <Progress
                     percent={trait.value*100}
@@ -58,36 +59,6 @@ export default function ExploreProfiles(props) {
                     <ProfileImage src={props.profilePic}/>
                     <ProfileLevels>
                         {percent}
-                        {/* <Progress
-                            percent={props.testResults.personality.conscientiousness*100}
-                            //percent={75}
-                            theme={{
-                                active: {
-                                symbol: 'conscientiousness',
-                                color: '#1EC56D'
-                                }
-                            }}
-                        />
-                        <Progress
-                            percent={props.testResults.needs.challenge*100}
-                            //percent={56}
-                            theme={{
-                                active: {
-                                symbol: 'challenge',
-                                color: '#FFD602'
-                                }
-                            }}
-                        />
-                        <Progress
-                            percent={props.testResults.needs.love*100}
-                            //percent={80}
-                            theme={{
-                                active: {
-                                symbol: 'love',
-                                color: '#CE46DD'
-                                }
-                            }}
-                        /> */}
                     </ProfileLevels>
                 </ProfileCard>
         </SearchWrapper>
