@@ -25,28 +25,6 @@ const HeaderTitle = styled.h2`
     display: flex;
 `; 
 
-// Logo 
-const MobileLogoStyled = styled.img`
-    max-width: 30%; 
-    height: auto; 
-`; 
-
-const SearchAgainButton = styled.button `
-    background-color: #12B1FC;
-    font-family: 'Montserrat', sans-serif;
-    color: white; 
-    border-radius: 10px; 
-    padding: 2%; 
-    width: 50%; 
-    margin-bottom: 2%; 
-
-    &:hover {
-        background-color: white;
-        color: #12B1FC; 
-        cursor: pointer;
-    }
-`; 
-
 const TabNavWrapper = styled.div`
     display: flex;
     flex-direction: row;
