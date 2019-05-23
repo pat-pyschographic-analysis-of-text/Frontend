@@ -13,6 +13,10 @@ const LogoutButtonWrapper = styled.i`
     margin: 3vw; 
     color: grey; 
     z-index: 10; 
+
+    @media (min-width: 500px) {
+        margin-right: 4vw; 
+    }
 `; 
 
 class LogoutButton extends React.Component {

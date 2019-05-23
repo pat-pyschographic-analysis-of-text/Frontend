@@ -15,6 +15,10 @@ const SettingsButtonStyle = styled.i`
     color: grey; 
     /* Adding z-index to keep above everything else  */
     z-index: 10; 
+
+    @media (min-width: 500px) {
+        margin-right: 4vw; 
+    }
 `; 
 
 class SettingsButton extends React.Component {
