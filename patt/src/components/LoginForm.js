@@ -31,10 +31,12 @@ const LoginFormWrapper = styled.form`
 `;
 
 // Logo 
-
-const MobileLogoStyled = styled.img`
-    max-width: 30%; 
+const LogoStyle = styled.img`
+    /* Sizing */
+    max-width: 60%; 
     height: auto; 
+
+    margin-top: 5vh; 
 `; 
 
 // Text Headers 
@@ -121,8 +123,7 @@ class LoginForm extends React.Component {
     render() {
         return(
                 <LoginWrapper>
-                    <MobileLogoStyled src={FullLogo} alt="TweetMate logo" />
-                    <HeaderTitle>Tweetmate</HeaderTitle>
+                    <LogoStyle src={FullLogo} alt="TweetMate logo" />
                     <HeaderSubtitle>Discover what your tweets say about who you are and who you should follow.</HeaderSubtitle>
                     <LoginTitle>Login</LoginTitle>
                    
