@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { login } from '../actions'
 import { withRouter } from 'react-router-dom' 
 
+import Loader from 'react-loader-spinner'; 
+
 import styled from 'styled-components'; 
 
 import FullLogo from '../assets/FullLogo.png'; 
@@ -174,15 +176,25 @@ class LoginForm extends React.Component {
               <LoginButton onClick={this.login}>Login</LoginButton>
 
               <SignUpButton>
-                <Link to="/register" style={{ textDecoration: "none" , color: 'white'}}>
+                <Link
+                  to="/register"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
                   Sign up
                 </Link>
               </SignUpButton>
             </LoginFormWrapper>
 
             <LoginMessage>
-                {this.props.message && <p>{this.props.message}</p>}
-                {this.props.error && <p>{this.props.error}</p>}
+            <Loader
+                type="ThreeDots"
+                color="#1f2a38"
+                height="12"
+                width="26"
+              />
+              
+              {this.props.message && <p>{this.props.message}</p>}
+              {this.props.error && <p>{this.props.error}</p>}
             </LoginMessage>
           </LoginWrapper>
         );
