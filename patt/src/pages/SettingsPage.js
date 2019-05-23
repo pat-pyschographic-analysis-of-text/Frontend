@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { UpdateForm } from '../components'; 
+import { SettingsForm } from '../components'; 
 import { connect } from 'react-redux' 
 import { withRouter } from 'react-router-dom'
 import { logout, deleteProfile } from '../actions'
@@ -15,7 +15,7 @@ class SettingsPage extends React.Component {
     render() {
         return(
             <> 
-            <UpdateForm />
+            <SettingsForm />
             </> 
         )
     }

@@ -11,7 +11,7 @@ import MobileLogo from '../assets/MobileLogo.png';
 import NavButtonWrapper from './NavButtonWrapper';
 
 // Overall Component styling 
-const UpdateWrapper = styled.div`
+const SettingsWrapper = styled.div`
     background-color: white; 
     max-width: 500px; 
     width: 100%; 
@@ -27,7 +27,7 @@ const HeaderTitle = styled.h2`
     color: #0082c9; 
 `; 
 
-const UpdateFormWrapper = styled.form`
+const SettingsFormWrapper = styled.form`
 display: flex;
 flex-direction: column;
 `; 
@@ -76,7 +76,7 @@ const DeleteButton = styled.button `
 `; 
 
  
-class UpdateForm extends React.Component {
+class SettingsForm extends React.Component {
   // Setting state to what our server needs to receive
   state = {
     profileUpdates: {
@@ -129,12 +129,12 @@ class UpdateForm extends React.Component {
 
   render() {
     return (
-      <UpdateWrapper>
+      <SettingsWrapper>
         <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
         <NavButtonWrapper /> 
         <HeaderTitle>Update Username</HeaderTitle>
 
-        <UpdateFormWrapper onSubmit={this.updateProfile}>
+        <SettingsFormWrapper onSubmit={this.updateProfile}>
 
           <UpdateInput
             name="username"
@@ -152,8 +152,8 @@ class UpdateForm extends React.Component {
           <Link to="/">
             <DeleteButton onClick={this.deleteProfile}>Delete Profile</DeleteButton>
           </Link>
-        </UpdateFormWrapper>
-      </UpdateWrapper>
+        </SettingsFormWrapper>
+      </SettingsWrapper>
     );
   }
 }
@@ -169,4 +169,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
    {updateProfile, deleteProfile}
-   ) (withRouter(UpdateForm)); 
+   ) (withRouter(SettingsForm)); 
