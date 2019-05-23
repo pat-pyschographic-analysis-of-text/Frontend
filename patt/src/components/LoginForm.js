@@ -12,7 +12,6 @@ import FullLogo from '../assets/FullLogo.png';
 
 // Full page wrapper styling 
 const LoginWrapper = styled.div`
-    color: red; 
     background-color: white; 
     max-width: 500px; 
     width: 100%; 
