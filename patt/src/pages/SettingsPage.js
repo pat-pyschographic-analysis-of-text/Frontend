@@ -15,8 +15,7 @@ class SettingsPage extends React.Component {
     render() {
         return(
             <> 
-            <UpdateForm /> 
-            <button onClick={this.deleteProfile}>Delete Profile</button>
+            <UpdateForm />
             </> 
         )
     }
