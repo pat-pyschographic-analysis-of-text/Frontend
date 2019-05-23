@@ -153,8 +153,12 @@ class RegisterForm extends React.Component {
                 Sign up
               </RegisterButton>
             </RegisterFormWrapper>
-            {this.props.message && <p>{this.props.message}</p>}
-            {this.props.error && <p>{this.props.error}</p>}
+
+            <div style={{width: '100%', height: '5vh'}}>
+              {this.props.message && <p>{this.props.message}</p>}
+              {this.props.error && <p>{this.props.error}</p>}
+            </div>
+
           </RegisterWrapper>
         );
     }
