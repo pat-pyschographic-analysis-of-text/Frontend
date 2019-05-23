@@ -10,8 +10,7 @@ import styled from 'styled-components';
 
 import FullLogo from '../assets/FullLogo.png'; 
 
-// Universal Login page styling 
-
+// Full page wrapper styling 
 const LoginWrapper = styled.div`
     color: red; 
     background-color: white; 
@@ -25,11 +24,6 @@ const LoginWrapper = styled.div`
     font-family: 'Montserrat', sans-serif;
 `; 
 
-const LoginFormWrapper = styled.form`
-    display: flex; 
-    flex-direction: column; 
-`;
-
 // Logo 
 const LogoStyle = styled.img`
     /* Sizing */
@@ -39,20 +33,26 @@ const LogoStyle = styled.img`
     margin-top: 5vh; 
 `; 
 
-// Text Headers 
-
-const HeaderTitle = styled.h2`
-    color: #0082c9; 
-`; 
-
+// Subtitle
 const HeaderSubtitle = styled.h5`
     color: #778899; 
     width: 60%; 
+    margin-top: 5vh; 
 `; 
 
 // Login section 
+const LoginFormWrapper = styled.form`
+    display: flex; 
+    flex-direction: column; 
+    border: 2px solid #778899; 
+    background-color: #12B1FC; 
+    padding: 5%; 
+    border-radius: 10%; 
+    margin-top: 5vh; 
+`;
+
 const LoginTitle = styled.h2`
-    color: #0082c9; 
+    color: white; 
 `; 
 
 const LoginButton = styled.button `
@@ -125,13 +125,14 @@ class LoginForm extends React.Component {
                 <LoginWrapper>
                     <LogoStyle src={FullLogo} alt="TweetMate logo" />
                     <HeaderSubtitle>Discover what your tweets say about who you are and who you should follow.</HeaderSubtitle>
-                    <LoginTitle>Login</LoginTitle>
+                    
                    
                         <LoginFormWrapper onSubmit={this.login}>
+                        <LoginTitle>Login</LoginTitle>
                             <SignInInput
                                 name="username"
                                 type="text"
-                                placeholder="Email"
+                                placeholder="Username"
                                 onChange={this.handleChanges}
                             />
                             <SignInInput
