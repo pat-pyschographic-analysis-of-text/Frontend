@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 
 import styled from 'styled-components'; 
 
-import MobileLogo from '../assets/MobileLogo.png'; 
+import FullLogo from '../assets/FullLogo.png'; 
 
 // Universal Login page styling 
 
@@ -121,7 +121,7 @@ class LoginForm extends React.Component {
     render() {
         return(
                 <LoginWrapper>
-                    <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
+                    <MobileLogoStyled src={FullLogo} alt="TweetMate logo" />
                     <HeaderTitle>Tweetmate</HeaderTitle>
                     <HeaderSubtitle>Discover what your tweets say about who you are and who you should follow.</HeaderSubtitle>
                     <LoginTitle>Login</LoginTitle>
