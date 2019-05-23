@@ -183,7 +183,7 @@ class LoginForm extends React.Component {
                   {/* think about loader like this...since it is being rendered inside a button, the <Loader /> component actually turns into an animated SVG, so just treat it like text! :) */}
                   <Loader
                 type="ThreeDots"
-                color="#1f2a38"
+                color="white"
                 height="12"
                 width="26"
                     />

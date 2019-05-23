@@ -26,7 +26,6 @@ const Header = styled.div`
 
     @media (min-width: 500px) {
         margin: 0 auto; 
-        justify-content: space-around; 
         max-width: 800px; 
     }
 `; 
