@@ -124,6 +124,9 @@ class LoginForm extends React.Component {
               , 2000)}
     }
     render() {
+
+        const { message, error } = this.props
+
         return(
                 <LoginWrapper>
                     <LogoStyle src={FullLogo} alt="TweetMate logo" />
@@ -151,8 +154,8 @@ class LoginForm extends React.Component {
                             
                         </LoginFormWrapper>
 
-                     {this.props.message && <p>{this.props.message}</p>}
-                    {this.props.error && <p>{this.props.error}</p>}
+                     {message && <p>{message}</p>}
+                    {error && <p>{error}</p>}
 
                 </LoginWrapper>
             )
