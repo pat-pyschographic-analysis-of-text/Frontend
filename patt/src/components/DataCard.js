@@ -62,8 +62,8 @@ class DataCard extends React.Component {
     displayedData: ''
   }
   componentDidMount() {
-    this.props.searching("austen")
     setTimeout(() => {
+      this.props.searching(`${this.props.username}`)
       this.setState({
         data: this.props.searchResults.personality,
         displayedData: 'Personality'
@@ -73,7 +73,7 @@ class DataCard extends React.Component {
   clickHandler = e => {
     e.preventDefault()
     this.setState({
-      data: this.dataProviderLogic(e.target.id),
+      data: this.dataProviderLogic(this.state.displayedData),
       displayedData: e.target.id
     })
   }
@@ -108,6 +108,9 @@ class DataCard extends React.Component {
     // })
     return (
       <DataCardWrapper>
+        {!this.props.searchLoaded ? <p>'Making a very impressive request to our AI. Calculating live scores now...'</p> : null}
+        {this.props.searchLoaded && 
+        <>
         <HeaderTitle>@</HeaderTitle>
         <TabNavWrapper>
           <TabNav id="Personality" onClick={this.clickHandler}>
@@ -127,10 +130,8 @@ class DataCard extends React.Component {
         {this.state.displayedData}
           {/* <p>{legend}</p> */}
         </div>
-        <Link to="/search">
-          <SearchAgainButton>Search again</SearchAgainButton>
-        </Link>
-
+        </>
+        }
       </DataCardWrapper>
     );
   }
@@ -139,7 +140,10 @@ class DataCard extends React.Component {
 const mapStateToProps = state => ({
   error: state.error,
   searching: state.searching,
-  searchResults: state.searchResults
+  searchResults: state.searchResults,
+  searchInput: state.searchInput,
+  username: state.username,
+  searchLoaded: state.searchLoaded
 })
 
 export default connect(

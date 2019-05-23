@@ -96,6 +96,7 @@ class SearchForm extends React.Component {
   // Search function calls our action 
   search = e => {
     e.preventDefault()
+    this.props.grabSearchInput(this.state.username.search)
     console.log(this.state.username.search); 
     this.props.searching(this.state.username.search)
       .then(() => {
@@ -109,7 +110,7 @@ class SearchForm extends React.Component {
     {this.props.message &&
     setTimeout(() => 
   this.props.history.push('/search-results')
-, 2000)}
+, 1000)}
   }
 
     render() {

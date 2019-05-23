@@ -38,11 +38,12 @@ export const login = creds => dispatch => {
     return axios 
             .post('https://pyschographic-analysis-of-text.herokuapp.com/users/login/', creds)
             .then(res => {
+                console.log(res.data.username)
                 console.log(res.data.message)
                 localStorage.setItem('token', res.data.token)
                 dispatch({
                     type: LOGIN_SUCCESS,
-                    payload: {message: res.data.message, userId: res.data.userId}
+                    payload: {message: res.data.message, userId: res.data.userId, username: res.data.username}
                 })
             })
             .catch(err => {
@@ -135,18 +136,28 @@ export const updateProfile = profileUpdates => dispatch => {
  export const SEARCH_START = 'SEARCH_START'
  export const SEARCH_SUCCESS = 'SEARCH_SUCCESS' 
  export const SEARCH_ERROR = 'SEARCH_ERROR' 
+ export const SEARCH_INPUT = 'SEARCH_INPUT' 
  
+export const grabSearchInput = twitter_name => dispatch => {
+    dispatch({ 
+        type: SEARCH_INPUT,
+        payload: twitter_name 
+    })
+}
+
  export const searching = username => dispatch => { 
-     dispatch({ type: SEARCH_START })
+     dispatch({ 
+         type: SEARCH_START
+        })
      return axios  
           
              .get(`https://pyschographic-analysis-of-text.herokuapp.com/api/users/${username}`)
              .then(res => { 
                  console.log(res) 
-                //  dispatch({ 
-                //      type: SEARCH_SUCCESS, 
-                //      payload: res.data 
-                // }) 
+                 dispatch({ 
+                     type: SEARCH_SUCCESS, 
+                     payload: {message: `Succesfully loaded the results for ${username} from the AI`, searchResults: res.data} 
+                }) 
              }) 
              .catch(err => { 
                  console.log(err) 

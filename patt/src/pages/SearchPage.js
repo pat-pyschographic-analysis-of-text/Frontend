@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { SearchForm, SettingsButton } from '../components'; 
-import DataCardPage from './DataCardPage'
+import DataCard from '../components/DataCard'
 
 class SearchPage extends React.Component {
     render() {
@@ -8,7 +8,7 @@ class SearchPage extends React.Component {
             <> 
             <SettingsButton /> 
             <SearchForm /> 
-            <DataCardPage /> 
+            <DataCard /> 
             </> 
 
             )
