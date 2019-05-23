@@ -99,6 +99,11 @@ const SignUpButton = styled.button `
         cursor: pointer;
     }
 `; 
+
+const LoginMessage = styled.div `
+    width: 100%; 
+    height: 5vh; 
+`;
  
  
 class LoginForm extends React.Component {
@@ -175,10 +180,10 @@ class LoginForm extends React.Component {
               </SignUpButton>
             </LoginFormWrapper>
 
-            <div style={{width: '100%', height: '5vh'}}>
+            <LoginMessage>
                 {this.props.message && <p>{this.props.message}</p>}
                 {this.props.error && <p>{this.props.error}</p>}
-            </div>
+            </LoginMessage>
           </LoginWrapper>
         );
     }
