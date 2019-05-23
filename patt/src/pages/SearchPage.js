@@ -1,5 +1,4 @@
 import React from 'react'; 
- 
 import { SearchForm, SettingsButton } from '../components'; 
 import DataCard from '../components/DataCard'
 
