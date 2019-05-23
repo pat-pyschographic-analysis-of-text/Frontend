@@ -172,8 +172,13 @@ class LoginForm extends React.Component {
                 placeholder="Password"
                 onChange={this.handleChanges}
               />
-
-              <LoginButton onClick={this.login}>Login</LoginButton>
+              
+              { this.props.loggingIn ? <LoginButton onClick={this.login}>Loging in<Loader
+                type="ThreeDots"
+                color="#1f2a38"
+                height="12"
+                width="26"
+              /></LoginButton> : <LoginButton onClick={this.login}>Login</LoginButton>}
 
               <SignUpButton>
                 <Link
@@ -186,13 +191,6 @@ class LoginForm extends React.Component {
             </LoginFormWrapper>
 
             <LoginMessage>
-            <Loader
-                type="ThreeDots"
-                color="#1f2a38"
-                height="12"
-                width="26"
-              />
-              
               {this.props.message && <p>{this.props.message}</p>}
               {this.props.error && <p>{this.props.error}</p>}
             </LoginMessage>
