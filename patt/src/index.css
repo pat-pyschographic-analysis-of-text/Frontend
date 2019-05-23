@@ -1,0 +1,20 @@
+/* CSS to style the video that is displaying in index.html */
+
+#bgvid {
+  display: none; 
+}
+
+/* Media query to display on desktop  */
+@media (min-width: 500px) {
+  #bgvid {
+    display: inline; 
+    width: 100vw;
+    height: auto;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+  }
+}

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { login } from '../actions'
 import { withRouter } from 'react-router-dom' 
 
-
+import Loader from 'react-loader-spinner'; 
 
 import styled from 'styled-components'; 
 
@@ -21,6 +21,14 @@ const LoginWrapper = styled.div`
     text-align: center; 
     align-items: center; 
     font-family: 'Montserrat', sans-serif;
+
+    @media (min-width: 500px) {
+        border: 2px solid #778899; 
+        border-radius: 10px; 
+        padding-bottom: 10vh; 
+        max-width: 30%; 
+        margin-top: 7vh; 
+    }
 `; 
 
 // Logo 
@@ -93,6 +101,11 @@ const SignUpButton = styled.button `
         cursor: pointer;
     }
 `; 
+
+const LoginMessage = styled.div `
+    width: 100%; 
+    height: 5vh; 
+`;
  
  
 class LoginForm extends React.Component {
@@ -123,39 +136,81 @@ class LoginForm extends React.Component {
             this.props.history.push('/search')
               , 2000)}
     }
+    // this function is doing two things, preventing default action of a button to reload the page, and also navigating to the desired route :)
+    signUpHandler = e => {
+        e.preventDefault()
+        this.props.history.push('/register')
+    }
     render() {
-        return(
-                <LoginWrapper>
-                    <LogoStyle src={FullLogo} alt="TweetMate logo" />
-                    <HeaderSubtitle>Discover what your tweets say about who you are and who you should follow.</HeaderSubtitle>
-                    
-                   
-                        <LoginFormWrapper onSubmit={this.login}>
-                        <LoginTitle>Login</LoginTitle>
-                            <SignInInput
-                                name="username"
-                                type="text"
-                                placeholder="Username"
-                                onChange={this.handleChanges}
-                            />
-                            <SignInInput
-                                name="password"
-                                type="password"
-                                placeholder="Password"
-                                onChange={this.handleChanges}
-                            />
-        
-                            <LoginButton onClick={this.login}>Login</LoginButton>
+        return (
+          <LoginWrapper>
+            <video
+              class="background-video hero-bg-video is-playing"
+              loop="loop"
+              autoplay="autoplay"
+              muted="muted"
+              id="bgvid"
+            >
+              <source
+                src="https://static.videezy.com/system/resources/previews/000/035/952/original/4K_2018.12.05_Sunset_Light_adjust.mp4"
+                type="video/mp4"
+              />
+            </video>
 
-                            <SignUpButton><Link to="/register" style={{ textDecoration: 'none', color: 'white'}}>Sign up</Link></SignUpButton>
-                            
-                        </LoginFormWrapper>
+            <LogoStyle src={FullLogo} alt="TweetMate logo" />
+            <HeaderSubtitle>
+              Discover what your tweets say about who you are and who
+              you should follow.
+            </HeaderSubtitle>
 
-                     {this.props.message && <p>{this.props.message}</p>}
-                    {this.props.error && <p>{this.props.error}</p>}
+            <LoginFormWrapper onSubmit={this.login}>
+              <LoginTitle>Login</LoginTitle>
+              <SignInInput
+                name="username"
+                type="text"
+                placeholder="Username"
+                onChange={this.handleChanges}
+              />
+              <SignInInput
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={this.handleChanges}
+              />
+              
+              { this.props.loggingIn ? <LoginButton onClick={this.login}>
+                  Loging in
+                  {/* think about loader like this...since it is being rendered inside a button, the <Loader /> component actually turns into an animated SVG, so just treat it like text! :) */}
+                  <Loader
+                type="ThreeDots"
+                color="#1f2a38"
+                height="12"
+                width="26"
+                    />
+              </LoginButton> : <LoginButton onClick={this.login}>Login</LoginButton>}
 
-                </LoginWrapper>
-            )
+              {/* <SignUpButton>
+                <Link
+                  to="/register"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Sign up
+                </Link>
+              </SignUpButton>
+            </LoginFormWrapper> */}
+            {/* Instead of wrapping with a link, lets use the this.props.history.push(path). This eleminates wrapping our button with a Link(which turns into an a tag) and also gets more functionality and may help with your color issue. Take a look at the this.signUpHandler above! */}
+
+              <SignUpButton onClick={this.signUpHandler}>
+                  Sign up
+              </SignUpButton>
+            </LoginFormWrapper>
+
+            <LoginMessage>
+              {this.props.message && <p>{this.props.message}</p>}
+              {this.props.error && <p>{this.props.error}</p>}
+            </LoginMessage>
+          </LoginWrapper>
+        );
     }
 }
 

@@ -7,8 +7,7 @@ import SettingsButton from './SettingsButton';
  const NavButtonWrapperStyle = styled.div`
   width: 100%;
   display: flex; 
-  justify-content: space-between; 
-  border: 2px solid red; 
+  
  `; 
 
 class NavButtonWrapper extends React.Component {
