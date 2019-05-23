@@ -53,7 +53,7 @@ class ExploreProfiles extends Component {
                                 //percent={75}
                                 theme={{
                                     active: {
-                                    symbol: '🤔',
+                                    symbol: 'conscientiousness',
                                     color: '#1EC56D'
                                     }
                                 }}
@@ -63,7 +63,7 @@ class ExploreProfiles extends Component {
                                 //percent={56}
                                 theme={{
                                     active: {
-                                    symbol: '💪',
+                                    symbol: 'challenge',
                                     color: '#FFD602'
                                     }
                                 }}
@@ -73,7 +73,7 @@ class ExploreProfiles extends Component {
                                 //percent={80}
                                 theme={{
                                     active: {
-                                    symbol: '🖖',
+                                    symbol: 'love',
                                     color: '#CE46DD'
                                     }
                                 }}
