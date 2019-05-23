@@ -16,7 +16,10 @@ export const register = creds => dispatch => {
                 localStorage.setItem('username', creds.username)
                 dispatch({
                     type: REGISTER_SUCCESS,
-                    payload: {message: `Succesfully registered ${creds.username}`, userId: res.data.id}
+                    payload: {
+                        message: `Succesfully registered ${creds.username}`, 
+                        userId: res.data.id
+                    }
                 })
             })
             .catch(err => {
@@ -43,7 +46,11 @@ export const login = creds => dispatch => {
                 localStorage.setItem('token', res.data.token)
                 dispatch({
                     type: LOGIN_SUCCESS,
-                    payload: {message: res.data.message, userId: res.data.userId, username: res.data.username}
+                    payload: {
+                        message: res.data.message, 
+                        userId: res.data.userId, 
+                        username: res.data.username
+                    }
                 })
             })
             .catch(err => {
