@@ -75,6 +75,11 @@ const RegisterButton = styled.button `
     }
 `; 
 
+const RegisterMessage = styled.div`
+  width: 100%; 
+  height: 5vh; 
+`; 
+
 class RegisterForm extends React.Component {
   state =  {
     credentials: {
@@ -154,10 +159,10 @@ class RegisterForm extends React.Component {
               </RegisterButton>
             </RegisterFormWrapper>
 
-            <div style={{width: '100%', height: '5vh'}}>
+            <RegisterMessage>
               {this.props.message && <p>{this.props.message}</p>}
               {this.props.error && <p>{this.props.error}</p>}
-            </div>
+            </RegisterMessage>
 
           </RegisterWrapper>
         );
