@@ -144,8 +144,8 @@ export const updateProfile = profileUpdates => dispatch => {
  export const SEARCH_SUCCESS = 'SEARCH_SUCCESS' 
  export const SEARCH_ERROR = 'SEARCH_ERROR' 
  export const SEARCH_INPUT_START = 'SEARCH_INPUT_START' 
- export const SEARCH_INPUT_SUCCESS = 'SEARCH_INPUT_START' 
- export const SEARCH_INPUT_ERROR = 'SEARCH_INPUT_START' 
+ export const SEARCH_INPUT_SUCCESS = 'SEARCH_INPUT_SUCCESS' 
+ export const SEARCH_INPUT_ERROR = 'SEARCH_INPUT_ERROR' 
  
 export const searchInput = twitter_name => dispatch => {
     dispatch({ 
