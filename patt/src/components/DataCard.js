@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import MobileLogo from '../assets/MobileLogo.png'; 
 import { Link } from 'react-router-dom'; 
 import { connect } from 'react-redux'
-import { testing } from '../actions'
+import { searching } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
+import TraitsLegend from './TraitsLegend'
 
 const DataCardWrapper = styled.div`
     background-color: white; 
@@ -21,6 +22,7 @@ const DataCardWrapper = styled.div`
 // For refactoring: create a custom React component that takes prop, and those props will be string of title
 const HeaderTitle = styled.h2`
     color: #0082c9; 
+    display: flex;
 `; 
 
 // Logo 
@@ -58,58 +60,34 @@ const TabNav = styled.div`
 
 class DataCard extends React.Component {
   state = {
-    data: [],
-    displayedData: ''
+    displayedData: 'Personality'
   }
   componentDidMount() {
-    this.props.testing("austen")
-    setTimeout(() => {
-      this.setState({
-        data: this.props.testResults.personality,
-        displayedData: 'Personality'
-      })
-    }, 500)
+    this.props.searching(`${this.props.username}`)
   }
   clickHandler = e => {
     e.preventDefault()
     this.setState({
-      data: this.dataProviderLogic(e.target.id),
-      displayedData: e.target.id
+      displayedData: e.target.id,
     })
   }
   dataProviderLogic = dataName => {
     if (dataName === 'Personality') {
-      return this.props.testResults.personality
+      return this.props.searchResults.personality
     } else if (dataName === 'Needs') {
-      return this.props.testResults.needs
+      return this.props.searchResults.needs
     } else if (dataName === 'Values') {
-      return this.props.testResults.values
+      return this.props.searchResults.values
     }
   }
-  percentileProviderLogic = integer => {
-    const percentile = (integer * 100).toFixed(2)
-    return percentile
-  }
-  legendTitleCapitalizer = legendKey => {
-    const legendTitle = (legendKey.charAt(0).toUpperCase() + legendKey.slice(1).replace(/[^a-zA-Z ]/g, " "))
-    return legendTitle
-  }
+
   render() {
-    const obj = this.state.data
-    const objOfArr = Object.keys(obj).map(key => {
-        return {
-            key: this.legendTitleCapitalizer(key),
-            value: obj[key]
-        }
-    })
-    const profileData = this.props.testResults
-    const legend = objOfArr.map((data, i) => {
-      return <p key={i}>{this.legendTitleCapitalizer(data.key)}: %{this.percentileProviderLogic(data.value)}</p>
-    })
     return (
       <DataCardWrapper>
-        <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
-        <HeaderTitle>@{profileData.username}</HeaderTitle>
+        {!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating live scores now...'</p>}
+        {this.props.searchLoaded && 
+        <>
+        <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle>
         <TabNavWrapper>
           <TabNav id="Personality" onClick={this.clickHandler}>
             Personality
@@ -122,28 +100,32 @@ class DataCard extends React.Component {
           </TabNav>
           </TabNavWrapper>
           <div>
-            <SingleUserTraitsGraph props={objOfArr}/>
+            {this.state.displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(this.state.displayedData)} /> }
           </div>
         <div>
         {this.state.displayedData}
-          <p>{legend}</p>
+        <TraitsLegend profilePic={this.props.searchResults.image_url} data={this.dataProviderLogic(this.state.displayedData)}/>
         </div>
-        <Link to="/search">
-          <SearchAgainButton>Search again</SearchAgainButton>
-        </Link>
-
+        </>
+        }
       </DataCardWrapper>
     );
   }
 }
 
-const mapStateToProps = state => ({
+
+
+const mapStateToProps = state => {
+  return {
   error: state.error,
-  testing: state.testing,
-  testResults: state.testResults
-})
+  searching: state.searching,
+  searchResults: state.searchResults,
+  searchInput: state.searchInput,
+  username: state.username,
+  searchLoaded: state.searchLoaded,
+}}
 
 export default connect(
   mapStateToProps,
-  { testing }
+  { searching }
 )(DataCard);
