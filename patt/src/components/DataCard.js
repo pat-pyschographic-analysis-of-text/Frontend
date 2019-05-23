@@ -59,21 +59,15 @@ const TabNav = styled.div`
 class DataCard extends React.Component {
   state = {
     data: [],
-    displayedData: ''
+    displayedData: 'Personality'
   }
   componentDidMount() {
-    this.props.searching("austen")
-    setTimeout(() => {
-      this.setState({
-        data: this.props.searchResults.personality,
-        displayedData: 'Personality'
-      })
-    }, 500)
+    this.loadData()
   }
   clickHandler = e => {
     e.preventDefault()
     this.setState({
-      data: this.dataProviderLogic(e.target.id),
+      data: this.dataProviderLogic(this.state.displayedData),
       displayedData: e.target.id
     })
   }
@@ -94,21 +88,32 @@ class DataCard extends React.Component {
     const legendTitle = (legendKey.charAt(0).toUpperCase() + legendKey.slice(1).replace(/[^a-zA-Z ]/g, " "))
     return legendTitle
   }
+  loadData = () => {
+    this.props.searching(`${this.props.username}`)
+      .then(() =>{
+        this.setState({
+          data: this.dataProviderLogic(this.state.displayedData)
+      })
+    })
+  }
   render() {
-    // const obj = this.state.data
-    // const objOfArr = Object.keys(obj).map(key => {
-    //     return {
-    //         key: this.legendTitleCapitalizer(key),
-    //         value: obj[key]
-    //     }
-    // })
-    // const profileData = this.props.searchResults
-    // const legend = objOfArr.map((data, i) => {
-    //   return <p key={i}>{this.legendTitleCapitalizer(data.key)}: %{this.percentileProviderLogic(data.value)}</p>
-    // })
+    const obj = this.state.data
+    const objOfArr = Object.keys(obj).map(key => {
+        return {
+            key: this.legendTitleCapitalizer(key),
+            value: obj[key]
+        }
+    })
+    const legend = objOfArr.map((data, i) => {
+      return <p key={i}>{this.legendTitleCapitalizer(data.key)}: %{this.percentileProviderLogic(data.value)}</p>
+    })
+    console.log(objOfArr)
     return (
       <DataCardWrapper>
-        <HeaderTitle>@</HeaderTitle>
+        {!this.props.searchLoaded ? <p>'Making a very impressive request to our AI. Calculating live scores now...'</p> : null}
+        {this.props.searchLoaded && 
+        <>
+        <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle>
         <TabNavWrapper>
           <TabNav id="Personality" onClick={this.clickHandler}>
             Personality
@@ -121,16 +126,14 @@ class DataCard extends React.Component {
           </TabNav>
           </TabNavWrapper>
           <div>
-            <SingleUserTraitsGraph />
+            {this.state.displayedData &&<SingleUserTraitsGraph data={objOfArr} /> }
           </div>
         <div>
         {this.state.displayedData}
-          {/* <p>{legend}</p> */}
+          <p>{legend}</p>
         </div>
-        <Link to="/search">
-          <SearchAgainButton>Search again</SearchAgainButton>
-        </Link>
-
+        </>
+        }
       </DataCardWrapper>
     );
   }
@@ -139,7 +142,10 @@ class DataCard extends React.Component {
 const mapStateToProps = state => ({
   error: state.error,
   searching: state.searching,
-  searchResults: state.searchResults
+  searchResults: state.searchResults,
+  searchInput: state.searchInput,
+  username: state.username,
+  searchLoaded: state.searchLoaded
 })
 
 export default connect(
