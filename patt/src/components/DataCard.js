@@ -67,8 +67,8 @@ class DataCard extends React.Component {
   clickHandler = e => {
     e.preventDefault()
     this.setState({
-      data: this.dataProviderLogic(this.state.displayedData),
-      displayedData: e.target.id
+      displayedData: e.target.id,
+      data: this.dataProviderLogic(e.target.id)
     })
   }
   dataProviderLogic = dataName => {
@@ -90,13 +90,21 @@ class DataCard extends React.Component {
   }
   loadData = () => {
     this.props.searching(`${this.props.username}`)
-      .then(() =>{
-        this.setState({
-          data: this.dataProviderLogic(this.state.displayedData)
-      })
+    this.setState({
+      data: this.props.searchResults.personality
     })
   }
-  render() {
+  chartDataFormat = () => {
+    const obj = this.state.data
+    const objOfArr = Object.keys(obj).map(key => {
+        return {
+            key: this.legendTitleCapitalizer(key),
+            value: obj[key]
+        }
+    })
+    return objOfArr
+  } 
+  legendDataFormat = () => {
     const obj = this.state.data
     const objOfArr = Object.keys(obj).map(key => {
         return {
@@ -107,13 +115,15 @@ class DataCard extends React.Component {
     const legend = objOfArr.map((data, i) => {
       return <p key={i}>{this.legendTitleCapitalizer(data.key)}: %{this.percentileProviderLogic(data.value)}</p>
     })
-    console.log(objOfArr)
+    return legend
+  }
+  render() {
     return (
       <DataCardWrapper>
         {!this.props.searchLoaded ? <p>'Making a very impressive request to our AI. Calculating live scores now...'</p> : null}
         {this.props.searchLoaded && 
         <>
-        <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle>
+        <HeaderTitle><img style={{width: '5vw', borderRadius: '50%'}} src={this.props.searchResults.image_url} alt="twitter profile picture" />@{this.props.searchResults.username}</HeaderTitle>
         <TabNavWrapper>
           <TabNav id="Personality" onClick={this.clickHandler}>
             Personality
@@ -126,11 +136,11 @@ class DataCard extends React.Component {
           </TabNav>
           </TabNavWrapper>
           <div>
-            {this.state.displayedData &&<SingleUserTraitsGraph data={objOfArr} /> }
+            {this.state.displayedData &&<SingleUserTraitsGraph data={this.chartDataFormat()} /> }
           </div>
         <div>
         {this.state.displayedData}
-          <p>{legend}</p>
+        {this.legendDataFormat()}
         </div>
         </>
         }
