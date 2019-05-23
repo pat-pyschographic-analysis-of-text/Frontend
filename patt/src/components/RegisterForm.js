@@ -18,6 +18,14 @@ const RegisterWrapper = styled.div`
     text-align: center; 
     align-items: center; 
     font-family: 'Montserrat', sans-serif;
+
+    @media (min-width: 500px) {
+        border: 2px solid #778899; 
+        border-radius: 10px; 
+        padding-bottom: 10vh; 
+        max-width: 30%; 
+        margin-top: 7vh; 
+    }
 `; 
 
 // Logo 
@@ -102,6 +110,19 @@ class RegisterForm extends React.Component {
     render() {
         return (
           <RegisterWrapper>
+            <video
+              class="background-video hero-bg-video is-playing"
+              loop="loop"
+              autoplay="autoplay"
+              muted="muted"
+              id="bgvid"
+            >
+              <source
+                src="https://static.videezy.com/system/resources/previews/000/035/952/original/4K_2018.12.05_Sunset_Light_adjust.mp4"
+                type="video/mp4"
+              />
+            </video>
+
             <LogoStyle src={FullLogo} alt="TweetMate logo" />
 
             <RegisterFormWrapper onSubmit={this.register}>
