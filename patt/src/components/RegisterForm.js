@@ -71,7 +71,8 @@ class RegisterForm extends React.Component {
   state =  {
     credentials: {
       username: '',
-      password: ''
+      password: '', 
+      twitter_handle: ''
     }
   }
 
@@ -102,14 +103,21 @@ class RegisterForm extends React.Component {
         return (
           <RegisterWrapper>
             <LogoStyle src={FullLogo} alt="TweetMate logo" />
-            
+
             <RegisterFormWrapper onSubmit={this.register}>
-            <RegisterTitle>Create account</RegisterTitle>
+              <RegisterTitle>Create account</RegisterTitle>
 
               <RegisterInput
                 name="username"
                 type="text"
                 placeholder="Username"
+                onChange={this.handleChanges}
+              />
+
+              <RegisterInput
+                name="twitter_handle"
+                type="text"
+                placeholder="Twitter handle"
                 onChange={this.handleChanges}
               />
 
@@ -120,10 +128,12 @@ class RegisterForm extends React.Component {
                 onChange={this.handleChanges}
               />
 
-              <RegisterButton onClick={this.register}>Sign up</RegisterButton>
+              <RegisterButton onClick={this.register}>
+                Sign up
+              </RegisterButton>
             </RegisterFormWrapper>
-              {this.props.message && <p>{this.props.message}</p>}
-              {this.props.error && <p>{this.props.error}</p>}
+            {this.props.message && <p>{this.props.message}</p>}
+            {this.props.error && <p>{this.props.error}</p>}
           </RegisterWrapper>
         );
     }
