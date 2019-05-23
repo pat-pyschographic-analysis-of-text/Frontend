@@ -83,32 +83,42 @@ class DataCard extends React.Component {
 
   render() {
     return (
-      <DataCardWrapper>
-        {!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating live scores now...'</p>}
-        {this.props.searchLoaded && 
-        <>
-        <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle>
-        <TabNavWrapper>
-          <TabNav id="Personality" onClick={this.clickHandler}>
-            Personality
-          </TabNav>
-          <TabNav id="Values" onClick={this.clickHandler}>
-            Values
-          </TabNav>
-          <TabNav id="Needs" onClick={this.clickHandler}>
-            Needs
-          </TabNav>
-          </TabNavWrapper>
-          <div>
-            {this.state.displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(this.state.displayedData)} /> }
-          </div>
+
+    <>
         <div>
-        {this.state.displayedData}
-        <TraitsLegend profilePic={this.props.searchResults.image_url} data={this.dataProviderLogic(this.state.displayedData)}/>
+          <div style={{zIndex: "5", margin: "0 auto", border: "1px solid red", textAlign: "center", paddingTop: "35vh"}}>{!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating live scores now...'</p>}</div>
+    
+          <DataCardWrapper>
+           
+           
+              {this.props.searchLoaded && 
+              <>
+              <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle>
+              <TabNavWrapper>
+                <TabNav id="Personality" onClick={this.clickHandler}>
+                  Personality
+                </TabNav>
+                <TabNav id="Values" onClick={this.clickHandler}>
+                  Values
+                </TabNav>
+                <TabNav id="Needs" onClick={this.clickHandler}>
+                  Needs
+                </TabNav>
+                </TabNavWrapper>
+                
+                <div>
+                  {this.state.displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(this.state.displayedData)} /> }
+                </div>
+      
+              <div>
+              {this.state.displayedData}
+              <TraitsLegend profilePic={this.props.searchResults.image_url} data={this.dataProviderLogic(this.state.displayedData)}/>
+              </div>
+              </>
+              }
+          </DataCardWrapper>
         </div>
-        </>
-        }
-      </DataCardWrapper>
+    </>
     );
   }
 }

@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import { login } from '../actions'
 import { withRouter } from 'react-router-dom' 
 
-
-
 import styled from 'styled-components'; 
 
 import FullLogo from '../assets/FullLogo.png'; 
@@ -21,6 +19,14 @@ const LoginWrapper = styled.div`
     text-align: center; 
     align-items: center; 
     font-family: 'Montserrat', sans-serif;
+
+    @media (min-width: 500px) {
+        border: 2px solid #778899; 
+        border-radius: 10px; 
+        padding-bottom: 10vh; 
+        max-width: 30%; 
+        margin-top: 7vh; 
+    }
 `; 
 
 // Logo 
@@ -124,38 +130,57 @@ class LoginForm extends React.Component {
               , 2000)}
     }
     render() {
-        return(
-                <LoginWrapper>
-                    <LogoStyle src={FullLogo} alt="TweetMate logo" />
-                    <HeaderSubtitle>Discover what your tweets say about who you are and who you should follow.</HeaderSubtitle>
-                    
-                   
-                        <LoginFormWrapper onSubmit={this.login}>
-                        <LoginTitle>Login</LoginTitle>
-                            <SignInInput
-                                name="username"
-                                type="text"
-                                placeholder="Username"
-                                onChange={this.handleChanges}
-                            />
-                            <SignInInput
-                                name="password"
-                                type="password"
-                                placeholder="Password"
-                                onChange={this.handleChanges}
-                            />
-        
-                            <LoginButton onClick={this.login}>Login</LoginButton>
+        return (
+          <LoginWrapper>
+            <video
+              class="background-video hero-bg-video is-playing"
+              loop="loop"
+              autoplay="autoplay"
+              muted="muted"
+              id="bgvid"
+            >
+              <source
+                src="https://static.videezy.com/system/resources/previews/000/035/952/original/4K_2018.12.05_Sunset_Light_adjust.mp4"
+                type="video/mp4"
+              />
+            </video>
 
-                            <SignUpButton><Link to="/register" style={{ textDecoration: 'none', color: 'white'}}>Sign up</Link></SignUpButton>
-                            
-                        </LoginFormWrapper>
+            <LogoStyle src={FullLogo} alt="TweetMate logo" />
+            <HeaderSubtitle>
+              Discover what your tweets say about who you are and who
+              you should follow.
+            </HeaderSubtitle>
 
-                     {this.props.message && <p>{this.props.message}</p>}
-                    {this.props.error && <p>{this.props.error}</p>}
+            <LoginFormWrapper onSubmit={this.login}>
+              <LoginTitle>Login</LoginTitle>
+              <SignInInput
+                name="username"
+                type="text"
+                placeholder="Username"
+                onChange={this.handleChanges}
+              />
+              <SignInInput
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={this.handleChanges}
+              />
 
-                </LoginWrapper>
-            )
+              <LoginButton onClick={this.login}>Login</LoginButton>
+
+              <SignUpButton>
+                <Link to="/register" style={{ textDecoration: "none" , color: 'white'}}>
+                  Sign up
+                </Link>
+              </SignUpButton>
+            </LoginFormWrapper>
+
+            <div style={{width: '100%', height: '5vh'}}>
+                {this.props.message && <p>{this.props.message}</p>}
+                {this.props.error && <p>{this.props.error}</p>}
+            </div>
+          </LoginWrapper>
+        );
     }
 }
 
