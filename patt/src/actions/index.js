@@ -143,13 +143,30 @@ export const updateProfile = profileUpdates => dispatch => {
  export const SEARCH_START = 'SEARCH_START'
  export const SEARCH_SUCCESS = 'SEARCH_SUCCESS' 
  export const SEARCH_ERROR = 'SEARCH_ERROR' 
- export const SEARCH_INPUT = 'SEARCH_INPUT' 
+ export const SEARCH_INPUT_START = 'SEARCH_INPUT_START' 
+ export const SEARCH_INPUT_SUCCESS = 'SEARCH_INPUT_START' 
+ export const SEARCH_INPUT_ERROR = 'SEARCH_INPUT_START' 
  
-export const grabSearchInput = twitter_name => dispatch => {
+export const searchInput = twitter_name => dispatch => {
     dispatch({ 
-        type: SEARCH_INPUT,
-        payload: twitter_name 
+        type: SEARCH_INPUT_START
     })
+    return axios
+        .get(`https://pyschographic-analysis-of-text.herokuapp.com/api/users/${twitter_name}`)
+        .then(res => {
+            console.log(res)
+            dispatch({
+                type: SEARCH_INPUT_SUCCESS,
+                payload: {message: `Successfully found psychographic results for ${twitter_name}`, searchInputResults: res.data}
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: SEARCH_INPUT_ERROR,
+                payload: err
+            })
+        })
 }
 
  export const searching = username => dispatch => { 

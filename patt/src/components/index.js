@@ -6,4 +6,4 @@ import DataCard from './DataCard';
 import SettingsButton from './SettingsButton'; 
 import ExploreProfiles from './ExploreProfiles';
 
-export {LoginForm, RegisterForm, UpdateForm, SearchForm, DataCard, SettingsButton, ExploreProfiles}
+export {LoginForm, RegisterForm, SearchForm, DataCard, SettingsForm, SettingsButton, ExploreProfiles}

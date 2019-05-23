@@ -7,7 +7,7 @@ import MobileLogo from '../assets/MobileLogo.png';
 
 // Importing things we need for Search 
 import { connect } from 'react-redux'; 
-import { searching } from '../actions'; 
+import { searching, searchInput } from '../actions'; 
 import { withRouter } from 'react-router-dom'; 
 import NavButtonWrapper from './NavButtonWrapper';
 
@@ -87,22 +87,20 @@ class SearchForm extends React.Component {
   // Handle changes function watches what our user types in 
   handleChanges = e => {
     this.setState({
-      username: {
-        ...this.state.username, 
-        [e.target.name]: e.target.value
-      }
+      username: e.target.value
     })
   }
 
   // Search function calls our action 
   search = e => {
     e.preventDefault()
-    this.props.grabSearchInput(this.state.username.search)
-    console.log(this.state.username.search); 
-    this.props.searching(this.state.username.search)
-      .then(() => {
-        this.timeOut()
-      })
+    //this.props.grabSearchInput(this.state.username.search)
+    console.log(this.state.username); 
+    this.props.searchInput(this.state.username);
+    // this.props.searching(this.state.username.search)
+    //   .then(() => {
+    //     this.timeOut()
+    //   })
   }
 
   // TimeOut gives our user a message in a certain amount of time 
@@ -147,9 +145,10 @@ class SearchForm extends React.Component {
 
 const mapStateToProps = state => ({
   searching: state.searching, 
+  compareResults: state.compareSearches,
   error: state.error, 
   message: state.message
 })
 
-export default connect(mapStateToProps, {searching}
+export default connect(mapStateToProps, {searching, searchInput}
   ) (withRouter(SearchForm)); 
