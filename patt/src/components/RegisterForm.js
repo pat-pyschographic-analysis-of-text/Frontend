@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { register } from '../actions';
 import { withRouter } from 'react-router-dom'; 
 
+import Loader from 'react-loader-spinner';
+
 import FullLogo from '../assets/FullLogo.png';
 
 // Full page wrapper styling
@@ -154,9 +156,13 @@ class RegisterForm extends React.Component {
                 onChange={this.handleChanges}
               />
 
-              <RegisterButton onClick={this.register}>
-                Sign up
-              </RegisterButton>
+              { this.props.registering ? <RegisterButton onClick={this.register}>
+                Sign up<Loader
+                type="ThreeDots"
+                color="#1f2a38"
+                height="12"
+                width="26"
+              /></RegisterButton> : <RegisterButton onClick={this.register}>Sign up</RegisterButton>}
             </RegisterFormWrapper>
 
             <RegisterMessage>

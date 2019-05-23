@@ -173,7 +173,7 @@ class LoginForm extends React.Component {
                 onChange={this.handleChanges}
               />
               
-              { this.props.loggingIn ? <LoginButton onClick={this.login}>Loging in<Loader
+              { this.props.loggingIn ? <LoginButton onClick={this.login}>Logging in<Loader
                 type="ThreeDots"
                 color="#1f2a38"
                 height="12"
