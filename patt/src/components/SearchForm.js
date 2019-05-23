@@ -35,12 +35,6 @@ const MobileLogoStyled = styled.img`
     height: auto; 
 `; 
 
-const HeaderTitle = styled.h2`
-    color: #0082c9;
-    font-size: 1em; 
-    margin-right: 2.5vw;
-`; 
-
 const HeaderSubtitle = styled.h5`
     color: #778899; 
     width: 60%; 
@@ -121,7 +115,7 @@ class SearchForm extends React.Component {
             <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
             
             <div style={{display: 'flex'}}>
-              <HeaderTitle>Find a Tweetmate</HeaderTitle>
+              
               {/* <HeaderSubtitle>
                 Enter a user's Twitter handle to learn what their tweets say about their personality and who else tweets like they do. 
               </HeaderSubtitle> */}
