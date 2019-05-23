@@ -178,14 +178,10 @@ class LoginForm extends React.Component {
                 onChange={this.handleChanges}
               />
               
-<<<<<<< HEAD
-              { this.props.loggingIn ? <LoginButton onClick={this.login}>Logging in<Loader
-=======
               { this.props.loggingIn ? <LoginButton onClick={this.login}>
                   Loging in
                   {/* think about loader like this...since it is being rendered inside a button, the <Loader /> component actually turns into an animated SVG, so just treat it like text! :) */}
                   <Loader
->>>>>>> fb412d61daa85c20648e4953c1ab3654e23ca8aa
                 type="ThreeDots"
                 color="#1f2a38"
                 height="12"
@@ -204,7 +200,7 @@ class LoginForm extends React.Component {
             </LoginFormWrapper> */}
             {/* Instead of wrapping with a link, lets use the this.props.history.push(path). This eleminates wrapping our button with a Link(which turns into an a tag) and also gets more functionality and may help with your color issue. Take a look at the this.signUpHandler above! */}
 
-              <SignUpButton onClick={this.signUpHandler} style={{ textDecoration: "none", color: "white" }}>
+              <SignUpButton onClick={this.signUpHandler}>
                   Sign up
               </SignUpButton>
             </LoginFormWrapper>
