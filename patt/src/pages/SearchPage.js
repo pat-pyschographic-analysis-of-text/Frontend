@@ -1,19 +1,18 @@
 import React from 'react'; 
 import { connect } from 'react-redux'; 
-import { SearchForm, SettingsButton } from '../components'; 
 import DataCard from '../components/DataCard'
+import Nav from '../components/Nav'
 
 class SearchPage extends React.Component {
     render() {
         return(
-            <> 
-            <SettingsButton /> 
-            <SearchForm /> 
+            <div style={{height: '100vh'}}> 
+                <Nav />
             <div style={{color: 'red', textAlign: 'center'}}>
                 {this.props.error? (<p>{this.props.error}</p>): null}
             </div>
             <DataCard /> 
-            </> 
+            </div> 
             )
     }
 }

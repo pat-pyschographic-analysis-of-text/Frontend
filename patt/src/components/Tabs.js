@@ -16,8 +16,9 @@ const TabsWrapper = styled.div`
 const Tabs = props => {
     return (
         <TabsWrapper>
-            {props.tabs.map((tab) => (
+            {props.tabs.map((tab, i) => (
                 <div> <Tab 
+                key={i}
                 tab={tab} 
                 selectedTabHandler={props.selectedTabHandler} 
                 selectedTab={props.selectedTab}
