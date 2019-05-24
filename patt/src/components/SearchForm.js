@@ -132,7 +132,6 @@ class SearchForm extends React.Component {
                   <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
 
               </SearchFormWrapper>
-            </div>
         );
     }
 }
