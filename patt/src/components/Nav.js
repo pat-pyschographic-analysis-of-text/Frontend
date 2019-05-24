@@ -9,7 +9,7 @@ const NavWrapper = styled.div`
     flex-direction: row;
     width: 100vw;
     height: 15vh;
-    justify-content: space-between
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     z-index: 5;

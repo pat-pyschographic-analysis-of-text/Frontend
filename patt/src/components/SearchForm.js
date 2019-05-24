@@ -19,8 +19,6 @@ align-items: center;
 justify-content: center;
 `; 
 
-
-
 const SearchBar = styled.input`
 border-radius: 50px;
 width: 25vw;
@@ -35,10 +33,10 @@ z-index: 2;
 height: 5vh;
 background: #12B1FC;
 color: white;
-margin-left: 15%
-  &:hover {
+margin-left: 15%;
+  
+&:hover {
     background: #0082c9;
-
   }
 `; 
 
