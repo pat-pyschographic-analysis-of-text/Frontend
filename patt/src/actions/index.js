@@ -11,14 +11,16 @@ export const register = creds => dispatch => {
             .post('https://pyschographic-analysis-of-text.herokuapp.com/users/register', creds)
             .then(res => {
                 console.log(res)
-                console.log(res.data.token)
+                console.log(res.data)
                 localStorage.setItem('token', res.data.token)
-                localStorage.setItem('username', creds.username)
                 dispatch({
                     type: REGISTER_SUCCESS,
                     payload: {
                         message: `Succesfully registered ${creds.username}`, 
-                        userId: res.data.id
+                        userId: res.data.id,
+                        username: res.data.username,
+                        twitter_handle: res.data.twitter_handle
+
                     }
                 })
             })
@@ -43,13 +45,15 @@ export const login = creds => dispatch => {
             .then(res => {
                 console.log(res.data.username)
                 console.log(res.data.message)
+                console.log(res)
                 localStorage.setItem('token', res.data.token)
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: {
                         message: res.data.message, 
                         userId: res.data.userId, 
-                        username: res.data.username
+                        username: res.data.username,
+                        twitter_handle: res.data.twitter_handle
                     }
                 })
             })
@@ -127,7 +131,7 @@ export const updateProfile = profileUpdates => dispatch => {
                 console.log(res)
                  dispatch({
                      type: UPDATE_PROFILE_SUCCESS,
-                     payload: `Profile updated successfully.`
+                     payload: {message: `Profile updated successfully.`, twitter_handle: profileUpdates.twitter_handle}
                  })
             })
             .catch(err => {
@@ -175,19 +179,22 @@ export const searchInput = twitter_name => dispatch => {
         })
      return axios  
           
-             .get(`https://pyschographic-analysis-of-text.herokuapp.com/api/users/${username}`)
-             .then(res => { 
-                 console.log(res) 
-                 dispatch({ 
-                     type: SEARCH_SUCCESS, 
-                     payload: {message: `Succesfully loaded the results for ${username} from the AI`, searchResults: res.data} 
-                }) 
-             }) 
-             .catch(err => { 
-                 console.log(err) 
-                 dispatch({ 
-                     type: SEARCH_ERROR, 
-                     payload: err 
-                 }) 
-             }) 
+    .get(`https://pyschographic-analysis-of-text.herokuapp.com/api/users/${username}`)
+    .then(res => { 
+        console.log(res) 
+        dispatch({ 
+            type: SEARCH_SUCCESS, 
+            payload: {message: `Succesfully loaded the results for ${username} from the AI`, searchResults: res.data} 
+    }) 
+    }) 
+    .catch(err => { 
+        console.log(err) 
+        dispatch({ 
+            type: SEARCH_ERROR, 
+            payload: err 
+        }) 
+    }) 
  } 
+
+
+
