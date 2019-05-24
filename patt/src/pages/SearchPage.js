@@ -10,7 +10,6 @@ class SearchPage extends React.Component {
             <SearchForm /> 
             <DataCard /> 
             </> 
-
             )
     }
 }

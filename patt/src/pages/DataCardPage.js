@@ -1,6 +1,7 @@
 import React from "react";
 import { DataCard, SettingsButton } from "../components";
 
+
 class DataCardPage extends React.Component {
   render() {
     return (
