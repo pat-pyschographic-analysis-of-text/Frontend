@@ -21,7 +21,7 @@ const Header = styled.div`
     flex-direction: row;  
     align-items: center;  
     justify-content: space-around; 
-    margin-top: 5vw; 
+    margin-top: 10vw; 
     margin: 0 auto; 
     font-family: 'Montserrat', sans-serif;
 
@@ -34,9 +34,11 @@ const Header = styled.div`
 const HeaderLogo = styled.img`
     max-width: 25%; 
     height: auto; 
+    margin-right: 4vw; 
 
     @media (min-width: 500px) {
         max-width: 20%; 
+        margin-right: 2vw; 
     }
 `; 
 
@@ -45,6 +47,7 @@ const SearchBar = styled.input`
   padding: 5%; 
   border: 2px solid #778899; 
   min-width: 25vw;
+  margin-right: 5vw; 
 
 `; 
 

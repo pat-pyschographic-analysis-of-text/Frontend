@@ -7,6 +7,11 @@ import SettingsButton from './SettingsButton';
  const NavButtonWrapperStyle = styled.div`
   width: 100%;
   display: flex; 
+  margin-bottom: 10vw; 
+
+  @media (min-width: 500px) {
+     margin-bottom: 5vw; 
+    }
   
  `; 
 
