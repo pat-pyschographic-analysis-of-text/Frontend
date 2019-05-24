@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components'; 
-import MobileLogo from '../assets/MobileLogo.png'; 
-import { Link } from 'react-router-dom'; 
+
+
 import { connect } from 'react-redux'
 import { searching } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
