@@ -191,16 +191,17 @@ class DataCard extends React.Component {
               </>
             }
           </DataCardWrapper>}
+           {this.props.compareResults.length > 0 && this.props.compareResults.map(user => (
+             <DataCardWrapper>
+               <SearchResultsDataCard searchResults={user}/>
+             </DataCardWrapper>
+           ))}          
           
           <div>
             {this.state.timelineFlag ? <StatsButton onClick={this.photoSwitcher}>Click to change the timeline</StatsButton> : <StatsButton onClick={this.showTimeline}>Click to change the timeline</StatsButton>}
             <div style={{height: '25vh', width: '100%'}}>
           </div>
             {this.state.timelineFlag && <img style={{width: '40%', maxHeight: '30vh', height: 'auto', margin: '0 auto'}}src={this.state.timelinePhoto} />}
-          </div>
-
-          <div >
-            {this.props.compareResults && <SearchResultsDataCard props={this.dataProviderLogic(displayedData)} />}
           </div>
       </>
     );

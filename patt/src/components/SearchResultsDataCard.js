@@ -3,6 +3,8 @@ import React from "react";
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
 import TraitsLegend from './TraitsLegend'
 import Loader from 'react-loader-spinner';
+import axios from 'axios';
+import {connect} from 'react-redux';
 
 import styled from 'styled-components'; 
 
@@ -19,7 +21,7 @@ const DataCardWrapper = styled.div`
     text-align: center; 
     align-items: center; 
     font-family: 'Montserrat', sans-serif;
-    margin: 5vh 0;
+    margin: 0;
 `;
 
 // For refactoring: create a custom React component that takes prop, and those props will be string of title
@@ -33,7 +35,7 @@ const StyledLoadingMessage = styled.div`
   z-index: 5;
   margin: 0 auto;
   text-align: center;
-  padding-top: 15vh; 
+  padding-top: 5vh; 
   font-family: 'Montserrat', sans-serif;
   max-width: 50vw;
   h1 {
@@ -51,9 +53,24 @@ class SearchResultsDataCard extends React.Component {
       selectedTab: "Personality",
       // 2. Setting up all the tab Data inline
       tabs: ["Personality", "Needs", "Values"],
-
+      score: ''
     };
   }
+
+  componentDidMount() {
+    //
+    const compareUsers = [{username: this.props.twitter_handle}, {username:this.props.searchResults.username}]
+    axios.post('https://pyschographic-analysis-of-text.herokuapp.com/api/users/reccomendations', compareUsers)
+      .then(res => 
+        this.setState({
+          score: res.data.score
+        })
+      )
+      .catch(err => 
+        console.log(err)
+      )
+  }
+
   clickHandler = e => {
     e.preventDefault()
     this.setState({
@@ -71,34 +88,23 @@ class SearchResultsDataCard extends React.Component {
 
   dataProviderLogic = dataName => {
     if (dataName === "Personality") {
-      return this.state.data.personality;
+      return this.props.searchResults.personality;
     } else if (dataName === "Needs") {
-      return this.state.data.needs;
+      return this.props.searchResults.needs;
     } else if (dataName === "Values") {
-      return this.state.data.values;
-    }
-  };
-
-  dataDeconstructProviderLogic = dataName => {
-    if (dataName === "Personality") {
-      return this.state.data.personality;
-    } else if (dataName === "Needs") {
-      return this.state.data.needs;
-    } else if (dataName === "Values") {
-      return this.state.data.values;
-    }
+      return this.props.searchResults.values;
+    } 
   };
 
   render() {
     const { displayedData } = this.state
-    console.log(this.props.props)
+    
     return (
       <>
-          <StyledLoadingMessage><div style={{margin: '0 auto'}}><Loader type="Plane" height={150} width={150} /></div>
-            </StyledLoadingMessage>
-
-          {this.props.username && <DataCardWrapper>
-              {this.props.username && 
+          {this.state.score && <div>{parseInt(this.state.score*100)}% Personality Match!</div>}
+          <a href={`https://twitter.com/${this.props.searchResults.username}?ref_src=twsrc%5Etfw`} target="_blank" class="twitter-follow-button" data-show-count="false">Follow @{this.props.searchResults.username}</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          {this.props.searchResults.username && <DataCardWrapper>
+              {this.props.searchResults.username && 
               <>
                   <Tabs tabs={this.state.tabs} selectedTab={this.state.selectedTab} selectedTabHandler={this.clickHandler}/> 
                 <div style={{
@@ -114,7 +120,7 @@ class SearchResultsDataCard extends React.Component {
                     margin: '0 auto'
                   }}>
                     
-                    {this.props.username && 
+                    {this.props.searchResults.username && 
                       <SingleUserTraitsGraph
                         data={this.dataProviderLogic(displayedData)}
                       />
@@ -122,9 +128,9 @@ class SearchResultsDataCard extends React.Component {
                   </div>
   
                   <div style={{    margin: '15vh 1vw', textAlign: 'center', width: '40%'}}>
-                  <HeaderTitle>@{this.props.username}</HeaderTitle>
+                  <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle>
                     <TraitsLegend
-                      profilePic={this.props.image_url}
+                      profilePic={this.props.searchResults.image_url}
                       data={this.dataProviderLogic(displayedData)}
                     />
                   </div>
@@ -137,4 +143,10 @@ class SearchResultsDataCard extends React.Component {
   }
 }
 
-export default SearchResultsDataCard
+const mapStateToProps = state => {
+  return {
+  error: state.error,
+  twitter_handle: state.twitter_handle,
+}}
+
+export default connect(mapStateToProps, null)(SearchResultsDataCard);
