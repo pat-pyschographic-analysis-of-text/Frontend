@@ -19,7 +19,7 @@ class LogoutButton extends React.Component {
     render() {
         return (
             <LogoutButtonWrapper onClick={this.logout}>
-                <i className="fas fa-sign-out-alt"></i>
+                <i className="fas fa-sign-out-alt fa-2x"></i>
             </LogoutButtonWrapper>
         )
     }

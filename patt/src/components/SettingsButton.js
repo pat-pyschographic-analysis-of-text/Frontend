@@ -15,7 +15,7 @@ class SettingsButton extends React.Component {
         return(
             <>
             <Link to="/settings">
-                <SettingsButtonStyle><i className="fas fa-cog"></i></SettingsButtonStyle>
+                <SettingsButtonStyle><i className="fas fa-cog fa-2x"></i></SettingsButtonStyle>
             </Link>
             </>
         )
