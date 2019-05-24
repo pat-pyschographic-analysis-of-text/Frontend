@@ -11,56 +11,47 @@ import { searching, searchInput } from '../actions';
 import { withRouter } from 'react-router-dom'; 
 import NavButtonWrapper from './NavButtonWrapper';
 
-// Overall Component styling 
-const SearchWrapper = styled.div`
+
+// Header parts 
+const Header = styled.div`
     background-color: white; 
     max-width: 500px; 
     width: 100%; 
-    margin: 0 auto; 
     display: flex; 
-    flex-direction: column; 
-    text-align: center; 
-    align-items: center; 
+    flex-direction: row;  
+    align-items: center;  
+    justify-content: space-around; 
+    margin-top: 10vw; 
+    margin: 0 auto; 
     font-family: 'Montserrat', sans-serif;
-    height: 15vh;
-    flex-direction: row;
-    display: flex;
-    width: 100%;
-    margin: 0;
+
+    @media (min-width: 500px) {
+        margin: 0 auto; 
+        max-width: 800px; 
+    }
 `; 
 
-// Logo 
-const MobileLogoStyled = styled.img`
-    max-width: 30%; 
+const HeaderLogo = styled.img`
+    max-width: 25%; 
     height: auto; 
-`; 
+    margin-right: 4vw; 
 
-const HeaderTitle = styled.h2`
-    color: #0082c9;
-    font-size: 1em; 
-    margin-right: 2.5vw;
-`; 
-
-const HeaderSubtitle = styled.h5`
-    color: #778899; 
-    width: 60%; 
-`; 
- 
-const SearchFormWrapper = styled.form`
-display: flex; 
-flex-direction: row; 
-align-items: center; 
+    @media (min-width: 500px) {
+        max-width: 20%; 
+        margin-right: 2vw; 
+    }
 `; 
 
 const SearchBar = styled.input`
-  width: 100%; 
   font-family: 'Montserrat', sans-serif;
   padding: 5%; 
   border: 2px solid #778899; 
   min-width: 25vw;
+  margin-right: 7vw; 
+
 `; 
 
-const SeeDataButton = styled.button`
+const SearchButton = styled.button`
   background-color: #12B1FC;
   font-family: "Montserrat", sans-serif;
   color: white;
@@ -76,6 +67,8 @@ const SeeDataButton = styled.button`
     color: #12B1FC; 
     cursor: pointer;
   }
+
+  
 `; 
 
 class SearchForm extends React.Component {
@@ -119,30 +112,29 @@ class SearchForm extends React.Component {
 
     render() {
         return (
-          <SearchWrapper>
-            <NavButtonWrapper displayName={this.props.username} /> 
-            <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
-            
-            <div style={{display: 'flex'}}>
-              <HeaderTitle>Find a Tweetmate</HeaderTitle>
-              {/* <HeaderSubtitle>
-                Enter a user's Twitter handle to learn what their tweets say about their personality and who else tweets like they do. 
-              </HeaderSubtitle> */}
-              <SearchFormWrapper onSubmit={this.search}>
+
+          <>
+            <NavButtonWrapper />
+            <Header>
+              <HeaderLogo src={MobileLogo} alt="TweetMate logo" />
+  
+              <form onSubmit={this.search}>
+  
                 <SearchBar
                   name="search"
                   type="text"
                   placeholder="Enter Twitter handle"
                   onChange={this.handleChanges}
                 />
-
+              </form>
   
-                  <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
-
-
-              </SearchFormWrapper>
-            </div>
-          </SearchWrapper>
+              <Link to="/search-results">
+                  <SearchButton onClick={this.search}>
+                    Search
+                  </SearchButton>
+                </Link>
+            </Header>
+          </>
         );
     }
 }
