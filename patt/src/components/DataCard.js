@@ -63,6 +63,10 @@ const StyledLoadingMessage = styled.div`
   text-align: center;
   padding-top: 10vh; 
   font-family: 'Montserrat', sans-serif;
+  max-width: 50vw;
+  h1 {
+
+  }
 `;     
 
 
@@ -114,11 +118,16 @@ class DataCard extends React.Component {
     <>
         <div>
         {/* <StyledLoadingMessage>{!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating  */}
-          <StyledLoadingMessage>{!searchLoaded && <p>Welcome, {username}. The twitter handle you entered when signing up is displayed here. You can change which twitter handle you see first at anytime in the settings menu. We are now making a very impressive request to our AI. Calculating live scores now...</p>}</StyledLoadingMessage>
-    
-          <DataCardWrapper>
+          <StyledLoadingMessage>{!searchLoaded && <p>Welcome, <h1>{username}</h1>. <br/>
+            The twitter handle you entered when signing up is displayed here. <br/>
+            {(twitter_handle) ? <>You can change which twitter handle you see first at anytime in the settings menu. <br/><br/>
+            We are now making a very impressive request to our AI.<br/> 
+            Calculating live scores now</> : <>You have do not have a valid twitter name on your profile</>}</p>}</StyledLoadingMessage>
 
-          <Loader type="Plane" color="rgba(83, 51, 237, 1)" height={150} width={150} />
+    
+          {twitter_handle && <DataCardWrapper>
+
+          {!searchLoaded && <Loader type="Plane" height={150} width={150} />}
           {/* {this.props.searchLoaded &&  */}
               {searchLoaded && 
               <>
@@ -149,7 +158,7 @@ class DataCard extends React.Component {
               </div>
               </>
               }
-          </DataCardWrapper>
+          </DataCardWrapper>}
         </div>
     </>
     );

@@ -142,6 +142,7 @@ class SettingsForm extends React.Component {
   };
 
   render() {
+    console.log(this.state)
     return (
       <SettingsWrapper>
         <NavButtonWrapper />
@@ -151,21 +152,23 @@ class SettingsForm extends React.Component {
         <SettingsFormWrapper onSubmit={this.updateProfile}>
           <SettingsTitle>Settings</SettingsTitle>
 
-          <UpdateInput
-            name="username"
-            type="text"
-            placeholder="Username"
-            onChange={this.handleChanges}
-            value={this.state.username}
-          />
-
-          <UpdateInput
-            name="twitter_handle"
-            type="text"
-            placeholder="Twitter handle"
-            onChange={this.handleChanges}
-            value={this.state.twitter_handle}
-          />
+          <form onSubmit={this.updateProfile}>
+            <UpdateInput
+              name="username"
+              type="text"
+              placeholder="Username"
+              onChange={this.handleChanges}
+              value={this.state.profileUpdates.username}
+            />
+  
+            <UpdateInput
+              name="twitter_handle"
+              type="text"
+              placeholder="Twitter handle"
+              onChange={this.handleChanges}
+              value={this.state.profileUpdates.twitter_handle}
+            />
+          </form>
 
           <Link to="/search">
             <UpdateButton onClick={this.updateProfile}>
