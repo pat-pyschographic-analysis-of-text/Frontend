@@ -24,7 +24,7 @@ justify-content: center;
 const SearchBar = styled.input`
 border-radius: 50px;
 width: 25vw;
-height: 5vh;
+height: 32px;
 padding-left: 10%;
 `; 
 
@@ -92,12 +92,12 @@ class SearchForm extends React.Component {
                   zIndex: '5',
                   display: 'inherit',
                   position: 'fixed',
-                  margin: '.4vh .5vw',
+                  margin: '3px',
                   fontSize: '1.7em',
                 }}>@</p><SearchBar
                   name="search"
                   type="text"
-                  placeholder="Enter Twitter handle"
+                  placeholder="   Enter Twitter handle"
                   onChange={this.handleChanges}
                 />
               </form>
