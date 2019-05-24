@@ -1,5 +1,4 @@
 import React from 'react'; 
-import { Link } from 'react-router-dom'; 
 import { connect } from 'react-redux'
 import { login } from '../actions'
 import { withRouter } from 'react-router-dom' 
@@ -136,12 +135,16 @@ class LoginForm extends React.Component {
             this.props.history.push('/search')
               , 2000)}
     }
-    // this function is doing two things, preventing default action of a button to reload the page, and also navigating to the desired route :)
+    // This function is doing two things, preventing default action of a button to reload the page, and also navigating to the desired route. We did this so that we avoided a styling issue when we added in a Link. 
     signUpHandler = e => {
         e.preventDefault()
         this.props.history.push('/register')
     }
     render() {
+
+      // Deconstructing message and error 
+      const { message, error } = this.props 
+
         return (
           <LoginWrapper>
             <video
@@ -180,25 +183,13 @@ class LoginForm extends React.Component {
               
               { this.props.loggingIn ? <LoginButton onClick={this.login}>
                   Loging in
-                  {/* think about loader like this...since it is being rendered inside a button, the <Loader /> component actually turns into an animated SVG, so just treat it like text! :) */}
                   <Loader
                 type="ThreeDots"
-                color="#1f2a38"
+                color="white"
                 height="12"
                 width="26"
                     />
               </LoginButton> : <LoginButton onClick={this.login}>Login</LoginButton>}
-
-              {/* <SignUpButton>
-                <Link
-                  to="/register"
-                  style={{ textDecoration: "none", color: "white" }}
-                >
-                  Sign up
-                </Link>
-              </SignUpButton>
-            </LoginFormWrapper> */}
-            {/* Instead of wrapping with a link, lets use the this.props.history.push(path). This eleminates wrapping our button with a Link(which turns into an a tag) and also gets more functionality and may help with your color issue. Take a look at the this.signUpHandler above! */}
 
               <SignUpButton onClick={this.signUpHandler}>
                   Sign up
@@ -206,8 +197,8 @@ class LoginForm extends React.Component {
             </LoginFormWrapper>
 
             <LoginMessage>
-              {this.props.message && <p>{this.props.message}</p>}
-              {this.props.error && <p>{this.props.error}</p>}
+              {message && <p>{message}</p>}
+              {error && <p>{error}</p>}
             </LoginMessage>
           </LoginWrapper>
         );
