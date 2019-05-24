@@ -1,11 +1,10 @@
 import React from "react";
-import styled from 'styled-components'; 
-
-
 import { connect } from 'react-redux'
 import { searching } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
 import TraitsLegend from './TraitsLegend'
+
+import styled from 'styled-components'; 
 
 const DataCardWrapper = styled.div`
     background-color: white; 

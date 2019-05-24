@@ -141,6 +141,10 @@ class LoginForm extends React.Component {
         this.props.history.push('/register')
     }
     render() {
+
+      // Deconstructing message and error 
+      const { message, error } = this.props 
+
         return (
           <LoginWrapper>
             <video
@@ -193,8 +197,8 @@ class LoginForm extends React.Component {
             </LoginFormWrapper>
 
             <LoginMessage>
-              {this.props.message && <p>{this.props.message}</p>}
-              {this.props.error && <p>{this.props.error}</p>}
+              {message && <p>{message}</p>}
+              {error && <p>{error}</p>}
             </LoginMessage>
           </LoginWrapper>
         );
