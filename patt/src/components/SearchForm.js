@@ -94,13 +94,17 @@ class SearchForm extends React.Component {
   // Search function calls our action 
   search = e => {
     e.preventDefault()
-    //this.props.grabSearchInput(this.state.username.search)
-    console.log(this.state.username); 
-    this.props.searchInput(this.state.username);
-    // this.props.searching(this.state.username.search)
-    //   .then(() => {
-    //     this.timeOut()
-    //   })
+    let username = this.state.username;
+
+    if(username.charAt(0)==='@') {
+      username = username.substr(1)
+    }
+    
+    if(15 < username.length || username.length < 4) {
+      window.alert('Please provide a valid twitter handle to search')
+    } else {
+      this.props.searching(username)
+    }
   }
 
   // TimeOut gives our user a message in a certain amount of time 
@@ -131,19 +135,18 @@ class SearchForm extends React.Component {
                   placeholder="Enter Twitter handle"
                   onChange={this.handleChanges}
                 />
-  
                 <Link to="/search-results">
-                  <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
+                  <SeeDataButton onClick={this.search}>{this.props.searchLoaded?'Get data':'Searching...'}</SeeDataButton>
                 </Link>
               </SearchFormWrapper>
             </div>
-
           </SearchWrapper>
         );
     }
 }
 
 const mapStateToProps = state => ({
+  searchLoaded: state.searchLoaded,
   searching: state.searching, 
   compareResults: state.compareSearches,
   error: state.error, 
