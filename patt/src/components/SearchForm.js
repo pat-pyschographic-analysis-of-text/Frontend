@@ -131,19 +131,18 @@ class SearchForm extends React.Component {
                   placeholder="Enter Twitter handle"
                   onChange={this.handleChanges}
                 />
-  
                 <Link to="/search-results">
-                  <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
+                  <SeeDataButton onClick={this.search}>{this.props.searchLoaded?'Get data':'Searching...'}</SeeDataButton>
                 </Link>
               </SearchFormWrapper>
             </div>
-
           </SearchWrapper>
         );
     }
 }
 
 const mapStateToProps = state => ({
+  searchLoaded: state.searchLoaded,
   searching: state.searching, 
   compareResults: state.compareSearches,
   error: state.error, 

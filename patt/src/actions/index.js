@@ -164,7 +164,7 @@ export const searchInput = twitter_name => dispatch => {
             console.log(err)
             dispatch({
                 type: SEARCH_INPUT_ERROR,
-                payload: err
+                payload: {message: `An error occurred looking up results for ${twitter_name}, make sure to enter a valid twitter handle`, error: err} 
             })
         })
 }
