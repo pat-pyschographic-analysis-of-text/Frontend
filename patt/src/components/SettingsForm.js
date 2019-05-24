@@ -93,8 +93,8 @@ class SettingsForm extends React.Component {
   // Setting state to what our server needs to receive
   state = {
     profileUpdates: {
-      username: "", 
-      twitter_handle: "", 
+      username: this.props.username, 
+      twitter_handle: this.props.twitter_handle, 
     }
   };
 
@@ -142,6 +142,7 @@ class SettingsForm extends React.Component {
   };
 
   render() {
+    console.log(this.state)
     return (
       <SettingsWrapper>
         <NavButtonWrapper />
@@ -151,19 +152,23 @@ class SettingsForm extends React.Component {
         <SettingsFormWrapper onSubmit={this.updateProfile}>
           <SettingsTitle>Settings</SettingsTitle>
 
-          <UpdateInput
-            name="username"
-            type="text"
-            placeholder="Username"
-            onChange={this.handleChanges}
-          />
-
-          <UpdateInput
-            name="twitter_handle"
-            type="text"
-            placeholder="Twitter handle"
-            onChange={this.handleChanges}
-          />
+          <form onSubmit={this.updateProfile}>
+            <UpdateInput
+              name="username"
+              type="text"
+              placeholder="Username"
+              onChange={this.handleChanges}
+              value={this.state.profileUpdates.username}
+            />
+  
+            <UpdateInput
+              name="twitter_handle"
+              type="text"
+              placeholder="Twitter handle"
+              onChange={this.handleChanges}
+              value={this.state.profileUpdates.twitter_handle}
+            />
+          </form>
 
           <Link to="/search">
             <UpdateButton onClick={this.updateProfile}>
@@ -186,7 +191,9 @@ const mapStateToProps = state => ({
   updating: state.updating, 
   message: state.message,
   error: state.error, 
-  userId: state.userId
+  userId: state.userId,
+  twitter_handle: state.twitter_handle,
+  username: state.username
 })
 
 // Using connect function to pass our actions in as props to this Form 
