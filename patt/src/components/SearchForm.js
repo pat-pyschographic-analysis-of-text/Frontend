@@ -59,11 +59,6 @@ const SearchButton = styled.button`
   padding: 10%;
   margin: 0 2vw; 
 
-  max-width: 500px; 
-  width: 100%;
-  height: 5vh;
-
-
   &:hover {
     background-color: white;
     color: #12B1FC; 
@@ -114,16 +109,13 @@ class SearchForm extends React.Component {
 
     render() {
         return (
-          <SearchWrapper>
-            <NavButtonWrapper displayName={this.props.username} /> 
-            <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
-            
-            <div style={{display: 'flex'}}>
-              <HeaderTitle>Find a Tweetmate</HeaderTitle>
-              {/* <HeaderSubtitle>
-                Enter a user's Twitter handle to learn what their tweets say about their personality and who else tweets like they do. 
-              </HeaderSubtitle> */}
-              <SearchFormWrapper onSubmit={this.search}>
+          <>
+            <NavButtonWrapper />
+            <Header>
+              <HeaderLogo src={MobileLogo} alt="TweetMate logo" />
+  
+              <form onSubmit={this.search}>
+  
                 <SearchBar
                   name="search"
                   type="text"
@@ -133,11 +125,13 @@ class SearchForm extends React.Component {
 
               </form>
   
-                 <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
-
-              </SearchFormWrapper>
-            </div>
-
+              <Link to="/search-results">
+                  <SearchButton onClick={this.search}>
+                    Search
+                  </SearchButton>
+                </Link>
+            </Header>
+          </>
 
         );
     }
@@ -148,8 +142,7 @@ const mapStateToProps = state => ({
   searching: state.searching, 
   compareResults: state.compareSearches,
   error: state.error, 
-  message: state.message,
-  username: state.username
+  message: state.message
 })
 
 export default connect(mapStateToProps, {searching, searchInput}

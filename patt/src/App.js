@@ -1,21 +1,11 @@
 import React from 'react';
-import { LoginPage, RegisterPage, SettingsPage, SearchPage } from './pages/index'; 
+import { LoginPage, RegisterPage, SettingsPage, SearchPage, DataCardPage } from './pages/index'; 
 import PrivateRoute from './PrivateRoute'
 import { Route } from 'react-router-dom'; 
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom' 
 
-function App(props) {
-  function helper() {
-    if(props.loggedIn == false) {
-      if(props.location.pathname !== "/" && props.location.pathname !== "/register") {
-        props.history.push('/')
-      }
-    }
-  }
+function App() {
   return (
     <>
-    {helper()}
       <Route exact path="/" component={LoginPage}/> 
       <Route path="/register" component= {RegisterPage} /> 
       <PrivateRoute path="/settings" component= {SettingsPage} /> 
@@ -24,10 +14,4 @@ function App(props) {
   );
 }
 
-const mapStateToProps = state => ({
-  loggedIn: state.loggedIn
-})
-
-export default connect(
-  mapStateToProps
-)(withRouter(App));
+export default App;
