@@ -29,6 +29,7 @@ const TabStyle = styled.div`
 `;
 
 const Tab = props => {
+  console.log(props)
   return (
     <TabStyle
       onClick={() => {
