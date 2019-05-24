@@ -1,7 +1,5 @@
 
 import React from "react";
-import { connect } from 'react-redux'
-import { searching } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
 import TraitsLegend from './TraitsLegend'
 import Loader from 'react-loader-spinner';
@@ -52,11 +50,9 @@ class SearchResultsDataCard extends React.Component {
       // 1. Setting up a Displayed tab on state
       selectedTab: "Personality",
       // 2. Setting up all the tab Data inline
-      tabs: ["Personality", "Needs", "Values"]
+      tabs: ["Personality", "Needs", "Values"],
+
     };
-  }
-  componentDidMount() {
-    this.props.searching(`${this.props.twitter_handle}`)
   }
   clickHandler = e => {
     e.preventDefault()
@@ -75,29 +71,34 @@ class SearchResultsDataCard extends React.Component {
 
   dataProviderLogic = dataName => {
     if (dataName === "Personality") {
-      return this.props.searchResults.personality;
+      return this.state.data.personality;
     } else if (dataName === "Needs") {
-      return this.props.searchResults.needs;
+      return this.state.data.needs;
     } else if (dataName === "Values") {
-      return this.props.searchResults.values;
+      return this.state.data.values;
+    }
+  };
+
+  dataDeconstructProviderLogic = dataName => {
+    if (dataName === "Personality") {
+      return this.state.data.personality;
+    } else if (dataName === "Needs") {
+      return this.state.data.needs;
+    } else if (dataName === "Values") {
+      return this.state.data.values;
     }
   };
 
   render() {
-    const { inputSearchLoaded, searchInputResults } = this.props
-    const { twitter_handle, username, displayedData, image_url } = searchInputResults
+    const { displayedData } = this.state.data
+    const {  username,  image_url } = this.dataDeconstructProviderLogic(this.state.displayedData)
     return (
       <>
-          <StyledLoadingMessage>{!inputSearchLoaded && <>Welcome, <h1>{username}</h1>. <br/>
-            The twitter handle you entered when signing up is displayed here. <br/>
-            {(twitter_handle) ? <>You can change which twitter handle you see first at anytime in the settings menu. <br/><br/>
-            We are now making a very impressive request to our AI.<br/> 
-            Calculating live scores now</> : <>You have do not have a valid twitter name on your profile</>}</>}
-            {!inputSearchLoaded && <div style={{margin: '0 auto'}}><Loader type="Plane" height={150} width={150} /></div>}
+          <StyledLoadingMessage><div style={{margin: '0 auto'}}><Loader type="Plane" height={150} width={150} /></div>
             </StyledLoadingMessage>
 
-          {twitter_handle && <DataCardWrapper>
-              {inputSearchLoaded && 
+          {username && <DataCardWrapper>
+              {username && 
               <>
                   <Tabs tabs={this.state.tabs} selectedTab={this.state.selectedTab} selectedTabHandler={this.clickHandler}/> 
                 <div style={{
@@ -113,7 +114,7 @@ class SearchResultsDataCard extends React.Component {
                     margin: '0 auto'
                   }}>
                     
-                    {displayedData && 
+                    {username && 
                       <SingleUserTraitsGraph
                         data={this.dataProviderLogic(displayedData)}
                       />
@@ -121,7 +122,7 @@ class SearchResultsDataCard extends React.Component {
                   </div>
   
                   <div style={{    margin: '15vh 1vw', textAlign: 'center', width: '40%'}}>
-                  <HeaderTitle>@{twitter_handle}</HeaderTitle>
+                  <HeaderTitle>@{username}</HeaderTitle>
                     <TraitsLegend
                       profilePic={image_url}
                       data={this.dataProviderLogic(displayedData)}
@@ -131,7 +132,6 @@ class SearchResultsDataCard extends React.Component {
               </>
             }
           </DataCardWrapper>}
-        
       </>
     );
   }
