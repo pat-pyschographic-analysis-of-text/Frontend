@@ -131,7 +131,7 @@ export const updateProfile = profileUpdates => dispatch => {
                 console.log(res)
                  dispatch({
                      type: UPDATE_PROFILE_SUCCESS,
-                     payload: {message: `Profile updated successfully.`, twitter_handle: profileUpdates.twitter_handle}
+                     payload: {message: `Profile updated successfully.`, twitter_handle: profileUpdates.twitter_handle, username: profileUpdates.username}
                  })
             })
             .catch(err => {

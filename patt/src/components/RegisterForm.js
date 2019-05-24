@@ -111,7 +111,7 @@ class RegisterForm extends React.Component {
     {this.props.message &&
     setTimeout(() => 
     this.props.history.push('/search')
-      , 2000)}
+      , 1000)}
   }
     render() {
         return (

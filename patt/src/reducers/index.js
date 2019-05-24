@@ -35,7 +35,8 @@ const rootReducer = (state = initialState, action) => {
           message: action.payload.message,
           userId: action.payload.userId,
           twitter_handle: action.payload.twitter_handle,
-          username: action.payload.twitter_handle
+          username: action.payload.twitter_handle,
+          loggedIn: true
         };
       case REGISTER_ERROR:
         return {

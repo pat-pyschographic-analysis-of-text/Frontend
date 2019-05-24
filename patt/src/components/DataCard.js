@@ -87,9 +87,7 @@ class DataCard extends React.Component {
     // const { username, image_url,  } = searchResults
 
     //We are going to deconstruct antyhing that comes off this.props or this.state into an object literal so we can make our JSX more readable, assigning as a const *non-mutable*
-    const { searchLoaded, searchResults } = this.props;
-
-    // START READING HERE
+      // START READING HERE
     //anthing that comes off of this.props, we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
     const { searchLoaded, searchResults, twitter_handle, username } = this.props
 
@@ -105,9 +103,8 @@ class DataCard extends React.Component {
     // When I do this, I usaully will do each seperate deconstruction path in order as i come to them. After i deconstruct each object, i will check to make sure it is still rendering. I would commit after doing a whole component. However, it may be best for you to commit a little more often until you get the hang of this. 
     return (
       <>
-        <div>
-
-        {/* <StyledLoadingMessage>{!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating  */}
+        
+        
           <StyledLoadingMessage>{!searchLoaded && <p>Welcome, <h1>{username}</h1>. <br/>
             The twitter handle you entered when signing up is displayed here. <br/>
             {(twitter_handle) ? <>You can change which twitter handle you see first at anytime in the settings menu. <br/><br/>
@@ -118,53 +115,31 @@ class DataCard extends React.Component {
           {twitter_handle && <DataCardWrapper>
 
           {!searchLoaded && <Loader type="Plane" height={150} width={150} />}
-          {/* {this.props.searchLoaded &&  */}
+         
               {searchLoaded && 
               <>
-              {/* <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle> */}
-              <HeaderTitle>@{twitter_handle}</HeaderTitle>
-              <TabNavWrapper>
-                <TabNav id="Personality" onClick={this.clickHandler}>
-                  Personality
-                </TabNav>
-                <TabNav id="Values" onClick={this.clickHandler}>
-                  Values
-                </TabNav>
-                <TabNav id="Needs" onClick={this.clickHandler}>
-                  Needs
-                </TabNav>
-                </TabNavWrapper>
               
+              <HeaderTitle>@{twitter_handle}</HeaderTitle>
+                           
 
                   <Tabs tabs={this.state.tabs} selectedTab={this.state.selectedTab} selectedTabHandler={this.clickHandler}/> 
 
-                  {/* <TabNav id="Personality" onClick={this.clickHandler} >
-                    Personality
-                  </TabNav>
-                  <TabNav 
-                  id="Values" 
-                  onClick={this.clickHandler} >
-                    Values
-                  </TabNav>
-                  <TabNav id="Needs" onClick={this.clickHandler}>
-                    Needs
-                  </TabNav> */}
-                
+                                
 
                 <div>
-                  {/* {this.state.displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(this.state.displayedData)} /> } */}
+                  
                   {displayedData && 
                     <SingleUserTraitsGraph
                       data={this.dataProviderLogic(displayedData)}
                     />
-                  )}
+                  }
                 </div>
 
                 <div>
-                  {/* {this.state.displayedData} */}
+                  
                   {displayedData}
 
-                  {/* <TraitsLegend profilePic={this.props.searchResults.image_url} data={this.dataProviderLogic(displayedData)}/> */}
+                  
                   <TraitsLegend
                     profilePic={image_url}
                     data={this.dataProviderLogic(displayedData)}
@@ -172,8 +147,8 @@ class DataCard extends React.Component {
                 </div>
               </>
             }
-          </DataCardWrapper>
-        </div>
+          </DataCardWrapper>}
+        
       </>
     );
   }
