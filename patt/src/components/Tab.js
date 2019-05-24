@@ -3,12 +3,12 @@ import React from "react";
 import styled from "styled-components";
 
 const TabStyle = styled.div`
-  color: ${props =>
-    props.tab === props.selectedTab ? { color: "333" } : "#fff"};
+  /* color: ${props =>
+    props.tab === props.selectedTab ? { color: "333" } : "#fff"}; */
 
   background-color: ${props => (props.tab === props.selected ? "fff" : "#333")};
   border: ${props =>
-    props.tab === props.selectedTab ? "2px solid #333" : "none"};
+    props.tab === props.selectedTab ? "2px solid #778899" : "none"};
 
   display: flex;
   justify-content: none;
@@ -23,6 +23,8 @@ const TabStyle = styled.div`
 
   :hover {
     text-decoration: underline;
+    background-color: #12B1FC; 
+    color: white; 
   }
 `;
 

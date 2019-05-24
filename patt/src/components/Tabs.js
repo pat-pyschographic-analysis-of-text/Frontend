@@ -6,6 +6,11 @@ import styled from 'styled-components';
 const TabsWrapper = styled.div`
     display: flex; 
     flex-direction: row; 
+    max-width: 500px; 
+    width: 100%; 
+    margin: 0 auto; 
+    text-align: center; 
+    justify-content: center; 
 `; 
 
 const Tabs = props => {
