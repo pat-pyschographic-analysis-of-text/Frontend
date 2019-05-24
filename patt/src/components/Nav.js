@@ -9,9 +9,10 @@ const NavWrapper = styled.div`
     flex-direction: row;
     width: 100vw;
     height: 15vh;
-    justify-content: space-between
+    justify-content: space-between;
     align-items: center;
     position: fixed;
+    background-color:  #FBFAFA,
     z-index: 5;
 `
 
@@ -22,7 +23,7 @@ width: 20vh;
 
 export default function Nav() {
     return (
-        <NavWrapper>
+        <NavWrapper style={{zIndex: 100, backgroundColor:'white'}}>
         <HeaderLogo src={MobileLogo} alt="TweetMate logo" />
         <SearchForm />
         <NavButtonWrapper />
