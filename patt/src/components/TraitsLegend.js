@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
@@ -43,6 +43,7 @@ export default function ExploreProfiles(props) {
     //conditionally render the color to match the score for each progress (red, yellow, green)
     const percent = objOfArr.map((trait, i) => {
         return <Progress
+                    key={i}
                     percent={trait.value*100}
                     theme={{
                                 active: {

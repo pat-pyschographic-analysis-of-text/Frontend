@@ -1,5 +1,4 @@
 import React from 'react'; 
-import { Link } from 'react-router-dom'; 
 import styled from 'styled-components'; 
 import { connect } from 'react-redux';
 import { register } from '../actions';
@@ -166,8 +165,8 @@ class RegisterForm extends React.Component {
             </RegisterFormWrapper>
 
             <RegisterMessage>
-              {this.props.message && <p>{this.props.message}</p>}
-              {this.props.error && <p>{this.props.error}</p>}
+              {this.props.message !== "Successfully logged out" && <p>{this.props.message}</p>}
+              {typeof this.props.error === 'string' && <p>{this.props.error}</p>}
             </RegisterMessage>
 
           </RegisterWrapper>

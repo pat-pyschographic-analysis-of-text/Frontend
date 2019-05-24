@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoginPage, RegisterPage, SettingsPage, SearchPage, DataCardPage } from './pages/index'; 
+import { LoginPage, RegisterPage, SettingsPage, SearchPage } from './pages/index'; 
 import PrivateRoute from './PrivateRoute'
 import { Route } from 'react-router-dom'; 
 

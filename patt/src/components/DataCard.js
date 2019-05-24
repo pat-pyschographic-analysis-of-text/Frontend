@@ -72,7 +72,7 @@ class DataCard extends React.Component {
     displayedData: 'Personality'
   }
   componentDidMount() {
-    this.props.searching(`${this.props.username}`)
+    this.props.searching(`${this.props.twitter_handle}`)
   }
   clickHandler = e => {
     e.preventDefault()
@@ -106,7 +106,7 @@ class DataCard extends React.Component {
 
 
  //anthing that comes off of searchResults(can be thought of this.props.searchResults, but since we deconstructed it above, we can extend of it like so...however if this was defined above it would cause an error, see example), we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
-    const { username, image_url,  } = searchResults
+    const { username, image_url, twitter_handle  } = searchResults
 
 
     // When I do this, I usaully will do each seperate deconstruction path in order as i come to them. After i deconstruct each object, i will check to make sure it is still rendering. I would commit after doing a whole component. However, it may be best for you to commit a little more often until you get the hang of this. 
@@ -115,7 +115,7 @@ class DataCard extends React.Component {
     <>
         <div>
         {/* <StyledLoadingMessage>{!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating  */}
-          <StyledLoadingMessage>{!searchLoaded && <p>'Making a very impressive request to our AI. Calculating live scores now...'</p>}</StyledLoadingMessage>
+          <StyledLoadingMessage>{!searchLoaded && <p>Welcome, {username}. The twitter handle you entered when signing up is displayed here. You can change which twitter handle you see first at anytime in the settings menu. We are now making a very impressive request to our AI. Calculating live scores now...</p>}</StyledLoadingMessage>
     
           <DataCardWrapper>
            
@@ -123,7 +123,7 @@ class DataCard extends React.Component {
               {searchLoaded && 
               <>
               {/* <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle> */}
-              <HeaderTitle>@{username}</HeaderTitle>
+              <HeaderTitle>@{twitter_handle}</HeaderTitle>
               <TabNavWrapper>
                 <TabNav id="Personality" onClick={this.clickHandler}>
                   Personality
@@ -166,6 +166,7 @@ const mapStateToProps = state => {
   searchInput: state.searchInput,
   username: state.username,
   searchLoaded: state.searchLoaded,
+  twitter_handle: state.twitter_handle
 }}
 
 export default connect(

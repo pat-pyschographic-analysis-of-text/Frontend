@@ -93,8 +93,8 @@ class SettingsForm extends React.Component {
   // Setting state to what our server needs to receive
   state = {
     profileUpdates: {
-      username: "", 
-      twitter_handle: "", 
+      username: this.props.username, 
+      twitter_handle: this.props.twitter_handle, 
     }
   };
 
@@ -156,6 +156,7 @@ class SettingsForm extends React.Component {
             type="text"
             placeholder="Username"
             onChange={this.handleChanges}
+            value={this.state.username}
           />
 
           <UpdateInput
@@ -163,6 +164,7 @@ class SettingsForm extends React.Component {
             type="text"
             placeholder="Twitter handle"
             onChange={this.handleChanges}
+            value={this.state.twitter_handle}
           />
 
           <Link to="/search">
@@ -186,7 +188,9 @@ const mapStateToProps = state => ({
   updating: state.updating, 
   message: state.message,
   error: state.error, 
-  userId: state.userId
+  userId: state.userId,
+  twitter_handle: state.twitter_handle,
+  username: state.username
 })
 
 // Using connect function to pass our actions in as props to this Form 
