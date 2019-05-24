@@ -11,14 +11,16 @@ export const register = creds => dispatch => {
             .post('https://pyschographic-analysis-of-text.herokuapp.com/users/register', creds)
             .then(res => {
                 console.log(res)
-                console.log(res.data.token)
+                console.log(res.data)
                 localStorage.setItem('token', res.data.token)
-                localStorage.setItem('username', creds.username)
                 dispatch({
                     type: REGISTER_SUCCESS,
                     payload: {
                         message: `Succesfully registered ${creds.username}`, 
-                        userId: res.data.id
+                        userId: res.data.id,
+                        username: res.data.username,
+                        twitter_handle: res.data.twitter_handle
+
                     }
                 })
             })

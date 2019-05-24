@@ -15,7 +15,8 @@ const initialState = {
     compareResults: [],
     searchInput: '',
     searchLoaded: null,
-    twitter_handle: ''
+    twitter_handle: '',
+    loggedIn: false
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -33,7 +34,8 @@ const rootReducer = (state = initialState, action) => {
           error: "",
           message: action.payload.message,
           userId: action.payload.userId,
-          twitter_handle: action.payload.twitter_handle
+          twitter_handle: action.payload.twitter_handle,
+          username: action.payload.twitter_handle
         };
       case REGISTER_ERROR:
         return {
@@ -56,7 +58,8 @@ const rootReducer = (state = initialState, action) => {
           message: action.payload.message,
           userId: action.payload.userId,
           username: action.payload.username,
-          twitter_handle: action.payload.twitter_handle
+          twitter_handle: action.payload.twitter_handle,
+          loggedIn: true
         };
       case LOGIN_ERROR:
         return {
@@ -86,7 +89,8 @@ const rootReducer = (state = initialState, action) => {
           compareResults: [],
           searchInput: '',
           searchLoaded: null,
-          twitter_handle: ''
+          twitter_handle: '',
+          loggedIn: false
           
         };
       case CAPTURE_PROFILE:
@@ -102,8 +106,22 @@ const rootReducer = (state = initialState, action) => {
       case DELETE_PROFILE_SUCCESS:
         return {
           ...state,
-          deleting: false,
-          message: action.payload
+          message: action.payload,
+          registering: false,
+          loggingIn: false,
+          updating: false, 
+          error: null,
+          testData: [],
+          profile: null,
+          userId: null,
+          username: null,
+          searching: null,
+          searchResults: [],
+          compareResults: [],
+          searchInput: '',
+          searchLoaded: null,
+          twitter_handle: '',
+          loggedIn: false
         };
       case DELETE_PROFILE_ERROR:
         return {
