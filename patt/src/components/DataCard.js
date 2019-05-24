@@ -74,20 +74,15 @@ class DataCard extends React.Component {
     // const { username, image_url,  } = searchResults
 
 
-    // START READING HERE
-    //anthing that comes off of this.props, we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
+  
+    //We are going to deconstruct antyhing that comes off this.props or this.state into an object literal so we can make our JSX more readable, assigning as a const *non-mutable* 
     const { searchLoaded, searchResults } = this.props
 
-
- //anthing that comes off of this.state, we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
     const { displayedData } = this.state
 
 
- //anthing that comes off of searchResults(can be thought of this.props.searchResults, but since we deconstructed it above, we can extend of it like so...however if this was defined above it would cause an error, see example), we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
+ //Since we deconstructed searchResults above, we can extend of it like so...
     const { username, image_url,  } = searchResults
-
-
-    // When I do this, I usaully will do each seperate deconstruction path in order as i come to them. After i deconstruct each object, i will check to make sure it is still rendering. I would commit after doing a whole component. However, it may be best for you to commit a little more often until you get the hang of this. 
 
     return (
     <>
@@ -120,8 +115,10 @@ class DataCard extends React.Component {
                 </div>
       
               <div>
+
               {/* {this.state.displayedData} */}
               {displayedData}
+
               {/* <TraitsLegend profilePic={this.props.searchResults.image_url} data={this.dataProviderLogic(displayedData)}/> */}
               <TraitsLegend profilePic={image_url} data={this.dataProviderLogic(displayedData)}/>
               </div>
