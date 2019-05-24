@@ -3,72 +3,43 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components'; 
 
-import MobileLogo from '../assets/MobileLogo.png';
+
 
 // Importing things we need for Search 
 import { connect } from 'react-redux'; 
 import { searching, searchInput } from '../actions'; 
 import { withRouter } from 'react-router-dom'; 
-import NavButtonWrapper from './NavButtonWrapper';
+
 
 
 // Header parts 
 const Header = styled.div`
-    background-color: white; 
-    max-width: 500px; 
-    width: 100%; 
-    display: flex; 
-    flex-direction: row;  
-    align-items: center;  
-    justify-content: space-around; 
-    margin-top: 10vw; 
-    margin: 0 auto; 
-    font-family: 'Montserrat', sans-serif;
-
-    @media (min-width: 500px) {
-        margin: 0 auto; 
-        max-width: 800px; 
-    }
+display: flex;
+align-items: center;
+justify-content: center;
 `; 
 
-const HeaderLogo = styled.img`
-    max-width: 25%; 
-    height: auto; 
-    margin-right: 4vw; 
 
-    @media (min-width: 500px) {
-        max-width: 20%; 
-        margin-right: 2vw; 
-    }
-`; 
 
 const SearchBar = styled.input`
-  font-family: 'Montserrat', sans-serif;
-  padding: 5%; 
-  border: 2px solid #778899; 
-  min-width: 25vw;
-  margin-right: 7vw; 
-
+border-radius: 50px;
+width: 25vw;
+height: 5vh;
+padding-left: 10%;
 `; 
 
 const SearchButton = styled.button`
-  background-color: #12B1FC;
-  font-family: "Montserrat", sans-serif;
-  color: white;
-  border-radius: 10px;
-  padding: 10%;
-  margin: 0 2vw; 
-  max-width: 500px; 
-  width: 100%;
-  height: 5vh;
-
+border-radius: 50px;
+/* margin: 0% 0px; */
+z-index: 2;
+height: 5vh;
+background: #12B1FC;
+color: white;
+margin-left: 15%
   &:hover {
-    background-color: white;
-    color: #12B1FC; 
-    cursor: pointer;
-  }
+    background: #0082c9;
 
-  
+  }
 `; 
 
 class SearchForm extends React.Component {
@@ -114,13 +85,16 @@ class SearchForm extends React.Component {
         return (
 
           <>
-            <NavButtonWrapper />
             <Header>
-              <HeaderLogo src={MobileLogo} alt="TweetMate logo" />
+              <form onSubmit={this.search} style={{padding: '5%'}}>
   
-              <form onSubmit={this.search}>
-  
-                <SearchBar
+                <p style={{
+                  zIndex: '5',
+                  display: 'inherit',
+                  position: 'fixed',
+                  margin: '.4vh .5vw',
+                  fontSize: '1.7em',
+                }}>@</p><SearchBar
                   name="search"
                   type="text"
                   placeholder="Enter Twitter handle"
@@ -128,11 +102,9 @@ class SearchForm extends React.Component {
                 />
               </form>
   
-              <Link to="/search-results">
                   <SearchButton onClick={this.search}>
                     Search
                   </SearchButton>
-                </Link>
             </Header>
           </>
         );

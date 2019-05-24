@@ -197,4 +197,29 @@ export const searchInput = twitter_name => dispatch => {
  } 
 
 
-
+ export const TIMELINE_START = 'TIMELINE_START'
+ export const TIMELINE_SUCCESS = 'TIMELINE_SUCCESS'
+ export const TIMELINE_ERROR = 'TIMELINE_ERROR'
+ 
+ export const timelineDataFetch = twitter_handle => dispatch => {
+     dispatch({ type: TIMELINE_START,
+        payload: "Started fetch for timeline"
+    })
+ 
+     return axios 
+             .get(`https://pyschographic-analysis-of-text.herokuapp.com/api/users/graphs/${twitter_handle}`)
+             .then(res => {
+                 console.log(res)
+                  dispatch({
+                      type: TIMELINE_SUCCESS,
+                      payload: {message: `Timeline data successfully fetched.`, timelineData: res.data}
+                  })
+             })
+             .catch(err => {
+                 console.log(err)
+                 dispatch({
+                     type: TIMELINE_ERROR,
+                     payload: 'update'
+                 })
+             })
+ }

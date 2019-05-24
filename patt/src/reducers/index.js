@@ -1,4 +1,4 @@
-import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT_START, LOG_OUT_SUCCESS, CAPTURE_PROFILE, DELETE_PROFILE_SUCCESS, DELETE_PROFILE_START, DELETE_PROFILE_ERROR, UPDATE_PROFILE_START, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERROR, SEARCH_START, SEARCH_SUCCESS, SEARCH_ERROR, SEARCH_INPUT_START, SEARCH_INPUT_SUCCESS, SEARCH_INPUT_ERROR } from '../actions'
+import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT_START, LOG_OUT_SUCCESS, CAPTURE_PROFILE, DELETE_PROFILE_SUCCESS, DELETE_PROFILE_START, DELETE_PROFILE_ERROR, UPDATE_PROFILE_START, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERROR, SEARCH_START, SEARCH_SUCCESS, SEARCH_ERROR, SEARCH_INPUT_START, SEARCH_INPUT_SUCCESS, SEARCH_INPUT_ERROR, TIMELINE_ERROR, TIMELINE_START, TIMELINE_SUCCESS } from '../actions'
 
 const initialState = {
     registering: false,
@@ -16,7 +16,8 @@ const initialState = {
     searchInput: '',
     searchLoaded: null,
     twitter_handle: '',
-    loggedIn: false
+    loggedIn: false,
+    timelineData: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -194,6 +195,28 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           searchLoaded: true,
+          message: '',
+          error: action.payload.message
+        }
+        case TIMELINE_START:
+        return {
+          ...state,
+          timeLineFetching: true,
+          message: '',
+          error: ''
+        };
+      case TIMELINE_SUCCESS:
+        console.log('input_success', state.compareResults)
+        return {
+          ...state,
+          timeLineFetching: false,
+          timelineData: action.payload.timelineData,
+          error: ''
+        };
+      case TIMELINE_ERROR:
+        return {
+          ...state,
+          timeLineFetching: false,
           message: '',
           error: action.payload.message
         }

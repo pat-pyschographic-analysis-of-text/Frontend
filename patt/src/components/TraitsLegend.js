@@ -13,6 +13,9 @@ const SearchWrapper = styled.div`
     text-align: center; 
     align-items: center; 
     font-family: 'Montserrat', sans-serif;
+    div {
+        width: 100%;
+    }
 `; 
 
 const ProfileCard = styled.div`
