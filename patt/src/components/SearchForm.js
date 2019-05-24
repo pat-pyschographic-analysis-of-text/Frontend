@@ -68,7 +68,8 @@ class SearchForm extends React.Component {
     if(15 < username.length || username.length < 4) {
       window.alert('Please provide a valid twitter handle to search')
     } else {
-      this.props.searching(username)
+      // this.props.searching(username)
+      this.props.searchInput(username)
     }
   }
 
