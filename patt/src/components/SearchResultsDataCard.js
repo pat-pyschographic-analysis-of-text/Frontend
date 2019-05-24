@@ -90,15 +90,15 @@ class SearchResultsDataCard extends React.Component {
   };
 
   render() {
-    const { displayedData } = this.state.data
-    const {  username,  image_url } = this.dataDeconstructProviderLogic(this.state.displayedData)
+    const { displayedData } = this.state
+    console.log(this.props.props)
     return (
       <>
           <StyledLoadingMessage><div style={{margin: '0 auto'}}><Loader type="Plane" height={150} width={150} /></div>
             </StyledLoadingMessage>
 
-          {username && <DataCardWrapper>
-              {username && 
+          {this.props.username && <DataCardWrapper>
+              {this.props.username && 
               <>
                   <Tabs tabs={this.state.tabs} selectedTab={this.state.selectedTab} selectedTabHandler={this.clickHandler}/> 
                 <div style={{
@@ -114,7 +114,7 @@ class SearchResultsDataCard extends React.Component {
                     margin: '0 auto'
                   }}>
                     
-                    {username && 
+                    {this.props.username && 
                       <SingleUserTraitsGraph
                         data={this.dataProviderLogic(displayedData)}
                       />
@@ -122,9 +122,9 @@ class SearchResultsDataCard extends React.Component {
                   </div>
   
                   <div style={{    margin: '15vh 1vw', textAlign: 'center', width: '40%'}}>
-                  <HeaderTitle>@{username}</HeaderTitle>
+                  <HeaderTitle>@{this.props.username}</HeaderTitle>
                     <TraitsLegend
-                      profilePic={image_url}
+                      profilePic={this.props.image_url}
                       data={this.dataProviderLogic(displayedData)}
                     />
                   </div>
