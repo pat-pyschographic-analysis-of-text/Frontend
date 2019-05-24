@@ -22,6 +22,7 @@ const Header = styled.div`
     align-items: center;  
     justify-content: space-around; 
     margin-top: 5vw; 
+    margin: 0 auto; 
     font-family: 'Montserrat', sans-serif;
 
     @media (min-width: 500px) {
