@@ -10,7 +10,7 @@ const initialState = {
     profile: null,
     userId: null,
     username: null,
-    searching: null,
+    searching: false,
     searchResults: [],
     compareResults: [],
     searchInput: '',
@@ -156,14 +156,14 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           message: "",
-          error: "",
+          error: '',
           searchLoaded: false 
         };
       case SEARCH_SUCCESS:
         return {
           ...state,
           message: action.payload.message, 
-          error: "",
+          error: '',
           searchResults: action.payload.searchResults,
           searchLoaded: true
         };
@@ -177,24 +177,24 @@ const rootReducer = (state = initialState, action) => {
       case SEARCH_INPUT_START:
         return {
           ...state,
-          searching: true,
+          searchLoaded: false,
           message: '',
-          err: ''
+          error: ''
         };
       case SEARCH_INPUT_SUCCESS:
         console.log('input_success', state.compareResults)
         return {
           ...state,
-          searching: false,
+          searchLoaded: true,
           message: action.payload.message,
           compareResults: [...state.compareResults, action.payload.searchInputResults]
         };
       case SEARCH_INPUT_ERROR:
         return {
           ...state,
-          searching: false,
+          searchLoaded: true,
           message: '',
-          err: action.payload
+          error: action.payload.message
         }
       default:
         return state;

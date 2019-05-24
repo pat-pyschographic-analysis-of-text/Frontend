@@ -1,3 +1,4 @@
+
 import React from "react";
 import styled from 'styled-components'; 
 import { connect } from 'react-redux'
@@ -5,6 +6,9 @@ import { searching } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
 import TraitsLegend from './TraitsLegend'
 import Loader from 'react-loader-spinner';
+
+// 5. Importing new components to be created 
+import Tabs from './Tabs'; 
 
 const DataCardWrapper = styled.div`
     background-color: white; 
@@ -24,39 +28,6 @@ const HeaderTitle = styled.h2`
     display: flex;
 `; 
 
-// Logo 
-const MobileLogoStyled = styled.img`
-    max-width: 30%; 
-    height: auto; 
-`; 
-
-const SearchAgainButton = styled.button `
-    background-color: #12B1FC;
-    font-family: 'Montserrat', sans-serif;
-    color: white; 
-    border-radius: 10px; 
-    padding: 2%; 
-    width: 50%; 
-    margin-bottom: 2%; 
-
-    &:hover {
-        background-color: white;
-        color: #12B1FC; 
-        cursor: pointer;
-    }
-`; 
-
-const TabNavWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    min-width: 60vw;
-`
-
-const TabNav = styled.div`
-    padding: 2vh 5vw;
-  `
-
 const StyledLoadingMessage = styled.div`
   z-index: 5;
   margin: 0 auto;
@@ -69,12 +40,20 @@ const StyledLoadingMessage = styled.div`
   }
 `;     
 
-
 class DataCard extends React.Component {
-  state = {
-    displayedData: 'Personality'
+  //3. Making sure props can pass down
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayedData: "Personality",
+      // 1. Setting up a Displayed tab on state
+      selectedTab: "Personality",
+      // 2. Setting up all the tab Data inline
+      tabs: ["Personality", "Needs", "Values"]
+    };
   }
   componentDidMount() {
+
     this.props.searching(`${this.props.twitter_handle}`)
   }
   clickHandler = e => {
@@ -82,21 +61,34 @@ class DataCard extends React.Component {
     this.setState({
       displayedData: e.target.id,
     })
+
   }
+
+  clickHandler = tab => {
+     this.setState({
+       displayedData: tab, 
+       // Setting tab state to be whatever tab is clicked on 
+       selectedTab: tab
+     });
+  };
+
   dataProviderLogic = dataName => {
-    if (dataName === 'Personality') {
-      return this.props.searchResults.personality
-    } else if (dataName === 'Needs') {
-      return this.props.searchResults.needs
-    } else if (dataName === 'Values') {
-      return this.props.searchResults.values
+    if (dataName === "Personality") {
+      return this.props.searchResults.personality;
+    } else if (dataName === "Needs") {
+      return this.props.searchResults.needs;
+    } else if (dataName === "Values") {
+      return this.props.searchResults.values;
     }
-  }
+  };
 
   render() {
     // SKIP THIS AT FIRST
-    // cannot declare a deconstructed object here because searchResults comes off of this.props and the compiler goes top to bottom 
+    // cannot declare a deconstructed object here because searchResults comes off of this.props and the compiler goes top to bottom
     // const { username, image_url,  } = searchResults
+
+    //We are going to deconstruct antyhing that comes off this.props or this.state into an object literal so we can make our JSX more readable, assigning as a const *non-mutable*
+    const { searchLoaded, searchResults } = this.props;
 
 
     // START READING HERE
@@ -113,10 +105,10 @@ class DataCard extends React.Component {
 
 
     // When I do this, I usaully will do each seperate deconstruction path in order as i come to them. After i deconstruct each object, i will check to make sure it is still rendering. I would commit after doing a whole component. However, it may be best for you to commit a little more often until you get the hang of this. 
-
     return (
-    <>
+      <>
         <div>
+
         {/* <StyledLoadingMessage>{!this.props.searchLoaded && <p>'Making a very impressive request to our AI. Calculating  */}
           <StyledLoadingMessage>{!searchLoaded && <p>Welcome, <h1>{username}</h1>. <br/>
             The twitter handle you entered when signing up is displayed here. <br/>
@@ -144,28 +136,51 @@ class DataCard extends React.Component {
                   Needs
                 </TabNav>
                 </TabNavWrapper>
+               
+
+                  <Tabs tabs={this.state.tabs} selectedTab={this.state.selectedTab} selectedTabHandler={this.clickHandler}/> 
+
+                  {/* <TabNav id="Personality" onClick={this.clickHandler} >
+                    Personality
+                  </TabNav>
+                  <TabNav 
+                  id="Values" 
+                  onClick={this.clickHandler} >
+                    Values
+                  </TabNav>
+                  <TabNav id="Needs" onClick={this.clickHandler}>
+                    Needs
+                  </TabNav> */}
                 
+
                 <div>
                   {/* {this.state.displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(this.state.displayedData)} /> } */}
-                  {displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(displayedData)} /> }
+                  {displayedData && (
+                    <SingleUserTraitsGraph
+                      data={this.dataProviderLogic(displayedData)}
+                    />
+                  )}
                 </div>
-      
-              <div>
-              {/* {this.state.displayedData} */}
-              {displayedData}
-              {/* <TraitsLegend profilePic={this.props.searchResults.image_url} data={this.dataProviderLogic(displayedData)}/> */}
-              <TraitsLegend profilePic={image_url} data={this.dataProviderLogic(displayedData)}/>
-              </div>
+
+                <div>
+                  {/* {this.state.displayedData} */}
+                  {displayedData}
+
+                  {/* <TraitsLegend profilePic={this.props.searchResults.image_url} data={this.dataProviderLogic(displayedData)}/> */}
+                  <TraitsLegend
+                    profilePic={image_url}
+                    data={this.dataProviderLogic(displayedData)}
+                  />
+                </div>
               </>
               }
           </DataCardWrapper>}
+
         </div>
-    </>
+      </>
     );
   }
 }
-
-
 
 const mapStateToProps = state => {
   return {

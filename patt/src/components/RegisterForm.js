@@ -158,7 +158,7 @@ class RegisterForm extends React.Component {
               { this.props.registering ? <RegisterButton onClick={this.register}>
                 Sign up<Loader
                 type="ThreeDots"
-                color="#1f2a38"
+                color="white"
                 height="12"
                 width="26"
               /></RegisterButton> : <RegisterButton onClick={this.register}>Sign up</RegisterButton>}
