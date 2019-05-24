@@ -1,11 +1,10 @@
 import React from "react";
 import styled from 'styled-components'; 
-import MobileLogo from '../assets/MobileLogo.png'; 
-import { Link } from 'react-router-dom'; 
 import { connect } from 'react-redux'
 import { searching } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
 import TraitsLegend from './TraitsLegend'
+import Loader from 'react-loader-spinner';
 
 const DataCardWrapper = styled.div`
     background-color: white; 
@@ -98,7 +97,7 @@ class DataCard extends React.Component {
 
     // START READING HERE
     //anthing that comes off of this.props, we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
-    const { searchLoaded, searchResults } = this.props
+    const { searchLoaded, searchResults, twitter_handle, username } = this.props
 
 
  //anthing that comes off of this.state, we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
@@ -106,7 +105,7 @@ class DataCard extends React.Component {
 
 
  //anthing that comes off of searchResults(can be thought of this.props.searchResults, but since we deconstructed it above, we can extend of it like so...however if this was defined above it would cause an error, see example), we are going to deconstruct into an object literal so we can make our JSX more readable, assign as a const *non-mutable* 
-    const { username, image_url, twitter_handle  } = searchResults
+    const {  image_url  } = searchResults
 
 
     // When I do this, I usaully will do each seperate deconstruction path in order as i come to them. After i deconstruct each object, i will check to make sure it is still rendering. I would commit after doing a whole component. However, it may be best for you to commit a little more often until you get the hang of this. 
@@ -118,7 +117,8 @@ class DataCard extends React.Component {
           <StyledLoadingMessage>{!searchLoaded && <p>Welcome, {username}. The twitter handle you entered when signing up is displayed here. You can change which twitter handle you see first at anytime in the settings menu. We are now making a very impressive request to our AI. Calculating live scores now...</p>}</StyledLoadingMessage>
     
           <DataCardWrapper>
-           
+
+          <Loader type="Plane" color="rgba(83, 51, 237, 1)" height={150} width={150} />
           {/* {this.props.searchLoaded &&  */}
               {searchLoaded && 
               <>

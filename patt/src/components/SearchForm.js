@@ -69,6 +69,7 @@ const SeeDataButton = styled.button`
   margin: 0 2vw; 
   max-width: 500px; 
   width: 100%;
+  height: 5vh;
 
   &:hover {
     background-color: white;
@@ -115,7 +116,7 @@ class SearchForm extends React.Component {
     render() {
         return (
           <SearchWrapper>
-            <NavButtonWrapper /> 
+            <NavButtonWrapper displayName={this.props.username} /> 
             <MobileLogoStyled src={MobileLogo} alt="TweetMate logo" />
             
             <div style={{display: 'flex'}}>
@@ -123,7 +124,6 @@ class SearchForm extends React.Component {
               {/* <HeaderSubtitle>
                 Enter a user's Twitter handle to learn what their tweets say about their personality and who else tweets like they do. 
               </HeaderSubtitle> */}
-              
               <SearchFormWrapper onSubmit={this.search}>
                 <SearchBar
                   name="search"
@@ -132,9 +132,8 @@ class SearchForm extends React.Component {
                   onChange={this.handleChanges}
                 />
   
-                <Link to="/search-results">
                   <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
-                </Link>
+
               </SearchFormWrapper>
             </div>
 
@@ -147,7 +146,8 @@ const mapStateToProps = state => ({
   searching: state.searching, 
   compareResults: state.compareSearches,
   error: state.error, 
-  message: state.message
+  message: state.message,
+  username: state.username
 })
 
 export default connect(mapStateToProps, {searching, searchInput}
