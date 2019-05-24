@@ -130,8 +130,6 @@ class DataCard extends React.Component {
     const { searchLoaded, searchResults, twitter_handle } = this.props
     const { displayedData } = this.state
     const {  image_url , username } = searchResults
-    const testing = this.props.compareResults && this.props.compareResults.map((result, i) => {
-      return <SearchResultsDataCard key={i} props={result}/>})
     return (
       <>
           <StyledLoadingMessage>{!searchLoaded && <>Welcome, <h1>{this.props.username}</h1>. <br/>
@@ -193,16 +191,17 @@ class DataCard extends React.Component {
               </>
             }
           </DataCardWrapper>}
+           {this.props.compareResults.length > 0 && this.props.compareResults.map(user => (
+             <DataCardWrapper>
+               <SearchResultsDataCard searchResults={user}/>
+             </DataCardWrapper>
+           ))}          
           
           <div>
             {this.state.timelineFlag ? <StatsButton onClick={this.photoSwitcher}>Click to change the timeline</StatsButton> : <StatsButton onClick={this.showTimeline}>Click to change the timeline</StatsButton>}
             <div style={{height: '25vh', width: '100%'}}>
           </div>
             {this.state.timelineFlag && <img style={{width: '40%', maxHeight: '30vh', height: 'auto', margin: '0 auto'}}src={this.state.timelinePhoto} />}
-          </div>
-
-          <div >
-            {testing}
           </div>
       </>
     );
@@ -214,7 +213,7 @@ const mapStateToProps = state => {
   error: state.error,
   searching: state.searching,
   searchResults: state.searchResults,
-  compareResults: state.searchInput,
+  compareResults: state.compareResults,
   username: state.username,
   searchLoaded: state.searchLoaded,
   twitter_handle: state.twitter_handle,
