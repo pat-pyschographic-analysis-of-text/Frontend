@@ -14,7 +14,9 @@ const initialState = {
     searchResults: [],
     compareResults: [],
     searchInput: '',
-    searchLoaded: null
+    searchLoaded: null,
+    twitter_handle: '',
+    loggedIn: false
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -31,7 +33,9 @@ const rootReducer = (state = initialState, action) => {
           registering: false,
           error: "",
           message: action.payload.message,
-          userId: action.payload.userId
+          userId: action.payload.userId,
+          twitter_handle: action.payload.twitter_handle,
+          username: action.payload.twitter_handle
         };
       case REGISTER_ERROR:
         return {
@@ -53,7 +57,9 @@ const rootReducer = (state = initialState, action) => {
           error: "",
           message: action.payload.message,
           userId: action.payload.userId,
-          username: action.payload.username
+          username: action.payload.username,
+          twitter_handle: action.payload.twitter_handle,
+          loggedIn: true
         };
       case LOGIN_ERROR:
         return {
@@ -70,7 +76,22 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           message: action.payload,
-          userId: null
+          registering: false,
+          loggingIn: false,
+          updating: false, 
+          error: null,
+          testData: [],
+          profile: null,
+          userId: null,
+          username: null,
+          searching: null,
+          searchResults: [],
+          compareResults: [],
+          searchInput: '',
+          searchLoaded: null,
+          twitter_handle: '',
+          loggedIn: false
+          
         };
       case CAPTURE_PROFILE:
         return {
@@ -85,8 +106,22 @@ const rootReducer = (state = initialState, action) => {
       case DELETE_PROFILE_SUCCESS:
         return {
           ...state,
-          deleting: false,
-          message: action.payload
+          message: action.payload,
+          registering: false,
+          loggingIn: false,
+          updating: false, 
+          error: null,
+          testData: [],
+          profile: null,
+          userId: null,
+          username: null,
+          searching: null,
+          searchResults: [],
+          compareResults: [],
+          searchInput: '',
+          searchLoaded: null,
+          twitter_handle: '',
+          loggedIn: false
         };
       case DELETE_PROFILE_ERROR:
         return {
@@ -105,7 +140,9 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           updating: false, 
-          message: action.payload, 
+          message: action.payload.message,
+          twitter_handle: action.payload.twitter_handle, 
+          username: action.payload.username,
           error: ""
         };
       case UPDATE_PROFILE_ERROR:

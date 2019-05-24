@@ -148,9 +148,9 @@ class LoginForm extends React.Component {
         return (
           <LoginWrapper>
             <video
-              class="background-video hero-bg-video is-playing"
+              className="background-video hero-bg-video is-playing"
               loop="loop"
-              autoplay="autoplay"
+              autoPlay="autoplay"
               muted="muted"
               id="bgvid"
             >
@@ -198,7 +198,8 @@ class LoginForm extends React.Component {
 
             <LoginMessage>
               {message && <p>{message}</p>}
-              {error && <p>{error}</p>}
+              {typeof error === 'string' && <p>{error}</p>}
+
             </LoginMessage>
           </LoginWrapper>
         );
