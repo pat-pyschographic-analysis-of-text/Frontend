@@ -6,9 +6,7 @@ import { connect } from 'react-redux'
 import { searching } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
 import TraitsLegend from './TraitsLegend'
-import Loader from 'react-loader-spinner';
-
-import styled from 'styled-components'; 
+import Loader from 'react-loader-spinner'
 
 // 5. Importing new components to be created 
 import Tabs from './Tabs'; 
