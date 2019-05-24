@@ -13,6 +13,7 @@
     "react-scripts": "3.0.1",
     "react-sweet-progress": "^1.1.2",
     "react-tooltip": "^3.10.0",
+    "react-twitter-embed": "^2.0.8",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
