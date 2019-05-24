@@ -28,6 +28,7 @@ const TabStyle = styled.div`
 `;
 
 const Tab = props => {
+  console.log(props)
   return (
     <TabStyle
         style={props.selectedTab === props.tab ? { backgroundColor: "#745AFF", color: "white", borderRadius: '10px' } : null }
