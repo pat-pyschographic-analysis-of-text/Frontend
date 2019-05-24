@@ -130,8 +130,6 @@ class DataCard extends React.Component {
     const { searchLoaded, searchResults, twitter_handle } = this.props
     const { displayedData } = this.state
     const {  image_url , username } = searchResults
-    const testing = this.props.compareResults && this.props.compareResults.map((result, i) => {
-      return <SearchResultsDataCard key={i} props={result}/>})
     return (
       <>
           <StyledLoadingMessage>{!searchLoaded && <>Welcome, <h1>{this.props.username}</h1>. <br/>
@@ -202,7 +200,7 @@ class DataCard extends React.Component {
           </div>
 
           <div >
-            {testing}
+            {this.props.compareResults && <SearchResultsDataCard props={this.dataProviderLogic(displayedData)} />}
           </div>
       </>
     );
@@ -214,7 +212,7 @@ const mapStateToProps = state => {
   error: state.error,
   searching: state.searching,
   searchResults: state.searchResults,
-  compareResults: state.searchInput,
+  compareResults: state.compareResults,
   username: state.username,
   searchLoaded: state.searchLoaded,
   twitter_handle: state.twitter_handle,
