@@ -7,7 +7,7 @@ import MobileLogo from '../assets/MobileLogo.png';
 
 // Importing things we need for Search 
 import { connect } from 'react-redux'; 
-import { searching } from '../actions'; 
+import { searching, searchInput } from '../actions'; 
 import { withRouter } from 'react-router-dom'; 
 import NavButtonWrapper from './NavButtonWrapper';
 
@@ -78,22 +78,24 @@ class SearchForm extends React.Component {
   // Handle changes function watches what our user types in 
   handleChanges = e => {
     this.setState({
-      username: {
-        ...this.state.username, 
-        [e.target.name]: e.target.value
-      }
+      username: e.target.value
     })
   }
 
   // Search function calls our action 
   search = e => {
     e.preventDefault()
-    this.props.grabSearchInput(this.state.username.search)
-    console.log(this.state.username.search); 
-    this.props.searching(this.state.username.search)
-      .then(() => {
-        this.timeOut()
-      })
+    let username = this.state.username;
+
+    if(username.charAt(0)==='@') {
+      username = username.substr(1)
+    }
+    
+    if(15 < username.length || username.length < 4) {
+      window.alert('Please provide a valid twitter handle to search')
+    } else {
+      this.props.searching(username)
+    }
   }
 
   // TimeOut gives our user a message in a certain amount of time 
@@ -120,6 +122,7 @@ class SearchForm extends React.Component {
                   placeholder="Enter Twitter handle"
                   onChange={this.handleChanges}
                 />
+
               </form>
   
               <Link to="/search-results">
@@ -129,15 +132,18 @@ class SearchForm extends React.Component {
                 </Link>
             </Header>
           </>
+
         );
     }
 }
 
 const mapStateToProps = state => ({
+  searchLoaded: state.searchLoaded,
   searching: state.searching, 
+  compareResults: state.compareSearches,
   error: state.error, 
   message: state.message
 })
 
-export default connect(mapStateToProps, {searching}
+export default connect(mapStateToProps, {searching, searchInput}
   ) (withRouter(SearchForm)); 

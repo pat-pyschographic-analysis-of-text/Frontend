@@ -1,4 +1,4 @@
-import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT_START, LOG_OUT_SUCCESS, CAPTURE_PROFILE, DELETE_PROFILE_SUCCESS, DELETE_PROFILE_START, DELETE_PROFILE_ERROR, UPDATE_PROFILE_START, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERROR, SEARCH_START, SEARCH_SUCCESS, SEARCH_ERROR, SEARCH_INPUT } from '../actions'
+import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT_START, LOG_OUT_SUCCESS, CAPTURE_PROFILE, DELETE_PROFILE_SUCCESS, DELETE_PROFILE_START, DELETE_PROFILE_ERROR, UPDATE_PROFILE_START, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERROR, SEARCH_START, SEARCH_SUCCESS, SEARCH_ERROR, SEARCH_INPUT_START, SEARCH_INPUT_SUCCESS, SEARCH_INPUT_ERROR } from '../actions'
 
 const initialState = {
     registering: false,
@@ -10,8 +10,9 @@ const initialState = {
     profile: null,
     userId: null,
     username: null,
-    searching: null,
+    searching: false,
     searchResults: [],
+    compareResults: [],
     searchInput: '',
     searchLoaded: null
 }
@@ -118,14 +119,14 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           message: "",
-          error: "",
+          error: '',
           searchLoaded: false 
         };
       case SEARCH_SUCCESS:
         return {
           ...state,
           message: action.payload.message, 
-          error: "",
+          error: '',
           searchResults: action.payload.searchResults,
           searchLoaded: true
         };
@@ -136,12 +137,27 @@ const rootReducer = (state = initialState, action) => {
           error: action.payload,
           searchLoaded: false 
         };
-      case SEARCH_INPUT:
+      case SEARCH_INPUT_START:
         return {
           ...state,
-          searching: true,
+          searchLoaded: false,
           message: '',
-          searchInput: action.payload
+          error: ''
+        };
+      case SEARCH_INPUT_SUCCESS:
+        console.log('input_success', state.compareResults)
+        return {
+          ...state,
+          searchLoaded: true,
+          message: action.payload.message,
+          compareResults: [...state.compareResults, action.payload.searchInputResults]
+        };
+      case SEARCH_INPUT_ERROR:
+        return {
+          ...state,
+          searchLoaded: true,
+          message: '',
+          error: action.payload.message
         }
       default:
         return state;
