@@ -129,9 +129,6 @@ class SearchForm extends React.Component {
                   onChange={this.handleChanges}
                 />
 
-              </form>
-  
-
                   <SeeDataButton onClick={this.search}>Get data</SeeDataButton>
 
               </SearchFormWrapper>
