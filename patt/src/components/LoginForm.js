@@ -182,10 +182,9 @@ class LoginForm extends React.Component {
               />
               
               { this.props.loggingIn ? <LoginButton onClick={this.login}>
-                  Loging in
                   <Loader
                 type="ThreeDots"
-                color="white"
+                color="blue"
                 height="12"
                 width="26"
                     />
