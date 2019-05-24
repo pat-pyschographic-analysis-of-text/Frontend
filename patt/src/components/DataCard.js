@@ -5,10 +5,10 @@ import { searching, timelineDataFetch } from '../actions'
 import SingleUserTraitsGraph from './SingleUserTraitsGraph'
 import TraitsLegend from './TraitsLegend'
 import Loader from 'react-loader-spinner';
-import SearchResultsDataCard from './SearchResultsDataCard'
 import styled from 'styled-components'; 
 import RawScoreLegend from './RawScoreLegend'
-import TimeLineGraph from './TimeLineGraph'
+import timeline1 from '../assets/timeline1.png'
+import timeline2 from '../assets/timeline2.png'
 
 // 5. Importing new components to be created 
 import Tabs from './Tabs'; 
@@ -63,7 +63,11 @@ class DataCard extends React.Component {
       // 2. Setting up all the tab Data inline
       tabs: ["Personality", "Needs", "Values"],
 
-      statsFlad: false
+      statsFlag: false,
+
+      timelinePhoto: timeline1,
+
+      timelineFlag: false
     };
   }
   componentDidMount() {
@@ -103,11 +107,23 @@ class DataCard extends React.Component {
     })
   }
 
+  showTimeline = e => {
+    e.preventDefault()
+    this.setState({
+      timelineFlag: !this.state.timelineFlag
+    })
+  }
+
   timelineDataFetch = e => {
     e.preventDefault()
     this.props.timelineDataFetch(this.props.twitter_handle)
   }
-  
+  photoSwitcher = e => {
+    e.preventDefault()
+    this.setState({
+      timelinePhoto: this.state.timelinePhoto === timeline1 ? timeline2 : timeline1
+    })
+  }
   render() {
     const { searchLoaded, searchResults, twitter_handle } = this.props
     const { displayedData } = this.state
@@ -174,8 +190,8 @@ class DataCard extends React.Component {
             }
           </DataCardWrapper>}
           
-          <StatsButton onClick={this.timelineDataFetch}>Click to see timeline</StatsButton>
-          {this.props.timelineData && <TimeLineGraph props={this.props.timelineData} />}
+          {this.state.timelineFlag ? <StatsButton onClick={this.photoSwitcher}>Click to change the timeline</StatsButton> : <StatsButton onClick={this.showTimeline}>Click to change the timeline</StatsButton>}
+          {this.state.timelineFlag && <img src={this.state.timelinePhoto} />}
       </>
     );
   }
