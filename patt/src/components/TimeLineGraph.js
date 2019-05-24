@@ -2,7 +2,7 @@ import React from 'react'
 import { VictoryChart, VictoryLine } from 'victory'
 
 export default function TimeLineGraph(props) {
-    console.log(props[0])
+    console.log(props.props[0])
     return (
         <VictoryChart>
             <VictoryLine
