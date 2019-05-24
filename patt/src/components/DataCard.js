@@ -27,17 +27,6 @@ const HeaderTitle = styled.h2`
     display: flex;
 `; 
 
-const TabNavWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    min-width: 60vw;
-`
-
-const TabNav = styled.div`
-    padding: 2vh 5vw;
-  `
-
 const StyledLoadingMessage = styled.div`
   z-index: 5;
   margin: 0 auto;
@@ -45,7 +34,6 @@ const StyledLoadingMessage = styled.div`
   padding-top: 10vh; 
   font-family: 'Montserrat', sans-serif;
 `;     
-
 
 class DataCard extends React.Component {
   //3. Making sure props can pass down
@@ -64,7 +52,6 @@ class DataCard extends React.Component {
   }
 
   clickHandler = tab => {
-    
      this.setState({
        displayedData: tab, 
        // Setting tab state to be whatever tab is clicked on 
@@ -114,7 +101,7 @@ class DataCard extends React.Component {
               <>
                 {/* <HeaderTitle>@{this.props.searchResults.username}</HeaderTitle> */}
                 <HeaderTitle>@{username}</HeaderTitle>
-                <TabNavWrapper>
+                
 
                   <Tabs tabs={this.state.tabs} selectedTab={this.state.selectedTab} selectedTabHandler={this.clickHandler}/> 
 
@@ -129,7 +116,7 @@ class DataCard extends React.Component {
                   <TabNav id="Needs" onClick={this.clickHandler}>
                     Needs
                   </TabNav> */}
-                </TabNavWrapper>
+                
 
                 <div>
                   {/* {this.state.displayedData && <SingleUserTraitsGraph data={this.dataProviderLogic(this.state.displayedData)} /> } */}

@@ -1,9 +1,16 @@
 import React from 'react'; 
 import Tab from './Tab'; 
 
+import styled from 'styled-components'; 
+
+const TabsWrapper = styled.div`
+    display: flex; 
+    flex-direction: row; 
+`; 
+
 const Tabs = props => {
     return (
-        <div>
+        <TabsWrapper>
             {props.tabs.map((tab) => (
                 <div> <Tab 
                 tab={tab} 
@@ -11,7 +18,7 @@ const Tabs = props => {
                 selectedTab={props.selectedTab}
                 /> </div> 
           ))}
-          </div>
+          </TabsWrapper>
     )
 }
 
