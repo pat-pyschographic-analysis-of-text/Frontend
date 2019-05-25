@@ -5,6 +5,7 @@ import TraitsLegend from './TraitsLegend'
 import Loader from 'react-loader-spinner';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import { TwitterFollowButton} from 'react-twitter-embed'
 
 import styled from 'styled-components'; 
 
@@ -102,7 +103,11 @@ class SearchResultsDataCard extends React.Component {
     return (
       <>
           {this.state.score && <div>{parseInt(this.state.score*100)}% Personality Match!</div>}
-          <a href={`https://twitter.com/${this.props.searchResults.username}?ref_src=twsrc%5Etfw`} target="_blank" class="twitter-follow-button" data-show-count="false">Follow @{this.props.searchResults.username}</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <div style={{margin: '1%'}}>
+            <TwitterFollowButton
+            screenName={this.props.searchResults.username}
+             />
+          </div>
           {this.props.searchResults.username && <DataCardWrapper>
               {this.props.searchResults.username && 
               <>
