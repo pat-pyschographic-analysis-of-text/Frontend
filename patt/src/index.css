@@ -1,5 +1,6 @@
 /* CSS to style the video that is displaying in index.html */
 
+/* Displays none on mobile-first design; we didn't want it on phones */
 #bgvid {
   display: none; 
 }
