@@ -1,3 +1,4 @@
+// Exports all our components from a central hub 
 import LoginForm from './LoginForm'; 
 import RegisterForm from './RegisterForm'; 
 import SettingsForm from './SettingsForm'; 
