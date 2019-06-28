@@ -1,16 +1,10 @@
 import React from 'react'; 
-import { Link } from 'react-router-dom'; 
-
 import styled from 'styled-components'; 
-
-
 
 // Importing things we need for Search 
 import { connect } from 'react-redux'; 
 import { searching, searchInput } from '../actions'; 
 import { withRouter } from 'react-router-dom'; 
-
-
 
 // Header parts 
 const Header = styled.div`
@@ -72,7 +66,6 @@ class SearchForm extends React.Component {
   }
 
   // TimeOut gives our user a message in a certain amount of time 
-
   timeOut = () => {
     {this.props.message &&
     setTimeout(() => 

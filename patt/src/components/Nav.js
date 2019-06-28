@@ -1,9 +1,13 @@
-import React from 'react'
+// React and Redux components we need 
+import React from 'react';
+import styled from 'styled-components'
+
+// Our own somponents 
 import  SearchForm  from './SearchForm';
 import NavButtonWrapper from './NavButtonWrapper';
-import styled from 'styled-components'
 import MobileLogo from '../assets/MobileLogo.png';
 
+// Styled component 
 const NavWrapper = styled.div`
     display: flex;
     flex-direction: row;
@@ -12,15 +16,16 @@ const NavWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    background-color:  #FBFAFA,
+    background-color:  #FBFAFA;
     z-index: 5;
 `
-
+// Styled component 
 const HeaderLogo = styled.img`
 height: 20vh;
 width: 20vh;
 `; 
 
+// The Nav component displays our Nav 
 export default function Nav() {
     return (
         <NavWrapper style={{zIndex: 100, backgroundColor:'white'}}>

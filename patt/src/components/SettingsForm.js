@@ -48,7 +48,6 @@ const SettingsTitle = styled.h2`
     color: white; 
 `; 
 
-
 const UpdateInput = styled.input`
   border: 1px solid #778899;
   font-family: "Montserrat", sans-serif;
@@ -133,7 +132,6 @@ class SettingsForm extends React.Component {
   };
 
   //Function that deletes a profile
-
   deleteProfile = e => {
     e.preventDefault();
     this.props.deleteProfile(this.props.userId).then(() => {

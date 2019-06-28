@@ -79,7 +79,7 @@ class DataCard extends React.Component {
     this.props.searching(`${this.props.twitter_handle}`);
   }
 
-  // Event handler to make sure we disply theright user's data
+  // Event handler to make sure we disply the right user's data
   clickHandler = e => {
     e.preventDefault();
     this.setState({

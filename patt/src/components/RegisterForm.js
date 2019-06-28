@@ -1,10 +1,10 @@
 import React from 'react'; 
 import styled from 'styled-components'; 
 import { connect } from 'react-redux';
-import { register } from '../actions';
 import { withRouter } from 'react-router-dom'; 
-
 import Loader from 'react-loader-spinner';
+
+import { register } from '../actions';
 
 import FullLogo from '../assets/FullLogo.png';
 

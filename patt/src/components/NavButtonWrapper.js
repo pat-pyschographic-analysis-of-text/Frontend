@@ -1,16 +1,17 @@
-import React from 'react'; 
-import LogoutButton from './LogoutButton';
-import SettingsButton from './SettingsButton'; 
+import React from "react";
+import styled from "styled-components";
 
- import styled from 'styled-components'; 
- 
- const NavButtonWrapperStyle = styled.div` 
- width: 15vw;
- padding: 0 5vw;
- display: flex;
- justify-content: space-between;
- `; 
+import LogoutButton from "./LogoutButton";
+import SettingsButton from "./SettingsButton";
 
+const NavButtonWrapperStyle = styled.div`
+  width: 15vw;
+  padding: 0 5vw;
+  display: flex;
+  justify-content: space-between;
+`;
+
+// Wraps our button specifically 
 class NavButtonWrapper extends React.Component {
   render() {
     return (
@@ -22,6 +23,4 @@ class NavButtonWrapper extends React.Component {
   }
 }
 
-
-
-export default NavButtonWrapper; 
+export default NavButtonWrapper;
