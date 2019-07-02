@@ -4,9 +4,8 @@ import Tooltip from 'react-png-tooltip'
 
 export default function RawScoreLegend(props) {
 
-  // Why both interger and integer here?? 
-    const personalityScoreProvider = interger => {
-      const integer = interger
+  
+    const personalityScoreProvider = integer => {
       if (interger < 1 && interger > .75) {
         return "High likelihood to have this trait"
       } else if (integer <= .75 && integer > .5) {
